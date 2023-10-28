@@ -1,7 +1,6 @@
 import { Inter } from 'next/font/google'
-import './globals.css'
-import IndexNavbar from "@/components/Navbars/IndexNavbar";
-import "../styles/globals.css";
+import '../globals.css'
+import "@/styles/globals.css";
 
 export const metadata = {
   title: 'Create Next App',
@@ -17,8 +16,7 @@ export default function RootLayout({ children }) {
         rel="stylesheet" />
       </head>
 
-        <body className="antialiased bg-slate-100 font-poppins text-black ">
-        <IndexNavbar />
+        <body className="antialiased bg-slate-50 font-poppins text-black ">
           {children}
         </body>
     </html>

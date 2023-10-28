@@ -32,7 +32,7 @@ export default function Navbar() {
               </p>
             </Link>
           </div>
-          <div className="flex flex-row gap-2">
+          {/* <div className="flex flex-row gap-2">
           <Link href="/player/85139014">
               <p
                 className=" text-sm leading-relaxed inline-block py-2 whitespace-nowrap font-bold"
@@ -42,6 +42,15 @@ export default function Navbar() {
             </Link>
           <Image src={"/img/team-3-800x800.jpg"} alt="" width={24} height={24} className="rounded-full h-10 w-10"></Image>
           
+          </div> */}
+          <div >
+          <Link href="/login" className="bg-blue-400 text-white h-10 px-6 rounded-xl font-semibold text-sm flex align-middle w-fit mr-0 ml-auto shadow-md">
+              <p
+                className=" text-sm leading-relaxed inline-block py-2 whitespace-nowrap font-bold"
+              >
+                Login
+              </p>
+            </Link>
           </div>
           </div>  
       </nav>
