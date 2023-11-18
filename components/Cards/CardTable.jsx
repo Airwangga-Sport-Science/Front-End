@@ -5,7 +5,7 @@ import CardRow from "./CardRow";
 
 // import TableDropdown from "components/Dropdowns/TableDropdown.js";
 
-export default function CardTable({ color }) {
+export default function CardTable({ openModalTraining }) {
   return (
     <>
       <div
@@ -18,13 +18,15 @@ export default function CardTable({ color }) {
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
               <h3
                 className={
-                  "font-semibold text-lg " +
-                  (color === "light" ? "text-blueGray-700" : "text-white")
+                  "font-semibold text-lg "
                 }
               >
                 Training Tables
               </h3>
             </div>
+            <button className="bg-blue-700 text-white active:bg-blue-600 text-xs font-bold uppercase px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={openModalTraining}> 
+              Create Training
+            </button>
           </div>
         </div>
         <div className="block w-full overflow-x-auto">
@@ -86,10 +88,3 @@ export default function CardTable({ color }) {
   );
 }
 
-CardTable.defaultProps = {
-  color: "light",
-};
-
-CardTable.propTypes = {
-  color: PropTypes.oneOf(["light", "dark"]),
-};
