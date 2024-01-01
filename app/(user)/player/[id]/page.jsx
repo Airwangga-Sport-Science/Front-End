@@ -7,30 +7,42 @@ import PlayerModal from '@/components/Popups/PlayerModal';
 import CardProfile from '@/components/Cards/CardProfile';
 import CardStatistic from '@/components/Cards/CardStatistic';
 import CardTraining from '@/components/Cards/CardTraining';
+import api from '@/utils/api';
 
 export default function Index() {
-  const params = useParams();
-  const { id } = params;
+
+
 
   const [player, setPlayer] = useState(null);
+  const [attribute, setAttribute] = useState(null);
+  const [article, setArticle] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isRecommendationModalOpen, setIsRecommendationModalOpen] = useState(false);
   const [isPlayerModalOpen, setIsPlayerModalOpen] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const fetchedPlayer = await getPlayer(id);
-        setPlayer(fetchedPlayer);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error fetching player data:', error);
-        setIsLoading(false);
-      }
-    };
+  async function fetchPlayer(){
 
-    fetchData();
-  }, [id]);
+    try {
+      const fetchedPlayer = await api.getPlayer();
+      const {player} = fetchedPlayer
+      const {attribute} = fetchedPlayer
+      const {article} = fetchedPlayer
+      setPlayer(player);
+      setAttribute(attribute);
+      setArticle(article);
+      setIsLoading(false);
+
+    } catch (error) {
+      console.error('Error fetching player data:', error);
+      setIsLoading(false);
+    }
+  }
+
+
+  
+  useEffect(() => {
+    fetchPlayer();
+  }, []);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -60,9 +72,9 @@ export default function Index() {
       
       <div className="flex flex-row w-full md:gap-6 px-6">
         <CardProfile {...player} openPlayerModal={openPlayerModal} />
-        <CardTraining />
+        <CardTraining article={article} />
       </div>
-      <CardStatistic openRecommendationModal={openRecommendationModal} />
+      <CardStatistic openRecommendationModal={openRecommendationModal} setAttribute={setAttribute} attribute={attribute} />
     </div>
   );
 }
