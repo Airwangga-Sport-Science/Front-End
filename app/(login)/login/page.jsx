@@ -1,9 +1,53 @@
 "use client"
 import React from "react";
 import Link from "next/link";
-
+import api from "@/utils/api";
+import { redirect } from 'next/navigation';
 
 export default function Login() {
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const [authedUser, setAuthedUser] = React.useState(null);
+  async function handleLogin(){
+    const response = await api.login({username, password});
+    
+    if(response){
+      onLoginSuccess(response);
+    }
+  }
+
+  async function onLoginSuccess(token) {
+    api.putAccessToken(token);
+
+    const  data  = await api.getUserLoggedIn();
+    console.log("data", data);
+    setAuthedUser(data);
+
+  }
+
+  async function checkLoggedIn() {
+    const accessToken = api.getAccessToken();
+    if (accessToken) {
+      const data  = await api.getUserLoggedIn();
+      setAuthedUser(data);
+    }
+
+    console.log("authedUser", authedUser);
+  }
+
+  React.useEffect(() => {
+    checkLoggedIn();
+  },[]);
+
+  if (authedUser) {
+    if (authedUser.role == 1) {
+      redirect('/player/85139014')
+    }
+    else if (authedUser.role == 2) {
+      redirect('/dashboard')
+    }
+  }
   return (
     <>
       <div className="container my-auto mx-auto px-4 h-screen">
@@ -21,12 +65,13 @@ export default function Login() {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Email
+                      Username
                     </label>
                     <input
-                      type="email"
+                      type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Email"
+                      placeholder="username"
+                      onChange={(e) => setUsername(e.target.value)}
                     />
                   </div>
 
@@ -41,6 +86,7 @@ export default function Login() {
                       type="password"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Password"
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
 
@@ -48,6 +94,7 @@ export default function Login() {
                     <button
                       className="bg-blue-800 text-white active:bg-blue-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="button"
+                      onClick={handleLogin}
                     >
                       Sign In
                     </button>
