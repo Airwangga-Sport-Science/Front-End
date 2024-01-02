@@ -38,7 +38,7 @@ export default function Login() {
 
   React.useEffect(() => {
     checkLoggedIn();
-  })
+  },[]);
 
   if (authedUser) {
     if (authedUser.role == 1) {
