@@ -1,7 +1,10 @@
 import React from "react";
 
 // Define the props
-const CardProfile = ({ name, age }) => {
+const CardProfile = ({ name, age, openPlayerModal }) => {
+
+
+
   return (
     <div className="flex flex-row gap-6 w-6/12">
       {/* User Image */}
@@ -19,9 +22,9 @@ const CardProfile = ({ name, age }) => {
               <h3 className="font-semibold text-3xl">{name}</h3>
               <h4 className="text-xl text-gray-500">Manchester City</h4>
             </div>
-            <div className="bg-gray-100 text-gray-400 h-12 px-6 rounded-xl font-semibold flex items-center">
+            <button className="bg-gray-100 text-gray-400 h-12 px-6 rounded-xl font-semibold flex items-center" onClick={openPlayerModal}>
               <span className="my-auto">Update</span>
-            </div>
+            </button>
           </div>
 
           {/* User Stats */}
