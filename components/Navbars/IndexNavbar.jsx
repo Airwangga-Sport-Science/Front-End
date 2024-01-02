@@ -4,7 +4,7 @@ import Image from "next/image";
 // components
 
 
-export default function Navbar() {
+export default function Navbar({ user, handleLogOut }) {
   return (
     <>
       <nav className="top-0 z-50 w-screen absolute flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-white shadow font-poppins">
@@ -14,7 +14,7 @@ export default function Navbar() {
               <p
                 className="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap "
               >
-                Notus Next JS
+                Soccer
               </p>
             </Link>
             <Link href="/player/85139014">
@@ -44,13 +44,24 @@ export default function Navbar() {
           
           </div> */}
           <div >
-          <Link href="/login" className="bg-blue-400 text-white h-10 px-6 rounded-xl font-semibold text-sm flex align-middle w-fit mr-0 ml-auto shadow-md">
-              <p
-                className=" text-sm leading-relaxed inline-block py-2 whitespace-nowrap font-bold"
-              >
-                Login
-              </p>
+          {user ? (
+            <button className="bg-blue-400 text-white h-10 px-6 rounded-xl font-semibold text-sm flex align-middle w-fit mr-0 ml-auto shadow-md" onClick={handleLogOut}>
+            <p
+              className=" text-sm leading-relaxed inline-block py-2 whitespace-nowrap font-bold"
+            >
+              Logout 
+            </p>
+            </button> ) : 
+            (
+            <Link href="/login" className="bg-blue-400 text-white h-10 px-6 rounded-xl font-semibold text-sm flex align-middle w-fit mr-0 ml-auto shadow-md">
+            <p
+              className=" text-sm leading-relaxed inline-block py-2 whitespace-nowrap font-bold"
+            >
+              Login
+            </p>
             </Link>
+          )
+          }
           </div>
           </div>  
       </nav>
