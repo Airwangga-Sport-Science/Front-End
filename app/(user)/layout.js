@@ -26,7 +26,11 @@ export default function RootLayout({ children }) {
     checkLoggedIn();
   }, []); // Provide an empty dependency array
 
-
+  async function handleLogOut(){
+    api.putAccessToken(null);
+    setAuthedUser(null);
+  }
+  
   if(initialized != false){
     if(authedUser){
       return (
@@ -38,7 +42,7 @@ export default function RootLayout({ children }) {
           </head>
     
             <body className="antialiased bg-slate-100 font-poppins text-black ">
-            <IndexNavbar user={authedUser}/>
+            <IndexNavbar user={authedUser} handleLogOut={handleLogOut}/>
               {children}
             </body>
         </html>

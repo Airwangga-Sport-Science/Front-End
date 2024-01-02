@@ -4,7 +4,7 @@ import Image from "next/image";
 // components
 
 
-export default function Navbar({ user }) {
+export default function Navbar({ user, handleLogOut }) {
   return (
     <>
       <nav className="top-0 z-50 w-screen absolute flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-white shadow font-poppins">
@@ -45,7 +45,7 @@ export default function Navbar({ user }) {
           </div> */}
           <div >
           {user ? (
-            <button className="bg-blue-400 text-white h-10 px-6 rounded-xl font-semibold text-sm flex align-middle w-fit mr-0 ml-auto shadow-md">
+            <button className="bg-blue-400 text-white h-10 px-6 rounded-xl font-semibold text-sm flex align-middle w-fit mr-0 ml-auto shadow-md" onClick={handleLogOut}>
             <p
               className=" text-sm leading-relaxed inline-block py-2 whitespace-nowrap font-bold"
             >
