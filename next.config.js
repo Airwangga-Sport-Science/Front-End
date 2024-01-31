@@ -1,4 +1,17 @@
+// next.config.js
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  reactStrictMode: true,
+  webpack(config, { isServer }) {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false
+      };
+    }
 
-module.exports = nextConfig
+    return config;
+  }
+};
+
+module.exports = nextConfig;

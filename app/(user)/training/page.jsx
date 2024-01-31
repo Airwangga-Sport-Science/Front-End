@@ -30,9 +30,9 @@ export default function Training() {
   }
 
   function handleFilter(e) {
+    console.log(articles,tempArticles);
     if (e.target.value === "0") {
       setArticles(tempArticles)
-      return
     }
     else{
       setArticles (tempArticles.filter(article => article.positions.includes(e.target.value)))
@@ -42,6 +42,7 @@ export default function Training() {
   React.useEffect(() => {
     getArticles();
     getPositions();
+    console.log(articles,tempArticles);
   }, []);
 
   return (

@@ -7,7 +7,7 @@ import Image from "next/image";
 export default function Navbar({ user, handleLogOut }) {
   return (
     <>
-      <nav className="top-0 z-50 w-screen absolute flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-white shadow font-poppins">
+      <nav className="top-0 z-1 w-screen absolute flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-white shadow font-poppins">
         <div className="container px-4 mx-auto flex flex-row items-center justify-between md:w-[1440px]">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <Link href="/">
@@ -17,7 +17,7 @@ export default function Navbar({ user, handleLogOut }) {
                 Soccer
               </p>
             </Link>
-            <Link href="/player/85139014">
+            <Link href="/player">
               <p
                 className=" text-sm leading-relaxed inline-block mr-4 py-2 whitespace-nowrap "
               >

@@ -1,25 +1,35 @@
 import api from '@/utils/api';
+import { useRouter,Link } from 'next/navigation';
 import React from 'react';
 
-export default function CardStatistic({ openRecommendationModal, attribute, setAttribute }) {
+export default function CardStatistic({ openRecommendationModal, attribute, setAttribute, setActiveAttribute }) {
   const isOdd = (count) => count % 2 !== 0;
   const [isEdit, setIsEdit] = React.useState(false);
-  const [tempAttribute, setTempAttribute] = React.useState(attribute);
+  const [tempAttribute, setTempAttribute] = React.useState(attribute[0]);
+  const router = useRouter();
 
-  const handleAttributeChange = (key, newValue) => {
-    setAttribute((prevAttributes) => ({
-      ...prevAttributes,
-      [key]: newValue,
-    }));
-  };
 
-  const handleIncrement = (key) => {
-    setAttribute((prevAttributes) => ({ ...prevAttributes, [key]: prevAttributes[key] + 1 }));
-  };
+  const [question, setQuestion] = React.useState([])
 
-  const handleDecrement = (key) => {
-    setAttribute((prevAttributes) => ({ ...prevAttributes, [key]: prevAttributes[key] - 1 }));
-  };
+  const displayForAttributes = (attribute_name) => {
+    const matchingQuestion = question.find(q => q.attribute_name === attribute_name);
+  
+    if (matchingQuestion) {
+      return matchingQuestion.attribute_display;
+    }
+  }
+
+  const fetchAttributesMaster = async () => {
+    const response = await api.getAttributeMaster();
+    setQuestion(response);
+    
+  }
+
+
+  React.useEffect(() => {
+    fetchAttributesMaster();
+  }, []);
+
 
   const handleReset = () => {
     setAttribute(tempAttribute);
@@ -39,8 +49,17 @@ export default function CardStatistic({ openRecommendationModal, attribute, setA
       alert('Failed to update attribute');
     }
 
+  }
 
-    
+  const redirectEdit = (id) => {
+    router.push('/form/' + id);
+  }
+
+  const handleSelect = (id) => {
+    let matchingAttribute = attribute.find((attribute) => attribute.id == id);
+    console.log(matchingAttribute);
+    setTempAttribute(matchingAttribute);
+    setActiveAttribute(matchingAttribute);
   }
 
   return (
@@ -62,15 +81,24 @@ export default function CardStatistic({ openRecommendationModal, attribute, setA
               
             ) : (
               <div className="flex gap-2">
-                <button
+                
+          <a 
             className="bg-blue-400 text-white h-12 px-6 rounded-xl font-semibold text flex align-middle"
-            onClick={openRecommendationModal}
+            href={'/form/'}
           >
             <span className="my-auto">Recommendation</span>
-          </button>
-              <button className="bg-gray-100 text-gray-400 h-12 px-6 rounded-xl font-semibold text flex align-middle" onClick={() => setIsEdit(true)}>
+          </a>
+              <button className="bg-gray-100 text-gray-400 h-12 px-6 rounded-xl font-semibold text flex align-middle" value={attribute[0].id} onClick={() => redirectEdit(attribute[0].id)}>
                 <span className="my-auto">Edit</span>
               </button>
+              <select className="bg-gray-100 text-gray-400 h-12 px-6 rounded-xl font-semibold text flex align-middle" onChange={(e) => handleSelect(e.target.value)}>
+              <option key={attribute[0].id} value={attribute[0].id}>{attribute[0].created_date}</option>
+                {
+                  attribute.map((attr) => (
+                    <option key={attr.id} value={attr.id}>{attr.created_date}</option>
+                  ))
+                }
+                </select>
               </div>
               
             )
@@ -80,36 +108,17 @@ export default function CardStatistic({ openRecommendationModal, attribute, setA
       </div>
 
       <div className="flex flex-row flex-wrap mt-8 justify-between gap-4 h-fit">
-        {Object.entries(attribute).map(([key, value], index) => (
+      {Object.entries(tempAttribute)
+        .filter(([key, value]) => key !== 'created_date' && key !== 'id' && key !== 'positions' && key !== 'latest_articles')
+        .map(([key, value], index) => (
           <div
             key={index}
             className={`flex flex-row justify-between w-64 my-1 ${
               isOdd(index) ? 'bg-white' : 'bg-gray-200'
             } px-4 py-2 rounded-lg`}
           >
-            <h5>{key}</h5>
-            {isEdit ? (
-              <div className="flex gap-2">
-                <button onClick={() => handleDecrement(key)}>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </button>
-                <input
-                  className="w-8 text-center bg-transparent"
-                  type="number"
-                  value={value}
-                  onChange={(e) => handleAttributeChange(key, e.target.value)}
-                />
-                <button onClick={() => handleIncrement(key)}>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </button>
-              </div>
-            ) : (
-              <p>{value}</p>
-            )}
+            <h5>{displayForAttributes(key)}</h5>
+            <p>{value}</p>
           </div>
         ))}
       </div>

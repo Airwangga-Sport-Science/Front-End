@@ -41,7 +41,7 @@ export default function RootLayout({ children }) {
             rel="stylesheet" />
           </head>
     
-            <body className="antialiased bg-slate-100 font-poppins text-black ">
+            <body className="antialiased bg-slate-100 py-10 font-poppins text-black ">
             <IndexNavbar user={authedUser} handleLogOut={handleLogOut}/>
               {children}
             </body>

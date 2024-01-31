@@ -21,7 +21,6 @@ export default function Login() {
     api.putAccessToken(token);
 
     const  data  = await api.getUserLoggedIn();
-    console.log("data", data);
     setAuthedUser(data);
 
   }
@@ -42,7 +41,7 @@ export default function Login() {
 
   if (authedUser) {
     if (authedUser.role == 1) {
-      redirect('/player/85139014')
+      redirect('/player')
     }
     else if (authedUser.role == 2) {
       redirect('/dashboard')

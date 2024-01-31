@@ -2,7 +2,14 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+
+1. git clone https://github.com/Airwangga-Sport-Science/Soccer-Front-End
+
+2. cd Soccer-Front-End
+
+3. npm install
+
+4. npm run dev
 
 ```bash
 npm run dev

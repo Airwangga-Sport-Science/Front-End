@@ -1,5 +1,5 @@
 const api = (() => {
-  const BASE_URL = 'http://127.0.0.1:5000';
+  const BASE_URL = `${process.env.API_URL}:${process.env.API_PORT}`;
 
   function getAccessToken() {
     return localStorage.getItem('accessToken')
@@ -43,6 +43,35 @@ const api = (() => {
     const { data: { token } } = responseJson;
 
     return token;
+  }
+
+  async function register({ username, password, name, email, weight, height, phone }) {
+    const response = await fetch(`${BASE_URL}/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        password,
+        phone,
+        role : 1,
+        name,
+        email,
+        weight,
+        height
+      }),
+    });
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    return responseJson;
   }
 
   async function getUserLoggedIn() {
@@ -140,6 +169,40 @@ const api = (() => {
     return responseJson.data;
   }
 
+  
+  async function createArticle(article) {
+    
+    const response = await fetchWithToken(`${BASE_URL}/articles`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    , body: JSON.stringify(article)
+    });
+
+    const responseJson = await response.json();
+
+    if (responseJson.status !== 'success') {
+      throw new Error(responseJson.message);
+    }
+  }
+
+  async function updateArticle(article) {
+    const response = await fetchWithToken(`${BASE_URL}/articles/${article.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(article),
+    });
+
+    const responseJson = await response.json();
+
+    if (responseJson.status !== 'success') {
+      throw new Error(responseJson.message);
+    }
+  }
+
   async function getPositions() {
     const response = await fetch(`${BASE_URL}/positions`, {
       method: 'GET',
@@ -153,10 +216,79 @@ const api = (() => {
     return responseJson.data;
   }
 
+  async function getAttributeMaster() {
+    const response = await fetch(`${BASE_URL}/attributes_master`, {
+      method: 'GET',
+    });
+    const responseJson = await response.json();
 
+    if (responseJson.status !== 'success') {
+      throw new Error(responseJson.message);
+    }
+    console.log(responseJson.data);
+    return responseJson.data;
+
+  }
+
+
+  async function getAttribute(id) {
+    const response = await fetch(`${BASE_URL}/attributes/${id}`, {
+      method: 'GET',
+    });
+
+    const responseJson = await response.json();
+
+    if (responseJson.status !== 'success') {
+      throw new Error(responseJson.message);
+    }
+
+    return responseJson.data;
+
+  }
+
+
+  async function getArticleByAttribute(id) {
+    const response = await fetch(`${BASE_URL}/articles/attributes/${id}`, {
+      method: 'GET',
+    });
+    const responseJson = await response.json();
+
+    if (responseJson.status !== 'success') {
+      throw new Error(responseJson.message);
+    }
+
+    return responseJson.data;
+  }
+
+  async function completeArticle(id) {
+    const response = await fetchWithToken(`${BASE_URL}/articles/complete/${id}`, {
+      method: 'POST',
+    });
+    const responseJson = await response.json();
+
+    if (responseJson.status !== 'success') {
+      throw new Error(responseJson.message);
+    }
+
+    return responseJson;
+  }
+
+  async function getCompleteArticle(id) {
+    const response = await fetchWithToken(`${BASE_URL}/articles/complete/${id}`, {
+      method: 'GET',
+    });
+    const responseJson = await response.json();
+
+    if (responseJson.status !== 'success') {
+      throw new Error(responseJson.message);
+    }
+
+    return responseJson;
+  }
 
   return {
     login,
+    register,
     getAccessToken,
     putAccessToken,
     getUserLoggedIn,
@@ -164,7 +296,15 @@ const api = (() => {
     updateAttribute,
     getArticle,
     getArticles,
-    getPositions
+    getPositions,
+    createArticle,
+    updateArticle,
+    getAttributeMaster,
+    getAttribute,
+    getArticleByAttribute,
+    completeArticle,
+    getCompleteArticle
+
   };
 })();
 
