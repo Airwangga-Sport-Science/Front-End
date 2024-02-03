@@ -20,8 +20,7 @@ export default function TableTrainingModal({ isOpen, closeModal,activeAttribute 
 
 	useEffect(() => {
 		getArticles();
-	}, []);
-
+	}, [activeAttribute.id]);
 	
 
 
@@ -56,7 +55,7 @@ export default function TableTrainingModal({ isOpen, closeModal,activeAttribute 
 							leaveFrom="opacity-100 translate-y-0"
 							leaveTo="opacity-0 translate-y-4 "
 						>
-							<Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 !w-10/12">
+							<Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 !w-9/12">
 								<form className="relative bg-white rounded-lg shadow w-full">
 									<div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
 										<h3 className="text-xl font-semibold text-gray-900">
@@ -87,19 +86,19 @@ export default function TableTrainingModal({ isOpen, closeModal,activeAttribute 
 									</div>
 
 									<div className="p-4 md:p-5 space-y-4">
-                    < table className="w-full text-left text-gray-500    ">
-                      <thead>
+                    < table className="w-full text-left text-gray-500 border">
+                      <thead className="text-xs text-gray-700 uppercase bg-gray-200">
                         <tr>
-                          <th className="p-3 font-semibold tracking-wide text-left">
+                          <th className="p-4 my-2 font-semibold border-r border-l border-white tracking-wide text-left">
                             Training Name
                           </th>
-                          <th className="p-3 font-semibold tracking-wide text-left">
+                          <th className="p-4 my-2 font-semibold border-r border-l border-white  tracking-wide text-left">
 														Position
                           </th>
-                          <th className="p-3 font-semibold tracking-wide text-left">
+                          <th className="p-4 my-2 font-semibold tracking-wide text-left border-r border-l border-white">
                             Status
                           </th>
-                          <th className="p-3 font-semibold tracking-wide text-left">
+                          <th className="p-4 my-2 font-semibold border-l border-white tracking-wide text-left">
                             Action 
                           </th>
                         </tr>

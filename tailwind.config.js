@@ -6,6 +6,7 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     "./node_modules/@nextui-org/theme/dist/components/slider.js", 
+    "./node_modules/@nextui-org/theme/dist/components/spinner.js"
   ],
   theme: {
     extend: {

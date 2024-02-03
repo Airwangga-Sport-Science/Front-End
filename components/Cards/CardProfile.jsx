@@ -1,10 +1,29 @@
 import React from "react";
 
 // Define the props
-const CardProfile = ({ player,positions, openPlayerModal }) => {
+const CardProfile = ({ activeAttribute, player,positions, openPlayerModal }) => {
+  function calculateAge(birthDateString) {
+    // Parse the birth date string into a Date object
+    const birthDate = new Date(birthDateString);
+  
+    // Calculate the current date
+    const currentDate = new Date();
+  
+    // Calculate the difference in years between the current year and the birth year
+    let age = currentDate.getFullYear() - birthDate.getFullYear();
+  
+    // Adjust the age if the birthday hasn't occurred yet this year
+    if (
+      currentDate.getMonth() < birthDate.getMonth() ||
+      (currentDate.getMonth() === birthDate.getMonth() && currentDate.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
+  
+    return age;
+  }
 
-
-  console.log(positions)
+  console.log(positions, player,activeAttribute)
   return (
     <div className="flex flex-row gap-6 w-6/12">
       {/* User Image */}
@@ -31,16 +50,16 @@ const CardProfile = ({ player,positions, openPlayerModal }) => {
           <div className="grid grid-cols-3 grid-rows-2 justify-between gap-y-6 mt-6">
             <div className="flex flex-col">
               <h4 className="text-sm text-center text-gray-500">Height</h4>
-              <h3 className="text-2xl text-center  font-semibold">{player.height}</h3>
+              <h3 className="text-2xl text-center  font-semibold">{activeAttribute.height}</h3>
               
             </div>
             <div className="flex flex-col">
               <h4 className="text-sm text-center text-gray-500">Weight</h4>
-              <h3 className="text-2xl text-center font-semibold">{player.weight}</h3>
+              <h3 className="text-2xl text-center font-semibold">{activeAttribute.weight}</h3>
             </div>
             <div className="flex flex-col">
               <h4 className="text-sm text-center text-gray-500">age</h4>
-              <h3 className="text-2xl text-center font-semibold">16</h3>
+              <h3 className="text-2xl text-center font-semibold">{calculateAge(player.birth_date)}</h3>
             </div>
             <div className="flex flex-col col-span-3">
               <h4 className="text-sm text-center text-gray-500">Position</h4>

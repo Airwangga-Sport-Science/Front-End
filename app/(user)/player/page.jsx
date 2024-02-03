@@ -10,6 +10,7 @@ import CardTraining from '@/components/Cards/CardTraining';
 import api from '@/utils/api';
 import { accordion } from '@nextui-org/theme';
 import TableTrainingModal from '@/components/Popups/TableTrainingModal';
+import CardStatsSelector from '@/components/Cards/CardStatsSelector';
 
 export default function Index() {
 
@@ -82,18 +83,18 @@ export default function Index() {
     setIsTableTrainingModalOpen(false);
   }
 
-  console.log(attribute.latest_articles);
   return (
-    <div className="flex flex-col 2xl:w-[1440px] mx-auto mt-20">
+    <div className="flex flex-col 2xl:w-[1440px] mx-auto mt-12">
       <RecommendationModal isOpen={isRecommendationModalOpen} closeModal={closeRecommendationModal} />
-      <PlayerModal isOpen={isPlayerModalOpen} closeModal={closePlayerModal} player={player} positions={positions}/>
+      <PlayerModal isOpen={isPlayerModalOpen} closeModal={closePlayerModal} player={player} positions={positions} />
       <TableTrainingModal isOpen={isTableTrainingModalOpen} closeModal={closeTableTrainingModal} activeAttribute={activeAttribute} positions={positions}/>
       
+      <CardStatsSelector attribute={attribute} activeAttribute={activeAttribute} setActiveAttribute={setActiveAttribute} />
       <div className="flex flex-row w-full md:gap-6 px-6">
-        <CardProfile player={player} positions={positions} openPlayerModal={openPlayerModal} />
+        <CardProfile player={player} positions={positions} activeAttribute={activeAttribute} openPlayerModal={openPlayerModal} />
         <CardTraining articles={article} openTableTrainingModal={openTableTrainingModal}  />
       </div>
-      <CardStatistic openRecommendationModal={openRecommendationModal} setAttribute={setAttribute} attribute={attribute} setActiveAttribute={setActiveAttribute} />
+      <CardStatistic activeAttribute={activeAttribute} positions={positions} />
     </div>
   );
 }

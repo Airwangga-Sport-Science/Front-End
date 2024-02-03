@@ -1,5 +1,5 @@
 const api = (() => {
-  const BASE_URL = `${process.env.API_URL}:${process.env.API_PORT}`;
+  const BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}:${process.env.NEXT_PUBLIC_API_PORT}`
 
   function getAccessToken() {
     return localStorage.getItem('accessToken')
@@ -45,7 +45,7 @@ const api = (() => {
     return token;
   }
 
-  async function register({ username, password, name, email, weight, height, phone }) {
+  async function register({ username, password, name, email, birthdate,phone }) {
     const response = await fetch(`${BASE_URL}/register`, {
       method: 'POST',
       headers: {
@@ -58,8 +58,7 @@ const api = (() => {
         role : 1,
         name,
         email,
-        weight,
-        height
+        birthdate,
       }),
     });
 
@@ -143,6 +142,37 @@ const api = (() => {
     }
   }
   
+  async function postAttribute(attribute) {
+    try {
+      const response = await fetchWithToken(`${BASE_URL}/attribute`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ attributes: attribute }), // Assuming the server expects an 'attributes' field
+      });
+  
+      // Check if the response status is OK (200)
+      if (!response.ok) {
+        throw new Error(`Request failed with status: ${response.status}`);
+      }
+  
+      const responseJson = await response.json();
+  
+      // Check if the response status is 'success'
+      if (responseJson.status !== 'success') {
+        throw new Error(responseJson.message);
+      }
+  
+      // Return any relevant data from the response if needed
+      return responseJson;
+    } catch (error) {
+      // Handle errors gracefully
+      console.error('Error updating attribute:', error.message);
+      throw error; // Rethrow the error for further handling upstream
+    }
+  }
+
   async function getArticle(id) {
     const response = await fetch(`${BASE_URL}/articles/${id}`, {
       method: 'GET',
@@ -294,6 +324,7 @@ const api = (() => {
     getUserLoggedIn,
     getPlayer,
     updateAttribute,
+    postAttribute,
     getArticle,
     getArticles,
     getPositions,

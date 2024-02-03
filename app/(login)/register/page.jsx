@@ -10,15 +10,13 @@ export default function Login() {
   const [password, setPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [phone, setPhone] = React.useState("");
-  const [weight, setWeight] = React.useState("");
-  const [height, setHeight] = React.useState("");
   const [birthdate, setBirthdate] = React.useState("");
 
   const router = useRouter();
   const [authedUser, setAuthedUser] = React.useState(null);
 
   async function handleRegister() {
-    const response = await api.register({username, name, password, email, weight, height, phone, birthdate});
+    const response = await api.register({username, name, password, email, phone, birthdate});
     if (response) {
       onRegisterSuccess(response.token);
     }
@@ -87,22 +85,6 @@ return (
                     onChange={(e) => setPhone(e.target.value)}
                   />
 
-                  <div className="flex gap-4">
-                  <input
-                    type="text"
-                    className="border-0 px-3 py-3 placeholder-gray-600 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 mt-4"
-                    placeholder="Weight"
-                    onChange={(e) => setWeight(e.target.value)}
-                  />
-
-                  <input
-                    type="text"
-                    className="border-0 px-3 py-3 placeholder-gray-600 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 mt-4"
-                    placeholder="Height"
-                    onChange={(e) => setHeight(e.target.value)}
-                  />
-
-                  </div>
                  
                   <input
                     type="date"
@@ -113,7 +95,7 @@ return (
 
                   <input
                     type="text"
-                    className="border-0 px-3 py-3 placeholder-gray-600 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    className="border-0 px-3 py-3 mt-4 placeholder-gray-600 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Username"
                     onChange={(e) => setUsername(e.target.value)}
                   />

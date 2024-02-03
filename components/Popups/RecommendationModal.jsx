@@ -2,10 +2,24 @@ import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
+import api from "@/utils/api";
 
-export default function RecommendationModal({ isOpen, setIsOpen, positions, alike }) {
+export default function RecommendationModal({ isOpen, setIsOpen, positions, alike, attributes }) {
   const cancelButtonRef = useRef(null);
   const router = useRouter();
+
+  const handleSave = async () => {
+    const response = await api.updateAttribute(attributes);
+    if (response.status === 'success') {
+      //redirect to dashboard
+      router.push('/player')
+    }
+    else {
+      alert('Failed to update attribute');
+    }
+    
+    
+  }
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
@@ -88,7 +102,7 @@ export default function RecommendationModal({ isOpen, setIsOpen, positions, alik
 
                   <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
                     <button
-                      onClick={() => router.push(`/player`)}
+                      onClick={handleSave}
                       type="button"
                       className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
                     >
