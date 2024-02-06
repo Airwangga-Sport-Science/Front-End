@@ -36,7 +36,7 @@ export default function Page() {
 
   useEffect(() => {
     getArticles();
-  }, []);
+  }, [isRecommendationModalOpen]);
   return (
     <div className='flex flex-col '>
       <TrainingModal isOpen={isRecommendationModalOpen} closeModal={() => setIsRecommendationModalOpen(false)} handleDataChange={handleDataChange} id={articleId}/>

@@ -3,6 +3,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Getting Started
 
 
+
+
+```bash
 1. git clone https://github.com/Airwangga-Sport-Science/Soccer-Front-End
 
 2. cd Soccer-Front-End
@@ -10,15 +13,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 3. npm install
 
 4. npm run dev
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

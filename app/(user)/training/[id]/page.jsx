@@ -50,9 +50,9 @@ export default function TrainingDetail() {
         <div className="flex justify-between">
         <h3 className='text-2xl font-semibold my-auto'>{article?.title}</h3>
         { isComplete == false ? (
-          <button className='bg-slate-100 text-slate-400 h-12 px-6 rounded-xl font-semibold text' onClick={() => handleComplete()}>Selesaikan</button>
+          <button className='bg-blue-500 text-white h-12 px-6 rounded-xl font-semibold text' onClick={() => handleComplete()}>Selesaikan</button>
         ) : (
-          <button className='bg-blue-500 text-white h-12 px-6 rounded-xl font-semibold text' >Selesai</button>
+          <button className='bg-slate-100 text-slate-500 h-12 px-6 rounded-xl font-semibold text' >Selesai</button>
         )}
         </div>
         
