@@ -1,7 +1,6 @@
 import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-<<<<<<< HEAD
 import { useRouter } from "next/navigation";
 import api from "@/utils/api";
 
@@ -21,23 +20,13 @@ export default function RecommendationModal({ isOpen, setIsOpen, positions, alik
     
     
   }
-=======
-
-export default function RecommendationModal({ isOpen, closeModal }) {
-  const cancelButtonRef = useRef(null);
-
->>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
         as="div"
         className="relative z-10"
         initialFocus={cancelButtonRef}
-<<<<<<< HEAD
         onClose={() => setIsOpen(false)}
-=======
-        onClose={closeModal}
->>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
       >
         <Transition.Child
           as={Fragment}
@@ -71,11 +60,7 @@ export default function RecommendationModal({ isOpen, closeModal }) {
                     <button
                       type="button"
                       className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center hover:bg-gray-600"
-<<<<<<< HEAD
                       onClick={() => setIsOpen(false)}
-=======
-                      onClick={closeModal}
->>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
                     >
                       <svg
                         className="w-3 h-3"
@@ -96,7 +81,6 @@ export default function RecommendationModal({ isOpen, closeModal }) {
                     </button>
                   </div>
 
-<<<<<<< HEAD
                   <div className="p-4 md:p-5 text-center">
                     <p className="text-lg leading-relaxed text-gray-500">
                       Kamu sangat mirip, <span className="font-bold text-xl">{alike}</span>
@@ -113,20 +97,11 @@ export default function RecommendationModal({ isOpen, closeModal }) {
                           null
                         )
                       }
-=======
-                  <div className="p-4 md:p-5 space-y-4 text-center">
-                    <p className="text-xl leading-relaxed text-gray-500">
-                      Best Position for You Are,
-                    </p>
-                    <p className="leading-relaxed text-gray-500 text-5xl font-bold">
-                      RW, LW
->>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
                     </p>
                   </div>
 
                   <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
                     <button
-<<<<<<< HEAD
                       onClick={handleSave}
                       type="button"
                       className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
@@ -135,16 +110,6 @@ export default function RecommendationModal({ isOpen, closeModal }) {
                     </button>
                     <button
                       onClick={() => setIsOpen(false)}
-=======
-                      onClick={() => closeModal()}
-                      type="button"
-                      className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
-                    >
-                      Update Position
-                    </button>
-                    <button
-                      onClick={() => closeModal()}
->>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
                       type="button"
                       className="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 bg-gray-700 text-gray-300 border-gray-500 hover:text-white hover:bg-gray-600 focus:ring-gray-600"
                     >
