@@ -2,8 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+<<<<<<< HEAD
 export default function CardTraining({articles, openTableTrainingModal}) {
   console.log(articles)
+=======
+export default function CardTraining({article}) {
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
   return (
     <div className="relative flex flex-row break-words gap-6 w-6/12 ">
       <div className="flex flex-col justify-between w-full">
@@ -13,6 +17,7 @@ export default function CardTraining({articles, openTableTrainingModal}) {
               Training Recommendation
             </h3>
             <div className="bg-gray-100 text-gray-400 h-12 px-6 rounded-xl font-semibold text flex align-middle">
+<<<<<<< HEAD
               <button
                 onClick={openTableTrainingModal}
                 className="flex items-center"
@@ -23,6 +28,13 @@ export default function CardTraining({articles, openTableTrainingModal}) {
           </div>
           <div className="flex flex-row gap-4 mt-6">
             <Link href={'/training/'+articles?.latest_art1_id } className="flex-col text-center justify-center align-middle relative ">
+=======
+              <span className="my-auto">More..</span>
+            </div>
+          </div>
+          <div className="flex flex-row gap-4 mt-6">
+            <Link href={'/training/' + article[0].id} className="flex-col text-center justify-center align-middle relative ">
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
               <Image
                 src={"/img/img-1-1000x600.jpg"}
                 width={200}
@@ -31,10 +43,17 @@ export default function CardTraining({articles, openTableTrainingModal}) {
                 alt=""
               />
               <h3 className="absolute text-left px-6 text-2xl font-semibold text-white bottom-4 ">
+<<<<<<< HEAD
                 {articles?.latest_art1_title}
               </h3>
             </Link>
             <Link href={'/training/'+articles?.latest_art2_id } className="flex-col text-center justify-center align-middle relative">
+=======
+                {article[0].title}
+              </h3>
+            </Link>
+            <Link href={'/training/' + article[1].id} className="flex-col text-center justify-center align-middle relative">
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
               <Image
                 src={"/img/img-1-1000x600.jpg"}
                 width={200}
@@ -43,10 +62,17 @@ export default function CardTraining({articles, openTableTrainingModal}) {
                 alt=""
               />
               <h3 className="absolute text-left px-6 text-2xl font-semibold text-white bottom-4">
+<<<<<<< HEAD
                 {articles?.latest_art2_title}
               </h3>
             </Link>
             <Link href={'/training/'+articles?.latest_art3_id } className="flex-col text-center justify-center align-middle relative">
+=======
+                {article[1].title}
+              </h3>
+            </Link>
+            <Link href={'/training/' + article[2].id} className="flex-col text-center justify-center align-middle relative">
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
               <Image
                 src={"/img/img-1-1000x600.jpg"}
                 width={200}
@@ -55,7 +81,11 @@ export default function CardTraining({articles, openTableTrainingModal}) {
                 alt=""
               />
               <h3 className="absolute text-left px-6 text-2xl font-semibold text-white bottom-4">
+<<<<<<< HEAD
                 {articles?.latest_art3_title}
+=======
+                {article[2].title}
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
               </h3>
             </Link>
           </div>

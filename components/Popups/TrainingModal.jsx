@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
@@ -87,12 +88,24 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 			closeModal()
 		)
 	}
+=======
+import { Fragment, useRef } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+
+export default function TrainingModal({ isOpen, closeModal, training = {} }) {
+	const cancelButtonRef = useRef(null);
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
 
 	return (
 		<Transition.Root show={isOpen} as={Fragment}>
 			<Dialog
 				as="div"
+<<<<<<< HEAD
 				className="relative z-50"
+=======
+				className="relative z-10"
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
 				initialFocus={cancelButtonRef}
 				onClose={closeModal}
 			>
@@ -120,11 +133,18 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 							leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
 						>
 							<Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+<<<<<<< HEAD
 								<form className="relative bg-white rounded-lg shadow" onSubmit={id? handleUpdate : handleSubmit} >
 									<input type="hidden" name="id" value={article?.id} />
 									<div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
 										<h3 className="text-xl font-semibold text-gray-900">
 											{ article ? "Update Training" : "Add Training" }
+=======
+								<form className="relative bg-white rounded-lg shadow">
+									<div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+										<h3 className="text-xl font-semibold text-gray-900">
+											{ training ? "Update Training" : "Add Training" }
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
 										</h3>
 										<button
 											type="button"
@@ -161,22 +181,32 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
                       <input
                         type="text"
                         id="name"
+<<<<<<< HEAD
 												name="title"
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         placeholder="Name"
 												value={article ? article.title : ""}
 												onChange={(e) => handleChange(e)}
+=======
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder="Name"
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
                         required
                       />
                     </div>
                     <div>
+<<<<<<< HEAD
 											<div className="">
 											<label
+=======
+                      <label
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
                         htmlFor="age"
                         classage="block mb-2 text-sm font-medium text-gray-900"
                       >
                         Position
                       </label>
+<<<<<<< HEAD
                       
 											</div>
 											<div className=" flex flex-row gap-4">
@@ -275,16 +305,33 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 												onChange={(e) => handleChange(e)}
 												required
 											/>
+=======
+                      <input
+                        type="number"
+                        id="age"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder="Name"
+                        required
+                      />
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
                     </div>
 									</div>
 
 									<div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
 										<button
+<<<<<<< HEAD
 											type="submit"
 											className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
 											
 										>
 											{article ? "Update" : "Create"}
+=======
+											type="button"
+											className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
+											onClick={closeModal}
+										>
+											Create Training
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
 										</button>
 										<button
 											type="button"

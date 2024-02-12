@@ -1,5 +1,9 @@
 const api = (() => {
+<<<<<<< HEAD
   const BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}:${process.env.NEXT_PUBLIC_API_PORT}`
+=======
+  const BASE_URL = 'http://127.0.0.1:5000';
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
 
   function getAccessToken() {
     return localStorage.getItem('accessToken')
@@ -45,6 +49,7 @@ const api = (() => {
     return token;
   }
 
+<<<<<<< HEAD
   async function register({ username, password, name, email, birthdate,phone }) {
     const response = await fetch(`${BASE_URL}/register`, {
       method: 'POST',
@@ -73,6 +78,8 @@ const api = (() => {
     return responseJson;
   }
 
+=======
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
   async function getUserLoggedIn() {
     const response = await fetchWithToken(`${BASE_URL}/user`, {
       method: 'GET',
@@ -142,6 +149,7 @@ const api = (() => {
     }
   }
   
+<<<<<<< HEAD
   async function postAttribute(attribute) {
     try {
       const response = await fetchWithToken(`${BASE_URL}/attribute`, {
@@ -173,6 +181,8 @@ const api = (() => {
     }
   }
 
+=======
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
   async function getArticle(id) {
     const response = await fetch(`${BASE_URL}/articles/${id}`, {
       method: 'GET',
@@ -199,6 +209,7 @@ const api = (() => {
     return responseJson.data;
   }
 
+<<<<<<< HEAD
   
   async function createArticle(article) {
     
@@ -233,6 +244,8 @@ const api = (() => {
     }
   }
 
+=======
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
   async function getPositions() {
     const response = await fetch(`${BASE_URL}/positions`, {
       method: 'GET',
@@ -246,6 +259,7 @@ const api = (() => {
     return responseJson.data;
   }
 
+<<<<<<< HEAD
   async function getAttributeMaster() {
     const response = await fetch(`${BASE_URL}/attributes_master`, {
       method: 'GET',
@@ -319,11 +333,18 @@ const api = (() => {
   return {
     login,
     register,
+=======
+
+
+  return {
+    login,
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
     getAccessToken,
     putAccessToken,
     getUserLoggedIn,
     getPlayer,
     updateAttribute,
+<<<<<<< HEAD
     postAttribute,
     getArticle,
     getArticles,
@@ -336,6 +357,11 @@ const api = (() => {
     completeArticle,
     getCompleteArticle
 
+=======
+    getArticle,
+    getArticles,
+    getPositions
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
   };
 })();
 

@@ -5,7 +5,11 @@ import CardRow from "./CardRow";
 
 // import TableDropdown from "components/Dropdowns/TableDropdown.js";
 
+<<<<<<< HEAD
 export default function CardTable({ articles, openModalTraining,handleOpenModal }) {
+=======
+export default function CardTable({ openModalTraining }) {
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
   return (
     <>
       <div
@@ -70,10 +74,23 @@ export default function CardTable({ articles, openModalTraining,handleOpenModal 
               </tr>
             </thead>
             <tbody>
+<<<<<<< HEAD
               {articles.map((article) => (
                 <CardRow key={article.id} {...article} handleOpenModal={handleOpenModal}/>
               ))}
 
+=======
+              
+                  <CardRow />
+                  <CardRow />
+                  <CardRow />
+                  <CardRow />
+                  <CardRow />
+                  <CardRow />
+                  <CardRow />
+                  <CardRow />
+                  <CardRow />
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
             </tbody>
           </table>
         </div>
