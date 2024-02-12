@@ -30,15 +30,9 @@ export default function Training() {
   }
 
   function handleFilter(e) {
-<<<<<<< HEAD
     console.log(articles,tempArticles);
     if (e.target.value === "0") {
       setArticles(tempArticles)
-=======
-    if (e.target.value === "0") {
-      setArticles(tempArticles)
-      return
->>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
     }
     else{
       setArticles (tempArticles.filter(article => article.positions.includes(e.target.value)))
@@ -48,10 +42,7 @@ export default function Training() {
   React.useEffect(() => {
     getArticles();
     getPositions();
-<<<<<<< HEAD
     console.log(articles,tempArticles);
-=======
->>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
   }, []);
 
   return (
