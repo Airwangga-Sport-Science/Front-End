@@ -1,11 +1,23 @@
 import React from 'react'
+<<<<<<< HEAD
+import TableDropdown from '../Dropdowns/TableDropdown'
+
+export default function CardRow({title, body,positions, thumbnail, id, handleOpenModal}) {
+
+
+=======
 
 export default function CardRow() {
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
   return (
     <tr>
                 <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
                   <img
+<<<<<<< HEAD
+                    src={thumbnail?thumbnail:"img/bootstrap.jpg"}
+=======
                     src="/img/bootstrap.jpg"
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
                     className="h-12 w-12 bg-white rounded-full border"
                     alt="..."
                   ></img>{" "}
@@ -14,6 +26,22 @@ export default function CardRow() {
                       "ml-3 font-bold "
                     }
                   >
+<<<<<<< HEAD
+                    {title}
+                  </span>
+                </th>
+                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  {positions}
+                </td>
+                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs  p-4">
+                  {body}
+                </td>
+                
+                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                <TableDropdown handleOpenModal={handleOpenModal} id={id} />
+                </td>
+
+=======
                     Argon Design System
                   </span>
                 </th>
@@ -31,6 +59,7 @@ export default function CardRow() {
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
                   {/* <TableDropdown /> */}
                 </td>
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
               </tr>
   )
 }

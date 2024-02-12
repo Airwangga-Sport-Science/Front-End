@@ -1,10 +1,36 @@
 import React from "react";
 
 // Define the props
+<<<<<<< HEAD
+const CardProfile = ({ activeAttribute, player,positions, openPlayerModal }) => {
+  function calculateAge(birthDateString) {
+    // Parse the birth date string into a Date object
+    const birthDate = new Date(birthDateString);
+  
+    // Calculate the current date
+    const currentDate = new Date();
+  
+    // Calculate the difference in years between the current year and the birth year
+    let age = currentDate.getFullYear() - birthDate.getFullYear();
+  
+    // Adjust the age if the birthday hasn't occurred yet this year
+    if (
+      currentDate.getMonth() < birthDate.getMonth() ||
+      (currentDate.getMonth() === birthDate.getMonth() && currentDate.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
+  
+    return age;
+  }
+
+  console.log(positions, player,activeAttribute)
+=======
 const CardProfile = ({ name, age, openPlayerModal }) => {
 
 
 
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
   return (
     <div className="flex flex-row gap-6 w-6/12">
       {/* User Image */}
@@ -19,8 +45,13 @@ const CardProfile = ({ name, age, openPlayerModal }) => {
         <div className="flex flex-col bg-white mb-6 shadow-xl rounded-xl px-6 pt-6 pb-12 h-80 justify-between">
           <div className="flex flex-row justify-between h-20">
             <div className="flex flex-col">
+<<<<<<< HEAD
+              <h3 className="font-semibold text-3xl">{player.name}</h3>
+              <h4 className="text-xl text-gray-500">{player.player_alike}</h4>
+=======
               <h3 className="font-semibold text-3xl">{name}</h3>
               <h4 className="text-xl text-gray-500">Manchester City</h4>
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
             </div>
             <button className="bg-gray-100 text-gray-400 h-12 px-6 rounded-xl font-semibold flex items-center" onClick={openPlayerModal}>
               <span className="my-auto">Update</span>
@@ -29,6 +60,30 @@ const CardProfile = ({ name, age, openPlayerModal }) => {
 
           {/* User Stats */}
           <div className="grid grid-cols-3 grid-rows-2 justify-between gap-y-6 mt-6">
+<<<<<<< HEAD
+            <div className="flex flex-col">
+              <h4 className="text-sm text-center text-gray-500">Height</h4>
+              <h3 className="text-2xl text-center  font-semibold">{activeAttribute.height}</h3>
+              
+            </div>
+            <div className="flex flex-col">
+              <h4 className="text-sm text-center text-gray-500">Weight</h4>
+              <h3 className="text-2xl text-center font-semibold">{activeAttribute.weight}</h3>
+            </div>
+            <div className="flex flex-col">
+              <h4 className="text-sm text-center text-gray-500">age</h4>
+              <h3 className="text-2xl text-center font-semibold">{calculateAge(player.birth_date)}</h3>
+            </div>
+            <div className="flex flex-col col-span-3">
+              <h4 className="text-sm text-center text-gray-500">Position</h4>
+              {positions != undefined ? (
+                <h3 className="text-2xl text-center font-semibold">{positions?.name}, {positions['pos2.name']}, {positions['pos3.name']}</h3>
+              ) : (
+                <h3 className="text-2xl text-center font-semibold">-</h3>
+              )
+              }
+            </div>
+=======
             {Array.from({ length: 6 }).map((_, index) => (
               <div
                 key={index}
@@ -38,6 +93,7 @@ const CardProfile = ({ name, age, openPlayerModal }) => {
                 <p className="text-base">12 Years</p>
               </div>
             ))}
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
           </div>
         </div>
       </div>

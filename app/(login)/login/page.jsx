@@ -1,8 +1,8 @@
 "use client"
 import React from "react";
 import Link from "next/link";
-import api from "@/utils/api";
 import { redirect } from 'next/navigation';
+import api from "../../../utils/api";
 
 export default function Login() {
   const [username, setUsername] = React.useState("");
@@ -21,7 +21,6 @@ export default function Login() {
     api.putAccessToken(token);
 
     const  data  = await api.getUserLoggedIn();
-    console.log("data", data);
     setAuthedUser(data);
 
   }
@@ -42,7 +41,7 @@ export default function Login() {
 
   if (authedUser) {
     if (authedUser.role == 1) {
-      redirect('/player/85139014')
+      redirect('/player')
     }
     else if (authedUser.role == 2) {
       redirect('/dashboard')
@@ -57,17 +56,20 @@ export default function Login() {
               
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                 <div className="text-xl text-center mb-3 font-bold py-4">
-                  Sign In
+                  Login
                 </div>
                 <form>
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
+                      htmlFor="username"
+                      id="username-label"
                     >
                       Username
                     </label>
                     <input
+                      id="username"
+                      name="username"
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="username"
@@ -78,12 +80,15 @@ export default function Login() {
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
+                      htmlFor="password"
+                      id="password-label"
                     >
                       Password
                     </label>
                     <input
                       type="password"
+                      id="password"
+                      name="password"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Password"
                       onChange={(e) => setPassword(e.target.value)}

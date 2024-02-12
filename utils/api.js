@@ -1,5 +1,9 @@
 const api = (() => {
+<<<<<<< HEAD
+  const BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}:${process.env.NEXT_PUBLIC_API_PORT}`
+=======
   const BASE_URL = 'http://127.0.0.1:5000';
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
 
   function getAccessToken() {
     return localStorage.getItem('accessToken')
@@ -45,6 +49,37 @@ const api = (() => {
     return token;
   }
 
+<<<<<<< HEAD
+  async function register({ username, password, name, email, birthdate,phone }) {
+    const response = await fetch(`${BASE_URL}/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        password,
+        phone,
+        role : 1,
+        name,
+        email,
+        birthdate,
+      }),
+    });
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    return responseJson;
+  }
+
+=======
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
   async function getUserLoggedIn() {
     const response = await fetchWithToken(`${BASE_URL}/user`, {
       method: 'GET',
@@ -114,6 +149,40 @@ const api = (() => {
     }
   }
   
+<<<<<<< HEAD
+  async function postAttribute(attribute) {
+    try {
+      const response = await fetchWithToken(`${BASE_URL}/attribute`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ attributes: attribute }), // Assuming the server expects an 'attributes' field
+      });
+  
+      // Check if the response status is OK (200)
+      if (!response.ok) {
+        throw new Error(`Request failed with status: ${response.status}`);
+      }
+  
+      const responseJson = await response.json();
+  
+      // Check if the response status is 'success'
+      if (responseJson.status !== 'success') {
+        throw new Error(responseJson.message);
+      }
+  
+      // Return any relevant data from the response if needed
+      return responseJson;
+    } catch (error) {
+      // Handle errors gracefully
+      console.error('Error updating attribute:', error.message);
+      throw error; // Rethrow the error for further handling upstream
+    }
+  }
+
+=======
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
   async function getArticle(id) {
     const response = await fetch(`${BASE_URL}/articles/${id}`, {
       method: 'GET',
@@ -140,6 +209,43 @@ const api = (() => {
     return responseJson.data;
   }
 
+<<<<<<< HEAD
+  
+  async function createArticle(article) {
+    
+    const response = await fetchWithToken(`${BASE_URL}/articles`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    , body: JSON.stringify(article)
+    });
+
+    const responseJson = await response.json();
+
+    if (responseJson.status !== 'success') {
+      throw new Error(responseJson.message);
+    }
+  }
+
+  async function updateArticle(article) {
+    const response = await fetchWithToken(`${BASE_URL}/articles/${article.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(article),
+    });
+
+    const responseJson = await response.json();
+
+    if (responseJson.status !== 'success') {
+      throw new Error(responseJson.message);
+    }
+  }
+
+=======
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
   async function getPositions() {
     const response = await fetch(`${BASE_URL}/positions`, {
       method: 'GET',
@@ -153,18 +259,109 @@ const api = (() => {
     return responseJson.data;
   }
 
+<<<<<<< HEAD
+  async function getAttributeMaster() {
+    const response = await fetch(`${BASE_URL}/attributes_master`, {
+      method: 'GET',
+    });
+    const responseJson = await response.json();
+
+    if (responseJson.status !== 'success') {
+      throw new Error(responseJson.message);
+    }
+    console.log(responseJson.data);
+    return responseJson.data;
+
+  }
+
+
+  async function getAttribute(id) {
+    const response = await fetch(`${BASE_URL}/attributes/${id}`, {
+      method: 'GET',
+    });
+
+    const responseJson = await response.json();
+
+    if (responseJson.status !== 'success') {
+      throw new Error(responseJson.message);
+    }
+
+    return responseJson.data;
+
+  }
+
+
+  async function getArticleByAttribute(id) {
+    const response = await fetch(`${BASE_URL}/articles/attributes/${id}`, {
+      method: 'GET',
+    });
+    const responseJson = await response.json();
+
+    if (responseJson.status !== 'success') {
+      throw new Error(responseJson.message);
+    }
+
+    return responseJson.data;
+  }
+
+  async function completeArticle(id) {
+    const response = await fetchWithToken(`${BASE_URL}/articles/complete/${id}`, {
+      method: 'POST',
+    });
+    const responseJson = await response.json();
+
+    if (responseJson.status !== 'success') {
+      throw new Error(responseJson.message);
+    }
+
+    return responseJson;
+  }
+
+  async function getCompleteArticle(id) {
+    const response = await fetchWithToken(`${BASE_URL}/articles/complete/${id}`, {
+      method: 'GET',
+    });
+    const responseJson = await response.json();
+
+    if (responseJson.status !== 'success') {
+      throw new Error(responseJson.message);
+    }
+
+    return responseJson;
+  }
+
+  return {
+    login,
+    register,
+=======
 
 
   return {
     login,
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
     getAccessToken,
     putAccessToken,
     getUserLoggedIn,
     getPlayer,
     updateAttribute,
+<<<<<<< HEAD
+    postAttribute,
+    getArticle,
+    getArticles,
+    getPositions,
+    createArticle,
+    updateArticle,
+    getAttributeMaster,
+    getAttribute,
+    getArticleByAttribute,
+    completeArticle,
+    getCompleteArticle
+
+=======
     getArticle,
     getArticles,
     getPositions
+>>>>>>> 09dcef1f7342e23510b844a91aec959df4e5ce8c
   };
 })();
 
