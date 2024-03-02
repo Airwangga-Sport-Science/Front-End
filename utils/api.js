@@ -45,7 +45,7 @@ const api = (() => {
     return token;
   }
 
-  async function register({ username, password, name, email, birthdate,phone }) {
+  async function register({ username, password, name, email, birthdate,phone, thumbnail }) {
     const response = await fetch(`${BASE_URL}/register`, {
       method: 'POST',
       headers: {
@@ -59,6 +59,64 @@ const api = (() => {
         name,
         email,
         birthdate,
+        thumbnail
+      }),
+    });
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    return responseJson;
+  }
+  async function updateUser({ username, password, name, email, birth_date,phone, thumbnail }) {
+    const response = await fetchWithToken(`${BASE_URL}/user`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        password,
+        phone,
+        role : 1,
+        name,
+        email,
+        birth_date,
+        thumbnail
+      }),
+    });
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    return responseJson;
+  }
+
+  async function updateUserWithRole({ username, password, name, email, birth_date,phone, thumbnail, role }) {
+    const response = await fetchWithToken(`${BASE_URL}/user`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        password,
+        phone,
+        role : role,
+        name,
+        email,
+        birth_date,
+        thumbnail
       }),
     });
 
@@ -198,7 +256,18 @@ const api = (() => {
 
     return responseJson.data;
   }
+  async function getUsers() {
+    const response = await fetchWithToken(`${BASE_URL}/users`, {
+      method: 'GET',
+    });
+    const responseJson = await response.json();
 
+    if (responseJson.status !== 'success') {
+      throw new Error(responseJson.message);
+    }
+
+    return responseJson.data;
+  }
   
   async function createArticle(article) {
     
@@ -334,7 +403,10 @@ const api = (() => {
     getAttribute,
     getArticleByAttribute,
     completeArticle,
-    getCompleteArticle
+    getCompleteArticle,
+    updateUser,
+    getUsers,
+    updateUserWithRole
 
   };
 })();

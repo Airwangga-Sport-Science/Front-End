@@ -185,7 +185,7 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 												{positions &&
 													positions.map((position) => (
 														<option
-															key={position.id} // Add a unique key for each option
+															key={position.id} 
 															value={position.id}
 															selected={article?.position_1 == position.name}
 														>
@@ -199,7 +199,7 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 												{positions &&
 													positions.map((position) => (
 														<option
-															key={position.id} // Add a unique key for each option
+															key={position.id} 
 															value={position.id}
 															selected={article?.position_2 == position.name}
 														>
@@ -212,7 +212,7 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 												{positions &&
 													positions.map((position) => (
 														<option
-															key={position.id} // Add a unique key for each option
+															key={position.id} 
 															value={position.id}
 															selected={article?.position_3 == position.name}
 														>

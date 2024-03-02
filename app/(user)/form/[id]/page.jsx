@@ -11,14 +11,13 @@ import FormQuestion from "@/components/Forms/FormQuestion";
 import FormRadio from "@/components/Forms/FormRadio";
 
 export default function Form() {
-	// This state variable holds the current set of attributes being displayed
+
 	const [attributes, setAttributes] = React.useState([]);
 	const [question, setQuestion] = React.useState([]);
 	const [openModal, setOpenModal] = React.useState(false);
 	const router = useRouter();
 	const params = useParams();
 
-	// This state variable holds all of the attributes
 	const [allAttributes, setAllAttributes] = React.useState({
 		weight: 0,
 		height: 0,
@@ -59,16 +58,13 @@ export default function Form() {
 		setAllAttributes(response);
 	};
 
-	// This state variable holds the current page number
+	
 	const [currentPage, setCurrentPage] = React.useState(1);
 
-	// This constant holds the number of attributes to display per page
 	const attributesPerPage = 5;
 
-	// This state variable holds all of the attributes
 	const allAttributesObject = allAttributes;
 
-	// This effect calculates the current set of attributes to display based on the current page number
 	React.useEffect(() => {
 		fetchAttributesMaster();
 
@@ -86,7 +82,7 @@ export default function Form() {
 		fetchAttributes(params.id);
 	}, []);
 
-	// This function updates the value of a specific attribute
+	
 	const handleAttributeChange = (key, newValue) => {
 		setAllAttributes((prevAttributes) => ({
 			...prevAttributes,
@@ -94,7 +90,6 @@ export default function Form() {
 		}));
 	};
 
-	// This constant holds the total number of pages
 	const totalPages = React.useMemo(() => {
 		return Math.ceil(Object.keys(allAttributesObject).length / attributesPerPage);
 	}, [allAttributesObject]);
@@ -105,8 +100,7 @@ export default function Form() {
 		const response = await api.postAttribute(allAttributes);
 
 		if (response.status === "success") {
-			//redirect to dashboard
-			//router.push('/player/1')
+
 			setOpenModal(true);
 			setPositions(response.positions);
 			setAlikedPlayers(response.alike);
@@ -129,7 +123,7 @@ export default function Form() {
 			console.log(matchingQuestion.attribute_question);
 			return matchingQuestion.attribute_question;
 		} else {
-			return "Question not found"; // or any default message
+			return "Question not found";
 		}
 	};
 
@@ -156,51 +150,61 @@ export default function Form() {
 				<div className="flex flex-col justify-between w-4/5 md:gap-6 bg-white rounded-md shadow-sm py-6 px-12 mx-auto">
 					<h2 className="font-semibold text-3xl my-auto"> Form Attribute </h2>
 					<div className="">
-						key == "height" ?
-						<FormQuestion
-							key={"height"}
-							question={questionForAttributes("height")}
-							display={displayForAttributes("height")}
-							onAttributeChange={handleAttributeChange}
-							attribute="height"
-							type={"number"}
-							value={attributes.height}
-						/>{" "}
-						: key == "weight" ?
-						<FormQuestion
-							key={"weight"}
-							question={questionForAttributes("weight")}
-							display={displayForAttributes("weight")}
-							onAttributeChange={handleAttributeChange}
-							attribute="weight"
-							type={"number"}
-							value={attributes.weight}
-						/>
-						: key == "prefered_foot" ?
-						<FormRadio
-							key={"prefered_foot"}
-							question={questionForAttributes("prefered_foot")}
-							display={displayForAttributes("prefered_foot")}
-							onAttributeChange={handleAttributeChange}
-							attribute="prefered_foot"
-							value={attributes.prefered_foot}
-							options={[
-								{ value: "left", label: "Left Foot" },
-								{ value: "right", label: "Right Foot" },
-							]}
-						/>
-						:
-						{Object.keys(attributes).map((key) => (
-							<FormSlider
-								key={key}
-								attribute={key}
-								value={attributes[key]}
-								question={questionForAttributes(key)}
-								display={displayForAttributes(key)}
-								onAttributeChange={handleAttributeChange}
-							/>
-						))}
+						{Object.keys(attributes).map((key) => {
+							if (key === "height") {
+								return (
+									<FormQuestion
+										key={key}
+										question={questionForAttributes(key)}
+										display={displayForAttributes(key)}
+										onAttributeChange={handleAttributeChange}
+										attribute={key}
+										type={"number"}
+										value={attributes[key]}
+									/>
+								);
+							} else if (key === "weight") {
+								return (
+									<FormQuestion
+										key={key}
+										question={questionForAttributes(key)}
+										display={displayForAttributes(key)}
+										onAttributeChange={handleAttributeChange}
+										attribute={key}
+										type={"number"}
+										value={attributes[key]}
+									/>
+								);
+							} else if (key === "prefered_foot") {
+								return (
+									<FormRadio
+										key={key}
+										question={questionForAttributes(key)}
+										display={displayForAttributes(key)}
+										onAttributeChange={handleAttributeChange}
+										attribute={key}
+										value={attributes[key]}
+										options={[
+											{ value: "left", label: "Left Foot" },
+											{ value: "right", label: "Right Foot" },
+										]}
+									/>
+								);
+							} else {
+								return (
+									<FormSlider
+										key={key}
+										attribute={key}
+										value={attributes[key]}
+										question={questionForAttributes(key)}
+										display={displayForAttributes(key)}
+										onAttributeChange={handleAttributeChange}
+									/>
+								);
+							}
+						})}
 					</div>
+
 					<div className="flex justify-end">
 						{currentPage === totalPages ? (
 							<button
@@ -222,7 +226,7 @@ export default function Form() {
 							Previous
 						</button>
 						<span className="mx-4 my-4">
-							Page <b>{currentPage}</b> of {totalPages}
+							Page <b>{currentPage+1}</b> of {totalPages+1}
 						</span>
 						<button
 							onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}

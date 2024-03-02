@@ -12,13 +12,13 @@ import FormRadio from "@/components/Forms/FormRadio";
 
 export default function Form() {
 
-// This state variable holds the current set of attributes being displayed
+
 const [attributes, setAttributes] = React.useState([])
 const [question, setQuestion] = React.useState([])
 const [openModal, setOpenModal] = React.useState(false)
 const router = useRouter();
 
-// This state variable holds all of the attributes
+
 const [allAttributes, setAllAttributes] = React.useState({
   'weight': 0,
   'height': 0,
@@ -54,17 +54,13 @@ const [allAttributes, setAllAttributes] = React.useState({
   "power_strength": 0,
 });
 
-// This state variable holds the current page number
+
 const [currentPage, setCurrentPage] = React.useState(0);
 
-// This constant holds the number of attributes to display per page
 const attributesPerPage = 5;
 
-// This state variable holds all of the attributes
 const allAttributesObject = allAttributes;
 
-
-// This effect calculates the current set of attributes to display based on the current page number
 React.useEffect(() => {
   fetchAttributesMaster();
 
@@ -80,7 +76,7 @@ React.useEffect(() => {
   
 }, [currentPage]);
 
-// This function updates the value of a specific attribute
+
 const handleAttributeChange = (key, newValue) => {
   setAllAttributes((prevAttributes) => ({
     ...prevAttributes,
@@ -88,7 +84,7 @@ const handleAttributeChange = (key, newValue) => {
   }))
 }
 
-// This constant holds the total number of pages
+
 const totalPages = React.useMemo(() => {
   return Math.ceil(Object.keys(allAttributesObject).length / attributesPerPage);
 }, [allAttributesObject]);
@@ -100,8 +96,7 @@ const handleSubmit = async () => {
   const response = await api.postAttribute(allAttributes);
 
   if (response.status === 'success') {
-    //redirect to dashboard
-    //router.push('/player/1')
+
     setOpenModal(true);
     setPositions(response.positions);
     setAlikedPlayers(response.alike);
@@ -126,7 +121,7 @@ const questionForAttributes = (attribute_name) => {
     console.log(matchingQuestion.attribute_question);
     return matchingQuestion.attribute_question;
   } else {
-    return 'Question not found'; // or any default message
+    return 'Question not found'; 
   }
 }
 
@@ -226,7 +221,7 @@ return (
             Previous
           </button>
           <span className="mx-4 my-4">
-            Page <b>{currentPage}</b> of {totalPages}
+            Page <b>{currentPage+1}</b> of {totalPages+1}
           </span>
           <button
             onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}

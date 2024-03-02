@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import CardRow from "./CardRow";
 // components
 
-// import TableDropdown from "components/Dropdowns/TableDropdown.js";
 
 export default function CardTable({ articles, openModalTraining,handleOpenModal }) {
   return (

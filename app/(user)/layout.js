@@ -44,6 +44,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+      <title>Airwangga Sport Center</title>
       <link
         href="https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap"
         rel="stylesheet" />
