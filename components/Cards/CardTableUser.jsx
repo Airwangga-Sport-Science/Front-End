@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import CardRow from "./CardRow";
+import CardRowUser from "./CardRowUser";
 // components
 
 
-export default function CardTable({ articles, openModalTraining,handleOpenModal }) {
+
+export default function CardTableUser({ users, openModalTraining,handleOpenModal }) {
   return (
     <>
       <div
@@ -20,11 +22,11 @@ export default function CardTable({ articles, openModalTraining,handleOpenModal 
                   "font-semibold text-lg "
                 }
               >
-                Training Tables
+                User Tables
               </h3>
             </div>
             <button className="bg-blue-700 text-white active:bg-blue-600 text-xs font-bold uppercase px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={openModalTraining}> 
-              Create Training
+              Create User
             </button>
           </div>
         </div>
@@ -38,21 +40,35 @@ export default function CardTable({ articles, openModalTraining,handleOpenModal 
                     "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left col-span-1" 
                   }
                 >
-                  Training Name
+                  Name
                 </th>
                 <th
                   className={
                     "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left col-span-1"
                   }
                 >
-                  Position
+                  Username
                 </th>
                 <th
                   className={
-                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left w-1/2" 
+                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left col-span-1" 
                   }
                 >
-                  Short Desc
+                  Phone
+                </th>
+                <th
+                  className={
+                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left col-span-1"
+                  }
+                >
+                  Email
+                </th>
+                <th
+                  className={
+                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " 
+                  }
+                >
+                  Role
                 </th>
                 <th
                   className={
@@ -69,8 +85,8 @@ export default function CardTable({ articles, openModalTraining,handleOpenModal 
               </tr>
             </thead>
             <tbody>
-              {articles.map((article) => (
-                <CardRow key={article.id} {...article} handleOpenModal={handleOpenModal}/>
+              {users.map((user) => (
+                <CardRowUser key={user.id} {...user} handleOpenModal={handleOpenModal}/>
               ))}
 
             </tbody>

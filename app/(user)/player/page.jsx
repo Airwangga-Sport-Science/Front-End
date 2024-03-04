@@ -45,7 +45,10 @@ export default function Index() {
   }
 
 
-  
+  async function handleUpdate(e){
+    e.preventDefault();
+    
+  }
   useEffect(() => {
     fetchPlayer();
   }, []);
@@ -86,12 +89,12 @@ export default function Index() {
   return (
     <div className="flex flex-col 2xl:w-[1440px] mx-auto mt-12">
       <RecommendationModal isOpen={isRecommendationModalOpen} closeModal={closeRecommendationModal} />
-      <PlayerModal isOpen={isPlayerModalOpen} closeModal={closePlayerModal} player={player} positions={positions} />
+      <PlayerModal isOpen={isPlayerModalOpen} closeModal={closePlayerModal} player={player} positions={positions} handleUpdate= {handleUpdate} setPlayer={setPlayer} />
       <TableTrainingModal isOpen={isTableTrainingModalOpen} closeModal={closeTableTrainingModal} activeAttribute={activeAttribute} positions={positions}/>
       
       <CardStatsSelector attribute={attribute} activeAttribute={activeAttribute} setActiveAttribute={setActiveAttribute} />
       <div className="flex flex-row w-full md:gap-6 px-6">
-        <CardProfile player={player} positions={positions} activeAttribute={activeAttribute} openPlayerModal={openPlayerModal} />
+        <CardProfile player={player} positions={positions} activeAttribute={activeAttribute} openPlayerModal={openPlayerModal}  />
         <CardTraining articles={article} openTableTrainingModal={openTableTrainingModal}  />
       </div>
       <CardStatistic activeAttribute={activeAttribute} positions={positions} />

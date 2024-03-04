@@ -1,18 +1,15 @@
 import React from "react";
 
-// Define the props
+
 const CardProfile = ({ activeAttribute, player,positions, openPlayerModal }) => {
   function calculateAge(birthDateString) {
-    // Parse the birth date string into a Date object
+
     const birthDate = new Date(birthDateString);
   
-    // Calculate the current date
     const currentDate = new Date();
   
-    // Calculate the difference in years between the current year and the birth year
     let age = currentDate.getFullYear() - birthDate.getFullYear();
   
-    // Adjust the age if the birthday hasn't occurred yet this year
     if (
       currentDate.getMonth() < birthDate.getMonth() ||
       (currentDate.getMonth() === birthDate.getMonth() && currentDate.getDate() < birthDate.getDate())
@@ -28,7 +25,7 @@ const CardProfile = ({ activeAttribute, player,positions, openPlayerModal }) => 
     <div className="flex flex-row gap-6 w-6/12">
       {/* User Image */}
       <img
-        src="/img/team-1-800x800.jpg"
+        src={player.thumbnail}
         alt=""
         className="w-64 h-80 rounded-xl shadow-xl"
       />

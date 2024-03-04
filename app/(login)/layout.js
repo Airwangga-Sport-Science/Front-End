@@ -1,6 +1,13 @@
 import { Inter } from 'next/font/google'
 import '../globals.css'
 import "@/styles/globals.css";
+import React, { Suspense } from "react";
+import { redirect } from 'next/navigation';
+import Loading from './loading';
+import { ErrorBoundary } from 'next/dist/client/components/error-boundary';
+import Error from './error';
+import GlobalError from '../global-error';
+
 
 export const metadata = {
   title: 'Create Next App',
@@ -11,14 +18,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+      <title>Airwangga Sport Center</title>
       <link
         href="https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap"
         rel="stylesheet" />
       </head>
 
         <body className="antialiased bg-slate-50 font-poppins text-black ">
-          {children}
+        <ErrorBoundary fallback={<GlobalError/>}>
+          <Suspense fallback={<Loading />}>{children}</Suspense>
+        </ErrorBoundary>
         </body>
+        
     </html>
   )
 }

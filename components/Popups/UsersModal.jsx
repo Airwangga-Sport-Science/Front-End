@@ -1,39 +1,80 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import api from "@/utils/api";
 
-export default function PlayerModal({ isOpen, closeModal, player,setPlayer }) {
+
+export default function UsersModal({ isOpen, closeModal, users,id,setUsers }) {
 	const cancelButtonRef = useRef(null);
-	const [tempPlayer, setTempPlayer] = useState(player);
+	console.log(users,id,users.find(user => user.id === id))
 
-	
+	const [tempPlayer, setTempPlayer] = useState({});
 
+
+	useEffect(() => {
+		setTempPlayer(users.find(user => user.id === id))
+	}, [users])
+
+	console.log(tempPlayer)
 	async function handleSubmit(e) {
-		e.preventDefault();
+    e.preventDefault();
 
-		const formData = new FormData(e.target);
-		const data = Object.fromEntries(formData);
-		const response1 = await fetch('/api/upload', {
-			method: 'POST',
-			body: formData,
-		});
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
 
-		if (!response1.ok) {
-			throw new Error('Network response was not ok');
+    const response1 = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+    });
+
+    if (!response1.ok) {
+        throw new Error('Network response was not ok');
+    }
+
+    const { filePath } = await response1.json();
+    let thumbnail = filePath;
+
+
+    const updatedUserData = {
+        username: tempPlayer.username,
+        password: tempPlayer.password,
+        name: tempPlayer.name,
+        email: tempPlayer.email,
+        birth_date: tempPlayer.birth_date,
+				birthdate : tempPlayer.birth_date,
+        phone: tempPlayer.phone,
+        thumbnail: thumbnail,
+        role: tempPlayer.role
+    };
+		let response = {};
+		if (id) {
+			 response = await api.updateUserWithRole(updatedUserData);
+		}
+    else{
+			console.log(updatedUserData)
+			 response = await api.register(updatedUserData);
 		}
 
-		const { filePath } = await response1.json();
-    let thumbnail = filePath;
-    console.log(thumbnail);
-
-    const response = await api.updateUser({username: tempPlayer.username, password: tempPlayer.password, name: tempPlayer.name, email: tempPlayer.email, birth_date: tempPlayer.birth_date, phone: tempPlayer.phone, thumbnail: thumbnail});
     if (response) {
-			console.log(response.data);
-			setPlayer(response.data);
-			closeModal();
+        console.log(response.data);
+
+        // Update the users state
+        setUsers(users.map(user => {
+            if (user.id === id) {
+                // Update the user with matching id
+                return {
+                    ...user,
+                    ...tempPlayer,
+                    thumbnail: thumbnail
+                };
+            }
+            return user; // Return other users without modifications
+        }));
+
+        closeModal();
     }
-	}
+}
+
 		
 	
 
@@ -157,12 +198,23 @@ export default function PlayerModal({ isOpen, closeModal, player,setPlayer }) {
 												id="birthdate"
 												className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
 												placeholder="Birthdate"
-												value={ tempPlayer ? new Date(tempPlayer?.birth_date).toISOString().split('T')[0] : '' }
-												
+												value={ tempPlayer ? (tempPlayer.birth_date ? new Date(tempPlayer?.birth_date).toISOString().split('T')[0] : '') : '' }
+												required
 												onChange={e => setTempPlayer({ ...tempPlayer, birth_date: e.target.value })}
 											/>
 
 										</div>
+										<div>
+											<label htmlFor="birthdate" className="block mb-2 text-sm font-medium text-gray-900">
+												Role
+											</label>
+											<select name="role" id="role" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={tempPlayer?.role} onChange={e => setTempPlayer({ ...tempPlayer, role: e.target.value })}>
+												<option value="2">Admin</option>
+												<option value="1">User</option>
+											</select>
+
+										</div>
+										
 										<div>
 											<label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900">
 												Username
@@ -188,7 +240,7 @@ export default function PlayerModal({ isOpen, closeModal, player,setPlayer }) {
 												className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
 												placeholder="Password"
 												onChange={e => setTempPlayer({ ...tempPlayer, password: e.target.value })}
-												
+												required
 											/>
 
 										</div>

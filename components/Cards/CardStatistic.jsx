@@ -71,7 +71,10 @@ export default function CardStatistic({ activeAttribute,positions }) {
         ))}
       </div>
             <hr />
-      <div className="flex flex-row justify-center mt-8 gap-4">
+      <div className="flex flex-col">
+      <h1 className='text-center font-semibold text-xl my-4'>Similar Players</h1>
+      <div className="flex flex-row justify-center  gap-4">
+        
         <div
             className={`flex flex-row justify-between my-1 bg-slate-200 px-4 py-4 rounded-lg gap-3`}
           >
@@ -94,6 +97,7 @@ export default function CardStatistic({ activeAttribute,positions }) {
             
           </div>
         </div>
+      </div>
     </div>
   );
 }

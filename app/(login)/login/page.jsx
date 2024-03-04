@@ -3,17 +3,25 @@ import React from "react";
 import Link from "next/link";
 import { redirect } from 'next/navigation';
 import api from "../../../utils/api";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
+import Error from "../error";
 
 export default function Login() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
+
+  const [isLoginError, setIsLoginError] = React.useState(false);
   const [authedUser, setAuthedUser] = React.useState(null);
   async function handleLogin(){
-    const response = await api.login({username, password});
+    try {
+      const response = await api.login({username, password});
     
-    if(response){
-      onLoginSuccess(response);
+      if(response){
+        onLoginSuccess(response);
+      }
+    } catch (error) {
+      setIsLoginError(true);
     }
   }
 
@@ -48,7 +56,7 @@ export default function Login() {
     }
   }
   return (
-    <>
+    <ErrorBoundary fallback={Error} >
       <div className="container my-auto mx-auto px-4 h-screen">
         <div className="flex content-center items-center justify-center h-full my-auto">
           <div className="w-full lg:w-4/12 px-4 ">
@@ -57,6 +65,9 @@ export default function Login() {
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                 <div className="text-xl text-center mb-3 font-bold py-4">
                   Login
+                </div>
+                <div className={`bg-red-100 my-6 border border-red-400 text-red-700 px-4 py-3 rounded relative ${isLoginError ? "block" : "hidden"}`}>
+                  Invalid username or password
                 </div>
                 <form>
                   <div className="relative w-full mb-3">
@@ -119,7 +130,7 @@ export default function Login() {
           </div>
         </div>
       </div>
-    </>
+      </ErrorBoundary>
   );
 }
 
