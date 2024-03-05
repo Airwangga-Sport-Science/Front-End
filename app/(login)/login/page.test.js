@@ -15,7 +15,12 @@ describe('Login Page', () => {
     render(<Login />);
     
     fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'testuser' } });
-    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'testpassword' } });
+    const nameInput = screen.getByPlaceholderText('Username');
+    fireEvent.change(nameInput, { target: { value: 'JohnDoe' } });
+    expect(nameInput).toHaveValue('JohnDoe');
+    const passwordInput = screen.getByPlaceholderText('Password');
+    fireEvent.change(passwordInput, { target: { value: 'testpassword' } });
+    expect(passwordInput).toHaveValue('testpassword');
     fireEvent.click(screen.getByText('Sign In'));
 
 

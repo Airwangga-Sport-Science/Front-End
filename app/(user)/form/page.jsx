@@ -3,7 +3,7 @@
 import React from "react";
 import {NextUIProvider} from "@nextui-org/system";
 import FormSlider from "@/components/Forms/FormSlider";
-import api from "@/utils/api";
+import api from "../../../utils/api";
 import { useRouter, useSearchParams } from "next/navigation";
 import RecommendationModal from "@/components/Popups/RecommendationModal";
 import FormLanding from "@/components/Forms/FormLanding";
@@ -16,7 +16,7 @@ export default function Form() {
 const [attributes, setAttributes] = React.useState([])
 const [question, setQuestion] = React.useState([])
 const [openModal, setOpenModal] = React.useState(false)
-const router = useRouter();
+
 
 
 const [allAttributes, setAllAttributes] = React.useState({

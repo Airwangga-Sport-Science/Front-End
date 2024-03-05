@@ -1,18 +1,17 @@
 import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import api from "@/utils/api";
 
 export default function RecommendationModal({ isOpen, setIsOpen, positions, alike, attributes }) {
   const cancelButtonRef = useRef(null);
-  const router = useRouter();
-
+ 
   const handleSave = async () => {
     const response = await api.updateAttribute(attributes);
     if (response.status === 'success') {
       //redirect to dashboard
-      router.push('/player')
+      redirect('/player')
     }
     else {
       alert('Failed to update attribute');

@@ -1,10 +1,10 @@
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import React from "react";
 
 export default function CardStatsSelector({ attribute,activeAttribute, setActiveAttribute }) {
-	const router = useRouter();
+
 	const redirectEdit = (id) => {
-		router.push("/form/" + id);
+		redirect("/form/" + id);
 	};
 
 	const handleSelect = (id) => {

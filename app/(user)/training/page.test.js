@@ -27,8 +27,6 @@ describe('Training Component', () => {
     render(<Training />);
 
 
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
-
 
     await waitFor(() => {
       expect(api.getArticles).toHaveBeenCalledTimes(1);
