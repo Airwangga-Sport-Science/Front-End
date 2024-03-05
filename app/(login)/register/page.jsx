@@ -28,7 +28,7 @@ export default function Login() {
       errors.email = true;
     }
 
-    if (phone == "" || phone.match(/^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/)){
+    if (phone == "" || phone.match(/\d/g).length>11){
       errors.phone = false;
     }
     else{
