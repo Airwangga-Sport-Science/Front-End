@@ -15,7 +15,6 @@ export default function Form() {
 	const [attributes, setAttributes] = React.useState([]);
 	const [question, setQuestion] = React.useState([]);
 	const [openModal, setOpenModal] = React.useState(false);
-	const router = useRouter();
 	const params = useParams();
 
 	const [allAttributes, setAllAttributes] = React.useState({

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import CardTable from '@/components/Cards/CardTable'
 import CardStats from '@/components/Cards/CardStats'
 import TrainingModal from '@/components/Popups/TrainingModal'
-import api from '../../../../utils/api';
+import api from '@/utils/api';
 import CardTableUser from '@/components/Cards/CardTableUser';
 import { UsersIcon } from '@heroicons/react/24/outline';
 import UsersModal from '@/components/Popups/UsersModal';

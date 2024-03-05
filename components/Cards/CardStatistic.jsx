@@ -1,11 +1,11 @@
 import api from '@/utils/api';
-import { useRouter,Link } from 'next/navigation';
+import { redirect,Link } from 'next/navigation';
 import React from 'react';
 
 export default function CardStatistic({ activeAttribute,positions }) {
   const isOdd = (count) => count % 2 !== 0;
   const [isEdit, setIsEdit] = React.useState(false);
-  const router = useRouter();
+
 
 
   const [question, setQuestion] = React.useState([])
@@ -39,7 +39,7 @@ export default function CardStatistic({ activeAttribute,positions }) {
 
 
   const redirectEdit = (id) => {
-    router.push('/form/' + id);
+    redirect('/form/' + id);
   }
 
 

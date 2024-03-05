@@ -1,40 +1,50 @@
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import Page from './page';
-import api from '@/utils/api';
+
 
 jest.mock('@/utils/api', () => ({
-  getArticles: jest.fn(),
+  getArticles: jest.fn().mockResolvedValue([
+
+    {
+      body: "Modified Update test",
+      create_date: "Mon, 19 Feb 2024 00:00:00 GMT",
+      deleted: 1,
+      id: 2, // Assuming a new ID
+      positions: "LM,RM",
+      steps: "Passing drills, Shooting practice",
+      thumbnail: null,
+      title: "Advanced Wing Training",
+      user_id: 3, // Assuming a new user ID
+      user_name: "Modified User"
+  },
+
+  ]),
+  getPositions: jest.fn().mockResolvedValue([
+    {
+      "id": 1,
+      "name": "RWB"
+    },
+    {
+      "id": 2,
+      "name": "LWB"
+    },
+  ])
 }));
 
 describe('Page Component', () => {
-  beforeEach(() => {
-    
-    api.getArticles.mockClear();
-  });
-
   it('renders the Page component and loads articles', async () => {
     
-    const mockArticles = [
-      { id: 1, title: 'Article 1' },
-      { id: 2, title: 'Article 2' },
-    ];
 
-    
-    api.getArticles.mockResolvedValue(mockArticles);
-
-    render(<Page />);
-
+    render (<Page />);
 
     expect(screen.getByText('Training Tables')).toBeInTheDocument();
 
-
     await waitFor(() => {
-      expect(api.getArticles).toHaveBeenCalled();
+      expect(screen.getByText('Advanced Wing Training')).toBeInTheDocument();
+      expect(screen.getByText('LM,RM')).toBeInTheDocument();
+      expect(screen.getByText('Advanced Wing Training')).toBeInTheDocument();
     });
-
-    expect(screen.getByText('Article 1')).toBeInTheDocument();
-    expect(screen.getByText('Article 2')).toBeInTheDocument();
   });
 
 });

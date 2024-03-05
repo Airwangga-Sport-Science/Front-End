@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
 import Link from "next/link";
-import api from "../../../utils/api";
+import api from "@/utils/api";
 import { redirect, useRouter } from 'next/navigation';
 
 export default function Login() {
@@ -28,7 +28,7 @@ export default function Login() {
       errors.email = true;
     }
 
-    if (phone == "" || phone.match(/^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/)){
+    if (phone == "" || phone.match(/\d/g).length>11){
       errors.phone = false;
     }
     else{
@@ -38,7 +38,6 @@ export default function Login() {
 
   }
   
-  const router = useRouter();
   const [authedUser, setAuthedUser] = React.useState(null);
 
   async function handleRegister(e) {
@@ -66,7 +65,7 @@ export default function Login() {
 
   async function onRegisterSuccess(token) {
     api.putAccessToken(token);
-    router.push('/form')
+    redirect('/form ');
   }
 
   async function checkLoggedIn() {

@@ -21,15 +21,17 @@ describe('Form Component', () => {
       { attribute_name: 'weight', attribute_question: 'How much do you weigh?', attribute_display: 'Slider' },
       { attribute_name: 'height', attribute_question: 'How tall are you?', attribute_display: 'Slider' },
       { attribute_name: 'prefered_foot', attribute_question: 'Which foot do you prefer?', attribute_display: 'Radio' },
-
+      { attribute_name: 'movement_sprint_speed', attribute_question: 'How would you rate your movement sprint speed?', attribute_display: 'Slider' },
     ];
 
     api.getAttributeMaster.mockResolvedValue(mockAttributeMaster);
 
     render(<Form />);
 
+    expect(screen.getByText('Previous')).toBeInTheDocument();
+    expect(screen.getByText('Next')).toBeInTheDocument();
 
-    expect(screen.getByText('Form Attribute')).toBeInTheDocument();
+    fireEvent.click(screen.getByText('Next'));
 
 
     await waitFor(() => {
@@ -39,6 +41,17 @@ describe('Form Component', () => {
     expect(screen.getByText('How much do you weigh?')).toBeInTheDocument();
     expect(screen.getByText('How tall are you?')).toBeInTheDocument();
     expect(screen.getByText('Which foot do you prefer?')).toBeInTheDocument();
+    expect(screen.getByText('How would you rate your movement sprint speed?')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText('Next'));
+    fireEvent.click(screen.getByText('Next'));
+    fireEvent.click(screen.getByText('Next'));
+    fireEvent.click(screen.getByText('Next'));
+    fireEvent.click(screen.getByText('Next'));
+    fireEvent.click(screen.getByText('Next'));
+    fireEvent.click(screen.getByText('Next'));
+    
+    expect(screen.getByText('Submit')).toBeInTheDocument();
 
   });
 

@@ -13,9 +13,13 @@ describe('Login Page', () => {
 
   it('handles login form submission', async () => {
     render(<Login />);
+    const usernameInput = screen.getByPlaceholderText('Username');
+    fireEvent.change(usernameInput, { target: { value: 'johndoe' } });
+    expect(usernameInput).toHaveValue('johndoe');
     
-    fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'testuser' } });
-    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'testpassword' } });
+    const passwordInput = screen.getByPlaceholderText('Password');
+    fireEvent.change(passwordInput, { target: { value: 'testpassword' } });
+    expect(passwordInput).toHaveValue('testpassword');
     fireEvent.click(screen.getByText('Sign In'));
 
 
