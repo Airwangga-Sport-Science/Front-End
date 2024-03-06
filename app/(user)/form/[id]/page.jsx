@@ -16,7 +16,7 @@ export default function Form() {
 	const [question, setQuestion] = React.useState([]);
 	const [openModal, setOpenModal] = React.useState(false);
 	const params = useParams();
-
+	const router = useRouter();
 	const [allAttributes, setAllAttributes] = React.useState({
 		weight: 0,
 		height: 0,
@@ -154,7 +154,7 @@ export default function Form() {
 								return (
 									<FormQuestion
 										key={key}
-										question={questionForAttributes(key)}
+										question={"Berapa tinggi badanmu?"}
 										display={displayForAttributes(key)}
 										onAttributeChange={handleAttributeChange}
 										attribute={key}
@@ -166,7 +166,7 @@ export default function Form() {
 								return (
 									<FormQuestion
 										key={key}
-										question={questionForAttributes(key)}
+										question={"Berapa berat badanmu?"}
 										display={displayForAttributes(key)}
 										onAttributeChange={handleAttributeChange}
 										attribute={key}
@@ -178,7 +178,7 @@ export default function Form() {
 								return (
 									<FormRadio
 										key={key}
-										question={questionForAttributes(key)}
+										question={"Apa kaki terbaikmu?"}
 										display={displayForAttributes(key)}
 										onAttributeChange={handleAttributeChange}
 										attribute={key}

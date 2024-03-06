@@ -12,7 +12,8 @@ export default function Login() {
   const [phone, setPhone] = React.useState("");
   const [birthdate, setBirthdate] = React.useState("");
   const [thumbnail, setThumbnail] = React.useState("");
-
+  const [isSend, setIsSend] = React.useState(false);
+  const router = useRouter();
   const [error, setError] = React.useState({});
 
   React.useEffect(() => {
@@ -42,7 +43,7 @@ export default function Login() {
 
   async function handleRegister(e) {
     e.preventDefault();
-
+    setIsSend(true);
 		const formData = new FormData(e.target);
 		const data = Object.fromEntries(formData);
 		const response1 = await fetch('/api/upload', {
@@ -65,7 +66,9 @@ export default function Login() {
 
   async function onRegisterSuccess(token) {
     api.putAccessToken(token);
-    redirect('/form ');
+    
+    router.push('/form');
+    setIsSend(false);
   }
 
   async function checkLoggedIn() {
@@ -82,14 +85,7 @@ export default function Login() {
     checkLoggedIn();
   },[]);
 
-  if (authedUser) {
-    if (authedUser.role == 1) {
-      redirect('/player')
-    }
-    else if (authedUser.role == 2) {
-      redirect('/dashboard')
-    }
-  }
+  
 
 
 
@@ -163,9 +159,9 @@ return (
 
                   <div className="text-center mt-6">
                     <button
-                      className="bg-blue-800 text-white active:bg-blue-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                      className="bg-blue-800 text-white active:bg-blue-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150 disabled:cursor-not-allowed disabled:bg-blue-400"
                       type="submit"
-                      
+                      disabled={isSend ? true : false}
                       
                     >
                       Register
