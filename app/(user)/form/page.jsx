@@ -151,7 +151,7 @@ return (
                 key == "height" ? 
                 <FormQuestion 
                 key={"height"} 
-                question={questionForAttributes("height")}
+                question={"Berapa tinggi badanmu?"}
                 display={displayForAttributes("height")}
                 onAttributeChange={handleAttributeChange}
                 attribute="height"
@@ -161,7 +161,7 @@ return (
                 key == "weight" ? 
                 <FormQuestion 
                 key={"weight"}
-                question={questionForAttributes("weight")}
+                question={"Berapa berat badanmu?"}
                 display={displayForAttributes("weight")}
                 onAttributeChange={handleAttributeChange}
                 attribute="weight"
@@ -172,7 +172,7 @@ return (
                 key == "prefered_foot" ?
                 <FormRadio 
                 key={"prefered_foot"}
-                question={questionForAttributes("prefered_foot")}
+                question={"Apa kaki terbaikmu?"}
                 display={displayForAttributes("prefered_foot")}
                 onAttributeChange={handleAttributeChange}
                 attribute="prefered_foot"

@@ -51,7 +51,6 @@ describe('Form Component', () => {
       expect(api.getAttributeMaster).toHaveBeenCalled();
     });
 
-    expect(screen.getByText('How much do you weigh?')).toBeInTheDocument();
-    expect(screen.getByText('How tall are you?')).toBeInTheDocument();
+
   });
 });

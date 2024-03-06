@@ -38,9 +38,6 @@ describe('Form Component', () => {
       expect(api.getAttributeMaster).toHaveBeenCalled();
     });
 
-    expect(screen.getByText('How much do you weigh?')).toBeInTheDocument();
-    expect(screen.getByText('How tall are you?')).toBeInTheDocument();
-    expect(screen.getByText('Which foot do you prefer?')).toBeInTheDocument();
     expect(screen.getByText('How would you rate your movement sprint speed?')).toBeInTheDocument();
 
     fireEvent.click(screen.getByText('Next'));

@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
 import Link from "next/link";
-import { redirect } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import api from "../../../utils/api";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import Error from "../error";
@@ -10,7 +10,7 @@ export default function Login() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-
+  const router = useRouter();
   const [isLoginError, setIsLoginError] = React.useState(false);
   const [authedUser, setAuthedUser] = React.useState(null);
   async function handleLogin(){

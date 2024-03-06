@@ -85,11 +85,11 @@ export default function TableTrainingModal({ isOpen, closeModal,activeAttribute 
 										</button>
 									</div>
 
-									<div className="p-4 md:p-5 space-y-4">
+									<div className="p-4 md:p-5 space-y-4 w-full">
                     < table className="w-full text-left text-gray-500 border">
                       <thead className="text-xs text-gray-700 uppercase bg-gray-200">
                         <tr>
-                          <th className="p-4 my-2 font-semibold border-r border-l border-white tracking-wide text-left">
+                          <th colSpan={2} className="p-4 my-2 font-semibold border-r border-l border-white tracking-wide text-left">
                             Training Name
                           </th>
                           <th className="p-4 my-2 font-semibold border-r border-l border-white  tracking-wide text-left">
@@ -106,17 +106,19 @@ export default function TableTrainingModal({ isOpen, closeModal,activeAttribute 
 											
 											<tbody>
 												{articles.map((article) => (
-													<tr key={article.id} className="bg-white border-b">
-														<td className="p-3 text-gray-700 whitespace-nowrap flex gap-2">
+													<tr key={article.id} className="bg-white border-b ">
+														<td className="p-3 text-gray-700 whitespace-nowrap gap-2 w-1/5">
 														<Image
-														alt="image"
-														src={"/img/img-1-1000x600.jpg"}
-														className="rounded"
-														width={100} height={500} >
+															alt="image"
+															src={"/img/img-1-1000x600.jpg"}
+															className="rounded w-full h-full"
+															width={100} height={500} >
 														</Image>
-														<div className="flex flex-col">
+														</td>
+														<td className="p-3 text-sm text-gray-700 whitespace-nowrap w-1/2">
+														<div className="flex flex-col text-warp " style={{textWrap: 'wrap'}}>
 															<h5 className="font-semibold">{article.article_title}</h5>
-															<p className="text-sm">{article.article_body}</p>
+															<p className="text-sm ">{article.article_body}</p>
 														</div>
 														</td>
 														<td className="p-3 text-sm text-gray-700 whitespace-nowrap ">
