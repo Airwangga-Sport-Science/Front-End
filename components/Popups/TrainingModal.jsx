@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import api from "@/utils/api";
 
-export default function TrainingModal({ isOpen, closeModal,handleDataChange, id = null }) {
+export default function TrainingModal({ isOpen, closeModal,handleDataChange, id = null,create=true }) {
 	const cancelButtonRef = useRef(null);
   const [positions, setPositions] = React.useState(null);
   const [article, setArticle] = React.useState(null);
@@ -30,6 +30,7 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 	React.useEffect(() => {
 		getPositions();
 		if(id) {
+			create = false
 			getArticle();
 		}
 	},[id])
@@ -62,7 +63,7 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 		data.thumbnail = filePath;
 		await api.createArticle(data).then(
 			handleDataChange(),
-			closeModal()
+			handleCloseModal()
 		)
 	}
 
@@ -84,8 +85,15 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 		data.thumbnail = filePath;
 		await api.updateArticle(data).then(
 			handleDataChange(),
-			closeModal()
+			handleCloseModal()
 		)
+	}
+
+	function handleCloseModal() {
+		setArticle(null);
+		id = null;
+		closeModal();
+
 	}
 
 	return (
@@ -94,7 +102,7 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 				as="div"
 				className="relative z-50"
 				initialFocus={cancelButtonRef}
-				onClose={closeModal}
+				onClose={handleCloseModal}
 			>
 				<Transition.Child
 					as={Fragment}
@@ -120,7 +128,7 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 							leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
 						>
 							<Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-								<form className="relative bg-white rounded-lg shadow" onSubmit={id? handleUpdate : handleSubmit} >
+								<form className="relative bg-white rounded-lg shadow" onSubmit={create? handleSubmit : handleUpdate}>
 									<input type="hidden" name="id" value={article?.id} />
 									<div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
 										<h3 className="text-xl font-semibold text-gray-900">
@@ -129,7 +137,7 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 										<button
 											type="button"
 											className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center hover:bg-gray-600"
-											onClick={closeModal}
+											onClick={handleCloseModal}
 										>
 											<svg
 												className="w-3 h-3"
@@ -289,7 +297,8 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 										<button
 											type="button"
 											className="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 bg-gray-700 text-gray-300 border-gray-500 hover:text-white hover:bg-gray-600 focus:ring-gray-600"
-											onClick={closeModal}
+											onClick={
+												handleCloseModal										}
 										>
 											Decline
 										</button>
