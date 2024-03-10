@@ -93,7 +93,7 @@ export default function Index() {
       <TableTrainingModal isOpen={isTableTrainingModalOpen} closeModal={closeTableTrainingModal} activeAttribute={activeAttribute} positions={positions}/>
       
       <CardStatsSelector attribute={attribute} activeAttribute={activeAttribute} setActiveAttribute={setActiveAttribute} />
-      <div className="flex flex-row w-full md:gap-6 px-6">
+      <div className="flex md:flex-row flex-col  w-full md:gap-6 px-6">
         <CardProfile player={player} positions={positions} activeAttribute={activeAttribute} openPlayerModal={openPlayerModal}  />
         <CardTraining articles={article} openTableTrainingModal={openTableTrainingModal}  />
       </div>

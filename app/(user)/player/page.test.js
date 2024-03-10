@@ -8,7 +8,13 @@ jest.mock('@/utils/api', () => ({
   getArticleByAttribute : jest.fn(),
   getAttributeMaster: jest.fn(),
 }));
-
+jest.mock("next/navigation", () => ({
+  useRouter() {
+    return {
+      prefetch: () => null
+    };
+  }
+}));
 describe('Index Component', () => {
   beforeEach(() => {
 

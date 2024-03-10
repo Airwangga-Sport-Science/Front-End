@@ -30,6 +30,7 @@ export default function Login() {
     }
 
     if (phone == "" || phone.match(/\d/g).length>11){
+    
       errors.phone = false;
     }
     else{

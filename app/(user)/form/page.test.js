@@ -7,7 +7,13 @@ jest.mock('@/utils/api', () => ({
   getAttributeMaster: jest.fn(),
   postAttribute: jest.fn(),
 }));
-
+jest.mock("next/navigation", () => ({
+  useRouter() {
+    return {
+      prefetch: () => null
+    };
+  }
+}));
 describe('Form Component', () => {
   beforeEach(() => {
 

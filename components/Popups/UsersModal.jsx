@@ -13,7 +13,7 @@ export default function UsersModal({ isOpen, closeModal, users,id,setUsers }) {
 
 	useEffect(() => {
 		setTempPlayer(users.find(user => user.id === id))
-	}, [users])
+	}, [users, id])
 
 	console.log(tempPlayer)
 	async function handleSubmit(e) {
@@ -44,7 +44,8 @@ export default function UsersModal({ isOpen, closeModal, users,id,setUsers }) {
 				birthdate : tempPlayer.birth_date,
         phone: tempPlayer.phone,
         thumbnail: thumbnail,
-        role: tempPlayer.role
+        role: tempPlayer.role,
+				id:id
     };
 		let response = {};
 		if (id) {
@@ -71,10 +72,16 @@ export default function UsersModal({ isOpen, closeModal, users,id,setUsers }) {
             return user; // Return other users without modifications
         }));
 
-        closeModal();
+        handleCloseModal();
     }
+		
 }
-
+function handleCloseModal() {
+	setTempPlayer({});
+	users = [];
+	id = null;
+	closeModal();
+}
 		
 	
 
@@ -84,7 +91,7 @@ export default function UsersModal({ isOpen, closeModal, users,id,setUsers }) {
 				as="div"
 				className="relative z-10"
 				initialFocus={cancelButtonRef}
-				onClose={closeModal}
+				onClose={handleCloseModal}
 			>
 				<Transition.Child
 					as={Fragment}
@@ -118,7 +125,7 @@ export default function UsersModal({ isOpen, closeModal, users,id,setUsers }) {
 										<button
 											type="button"
 											className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center hover:bg-gray-600"
-											onClick={closeModal}
+											onClick={handleCloseModal}
 										>
 											<svg
 												className="w-3 h-3"
@@ -208,8 +215,9 @@ export default function UsersModal({ isOpen, closeModal, users,id,setUsers }) {
 											<label htmlFor="birthdate" className="block mb-2 text-sm font-medium text-gray-900">
 												Role
 											</label>
-											<select name="role" id="role" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={tempPlayer?.role} onChange={e => setTempPlayer({ ...tempPlayer, role: e.target.value })}>
-												<option value="2">Admin</option>
+											<select name="role" id="role" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+											value={tempPlayer?.role} onChange={e => setTempPlayer({ ...tempPlayer, role: e.target.value })}>
+												<option value="2" selected>Admin</option>
 												<option value="1">User</option>
 											</select>
 
@@ -273,7 +281,7 @@ export default function UsersModal({ isOpen, closeModal, users,id,setUsers }) {
 										<button
 											type="button"
 											className="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 bg-gray-700 text-gray-300 border-gray-500 hover:text-white hover:bg-gray-600 focus:ring-gray-600"
-											onClick={closeModal}
+											onClick={handleCloseModal}
 										>
 											Decline
 										</button>

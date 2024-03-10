@@ -26,17 +26,17 @@ const CardProfile = ({
 
   console.log(positions, player, activeAttribute);
   return (
-    <div className="flex flex-row gap-6 w-6/12">
+    <div className="flex md:flex-row flex-col gap-6 md:w-6/12">
       {/* User Image */}
       <img
         src={player.thumbnail}
         alt=""
-        className="w-64 h-80 rounded-xl shadow-xl"
+        className="md:w-64 md:h-80 rounded-xl shadow-xl"
       />
 
       {/* User Details */}
-      <div className="flex flex-col w-full">
-        <div className="flex flex-col bg-white mb-6 shadow-xl rounded-xl px-6 pt-6 pb-12 h-80 justify-between">
+      <div className="flex w-full">
+        <div className="flex flex-col w-full bg-white mb-6 shadow-xl rounded-xl px-6 pt-6 pb-12 md:h-80 justify-between">
           <div className="flex flex-row justify-between h-20">
             <div className="flex flex-col">
               <h3 className="font-semibold text-3xl">{player.name}</h3>

@@ -5,11 +5,11 @@ import React from "react";
 export default function CardTraining({ articles, openTableTrainingModal }) {
 	console.log(articles);
 	return (
-		<div className="relative flex flex-row break-words gap-6 w-6/12 ">
+		<div className="relative flex flex-row break-words gap-6 md:w-6/12 w-full ">
 			<div className="flex flex-col justify-between w-full">
 				<div className="flex flex-col bg-white mb-6 shadow-xl rounded-xl px-6 py-6 h-80 ">
 					<div className="flex flex-row justify-between h-20">
-						<h3 className=" font-semibold text-4xl ">Training Recommendation</h3>
+						<h3 className=" font-semibold md:text-4xl">Training Recommendation</h3>
 						<div className="bg-gray-100 text-gray-400 h-12 px-6 rounded-xl font-semibold text flex align-middle">
 							<button onClick={openTableTrainingModal} className="flex items-center">
 								<span className="my-auto">View All</span>
