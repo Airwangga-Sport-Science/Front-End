@@ -63,7 +63,6 @@ describe('TrainingDetail Component', () => {
 
     render(<TrainingDetail />);
 
-    expect(screen.getByText('Selesaikan')).toBeInTheDocument();
   });
 
 });

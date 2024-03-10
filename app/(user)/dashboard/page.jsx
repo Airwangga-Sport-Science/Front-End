@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react'
 import CardTable from '@/components/Cards/CardTable'
-import CardStats from '@/components/Cards/CardStats'
 import TrainingModal from '@/components/Popups/TrainingModal'
 import api from '../../../utils/api';
 

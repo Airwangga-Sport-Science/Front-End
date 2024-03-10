@@ -1,7 +1,13 @@
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import Login from './page';
-
+jest.mock("next/navigation", () => ({
+  useRouter() {
+    return {
+      prefetch: () => null
+    };
+  }
+}));
 describe('Login Page', () => {
   it('renders a heading', () => {
     render(<Login />);

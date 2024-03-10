@@ -4,8 +4,8 @@ import Link from 'next/link'
 
 export default function TrainingItem({ title, body, thumbnail, id, positions }) {
   return (
-    <div className='flex gap-8 mx-6 my-4'>
-      <Image src={thumbnail ? thumbnail : "/img/img-1-1000x600.jpg"} alt='' width={200} height={200} className=' w-48 h-auto rounded-lg'></Image>
+    <div className='flex md:flex-row flex-col gap-8 mx-6 my-4'>
+      <Image src={thumbnail ? thumbnail : "/img/img-1-1000x600.jpg"} alt='' width={200} height={200} className=' md:w-48 w-full h-auto rounded-lg'></Image>
       <div className="flex flex-col bg-white shadow-xl rounded-xl px-6 py-6 justify-between w-full">
         <h3 className='text-xl font-semibold'>{title}</h3>
         <p className=' text-slate-500'>{positions}</p>

@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { useRouter } from 'next/router'; // Import useRouter from next/router
 import Form from './page';
 import api from '@/utils/api';
 import { useParams } from 'next/navigation';
@@ -12,13 +11,15 @@ jest.mock('@/utils/api', () => ({
 }));
 
 // Mock the useRouter hook
-jest.mock('next/router', () => ({
-  useRouter: jest.fn(),
 
-}));
 
 jest.mock('next/navigation', () => ({
   useParams: jest.fn().mockReturnValue({ id: '123' }),
+  useRouter() {
+    return {
+      prefetch: () => null
+    };
+  }
 }))
 describe('Form Component', () => {
   beforeEach(() => {

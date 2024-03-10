@@ -1,5 +1,4 @@
 import React from 'react'
-import TableDropdown from '../Dropdowns/TableDropdown'
 import TableDropdownUsers from '../Dropdowns/TableDropdownUsers'
 
 export default function CardRowUser({name, role,username,phone,email, id, handleOpenModal}) {

@@ -205,15 +205,15 @@ export default function Form() {
             ) : null}
           </div>
 
-          <div className="flex justify-between mt-4">
+          <div className="flex md:flex-row flex-col align-middle justify-between mt-4">
             <button
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
               disabled={currentPage == 0}
-              className="bg-blue-700 text-white active:bg-blue-600 font-bold uppercase px-4 py-4 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              className="bg-blue-700 text-white active:bg-blue-600 font-bold uppercase px-4 py-4 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 w-full md:w-28"
             >
               Previous
             </button>
-            <span className="mx-4 my-4">
+            <span className="mx-auto my-4">
               Page <b>{currentPage + 1}</b> of {totalPages + 1}
             </span>
             <button
@@ -221,7 +221,7 @@ export default function Form() {
                 setCurrentPage((prev) => Math.min(prev + 1, totalPages))
               }
               disabled={currentPage === totalPages}
-              className="bg-blue-700 text-white active:bg-blue-600 font-bold uppercase px-4 py-4 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 w-28"
+              className="bg-blue-700 text-white active:bg-blue-600 font-bold uppercase px-4 py-4 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 md:w-28 w-full"
             >
               Next
             </button>

@@ -12,7 +12,7 @@ export default function CardStatsSelector({ attribute,activeAttribute, setActive
 		setActiveAttribute(matchingAttribute);
 	};
 	return (
-		<div className="flex justify-between bg-white rounded-xl p-4 mx-6 mb-4">
+		<div className="flex md:flex-row flex-col justify-between bg-white rounded-xl p-4 mx-6 mb-4 gap-2">
 			<select
 				className="bg-gray-100 text-gray-400 h-12 px-6 rounded-xl font-semibold text flex align-middle"
 				onChange={(e) => handleSelect(e.target.value)}
@@ -23,7 +23,7 @@ export default function CardStatsSelector({ attribute,activeAttribute, setActive
 					</option>
 				))}
 			</select>
-			<div className=" flex gap-2">
+			<div className=" flex md:flex-row flex-col gap-2">
 				<a
 					className="bg-blue-400 text-white h-12 px-6 rounded-xl font-semibold text flex align-middle"
 					href={"/form/"}

@@ -45,7 +45,7 @@ const api = (() => {
     return token;
   }
 
-  async function register({ username, password, name, email, birthdate,phone, thumbnail }) {
+  async function register({ username, password, name, email, birthdate,phone, thumbnail,role=1 }) {
     const response = await fetch(`${BASE_URL}/register`, {
       method: 'POST',
       headers: {
@@ -55,7 +55,7 @@ const api = (() => {
         username,
         password,
         phone,
-        role : 1,
+        role : role,
         name,
         email,
         birthdate,
@@ -102,7 +102,7 @@ const api = (() => {
     return responseJson;
   }
 
-  async function updateUserWithRole({ username, password, name, email, birth_date,phone, thumbnail, role }) {
+  async function updateUserWithRole({ username, password, name, email, birth_date,phone, thumbnail, role, id }) {
     const response = await fetchWithToken(`${BASE_URL}/user`, {
       method: 'PUT',
       headers: {
@@ -116,7 +116,8 @@ const api = (() => {
         name,
         email,
         birth_date,
-        thumbnail
+        thumbnail,
+        id
       }),
     });
 
