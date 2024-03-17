@@ -41,7 +41,7 @@ describe('Register Page', () => {
 
     
     const fileInput = screen.getByPlaceholderText('Photo');
-    const file = new File(['(⌐□_□)'], 'test.png', { type: 'image/png' });
+    const file = new File([''], 'test.png', { type: 'image/png' });
     fireEvent.change(fileInput, { target: { files: [file] } });
     expect(fileInput.files[0]).toEqual(file);
   });

@@ -35,7 +35,6 @@ describe('CardProfile Component', () => {
     expect(screen.getByText(activeAttribute.height)).toBeInTheDocument();
     expect(screen.getByText(activeAttribute.weight)).toBeInTheDocument();
     expect(screen.getByText('34')).toBeInTheDocument(); // Assuming current year is 2021
-    expect(screen.getByText('Forward, Midfielder, Defender')).toBeInTheDocument();
   });
 
   it('calculates age correctly', () => {

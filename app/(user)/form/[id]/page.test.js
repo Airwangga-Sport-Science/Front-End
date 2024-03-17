@@ -45,6 +45,11 @@ describe('Form Component', () => {
     ]);
 
     render(<Form />);
+    fireEvent.click(screen.getByText('Next'));
+    expect(screen.getByText('Previous')).toBeInTheDocument();
+    expect(screen.getByText('Next')).toBeInTheDocument();
+
+
     expect(screen.getByText('Form Attribute')).toBeInTheDocument();
 
     await waitFor(() => {

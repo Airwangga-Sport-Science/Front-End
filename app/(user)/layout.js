@@ -6,7 +6,7 @@ import "@/styles/globals.css";
 import api from '@/utils/api';
 import React, { Suspense } from "react";
 import { redirect } from 'next/navigation';
-import Loading from './loading';
+import Loading from '../loading';
 
 
 export default function RootLayout({ children }) {
@@ -50,7 +50,7 @@ export default function RootLayout({ children }) {
         rel="stylesheet" />
       </head>
 
-        <body className="antialiased bg-slate-100 py-10 font-poppins text-black overflow-x-hidden min-h-screen">
+        <body className="antialiased bg-white pt-10 font-poppins text-black overflow-x-hidden min-h-screen">
         <IndexNavbar user={authedUser} handleLogOut={handleLogOut}/>
           
         <Suspense fallback={<Loading />}>{children}</Suspense>

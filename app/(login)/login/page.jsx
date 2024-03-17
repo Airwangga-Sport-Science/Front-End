@@ -5,10 +5,11 @@ import { redirect, useRouter } from 'next/navigation';
 import api from "../../../utils/api";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import Error from "../error";
-
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
 export default function Login() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [showPassword, setShowPassword] = React.useState(false);
 
   const router = useRouter();
   const [isLoginError, setIsLoginError] = React.useState(false);
@@ -41,6 +42,10 @@ export default function Login() {
     }
 
     console.log("authedUser", authedUser);
+  }
+
+  function handleShowPassword() {
+    setShowPassword(!showPassword);
   }
 
   React.useEffect(() => {
@@ -97,13 +102,16 @@ export default function Login() {
                       Password
                     </label>
                     <input
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       id="password"
                       name="password"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Password"
                       onChange={(e) => setPassword(e.target.value)}
                     />
+                    <button type="button" className="absolute right-0 bottom-4 pr-3" onClick={handleShowPassword}>
+                      {showPassword ? <FaEyeSlash /> : <FaEye />  }
+                    </button>
                   </div>
 
                   <div className="text-center mt-6">

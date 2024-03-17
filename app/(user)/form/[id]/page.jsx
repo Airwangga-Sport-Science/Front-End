@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { NextUIProvider } from "@nextui-org/system";
 import FormSlider from "@/components/Forms/FormSlider";
 import api from "@/utils/api";
@@ -9,6 +9,7 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 import RecommendationModal from "@/components/Popups/RecommendationModal";
 import FormQuestion from "@/components/Forms/FormQuestion";
 import FormRadio from "@/components/Forms/FormRadio";
+import FormLanding from "@/components/Forms/FormLanding";
 
 export default function Form() {
   const [attributes, setAttributes] = React.useState([]);
@@ -52,11 +53,28 @@ export default function Form() {
   });
 
   const fetchAttributes = async (id) => {
-    const response = await api.getAttribute(id);
-    setAllAttributes(response);
+    try {
+      const response = await api.getAttribute(id);
+      console.log(response);
+      
+      // Update allAttributes with the fetched attributes
+      Object.entries(response).forEach(([key, value]) => {
+        setAllAttributes((prevAttributes) => ({
+          ...prevAttributes,
+          [key]: value,
+        }));
+      });
+    } catch (error) {
+      console.error('Error fetching attributes:', error);
+    }
   };
 
-  const [currentPage, setCurrentPage] = React.useState(1);
+  useEffect(() => {
+    // Call fetchAttributes when component mounts
+    fetchAttributes(params.id);
+  }, []);
+
+  const [currentPage, setCurrentPage] = React.useState(0);
 
   const attributesPerPage = 5;
 
@@ -145,62 +163,63 @@ export default function Form() {
       />
       <div className="flex flex-col 2xl:w-[1440px] mx-auto mt-16 py-6">
         <div className="flex flex-col justify-between w-4/5 md:gap-6 bg-white rounded-md shadow-sm py-6 px-12 mx-auto">
-          <h2 className="font-semibold text-3xl my-auto"> Form Attribute </h2>
-          <div className="">
-            {Object.keys(attributes).map((key) => {
-              if (key === "height") {
-                return (
-                  <FormQuestion
-                    key={key}
-                    question={"Berapa tinggi badanmu? (cm)"}
-                    display={displayForAttributes(key)}
-                    onAttributeChange={handleAttributeChange}
-                    attribute={key}
-                    type={"number"}
-                    value={attributes[key]}
-                  />
-                );
-              } else if (key === "weight") {
-                return (
-                  <FormQuestion
-                    key={key}
-                    question={"Berapa berat badanmu? (kg)"}
-                    display={displayForAttributes(key)}
-                    onAttributeChange={handleAttributeChange}
-                    attribute={key}
-                    type={"number"}
-                    value={attributes[key]}
-                  />
-                );
-              } else if (key === "prefered_foot") {
-                return (
-                  <FormRadio
-                    key={key}
-                    question={"Manakah kaki terbaikmu?"}
-                    display={displayForAttributes(key)}
-                    onAttributeChange={handleAttributeChange}
-                    attribute={key}
-                    value={attributes[key]}
-                    options={[
-                      { value: "left", label: "Kaki Kiri (Left Foot)" },
-                      { value: "right", label: "Kaki Kanan (Right Foot)" },
-                    ]}
-                  />
-                );
-              } else {
-                return (
-                  <FormSlider
-                    key={key}
-                    attribute={key}
-                    value={attributes[key]}
-                    question={questionForAttributes(key)}
-                    display={displayForAttributes(key)}
-                    onAttributeChange={handleAttributeChange}
-                  />
-                );
-              }
-            })}
-          </div>
+          {currentPage == 0 ? (
+            <FormLanding />
+          ) : (
+            <div>
+              <h2 className="font-semibold text-3xl my-auto">
+                {" "}
+                Form Attribute{" "}
+              </h2>
+              <div className="">
+                {Object.keys(attributes).map((key) =>
+                  key == "height" ? (
+                    <FormQuestion
+                      key={"height"}
+                      question={"Berapa tinggi badanmu? (cm)"}
+                      display={displayForAttributes("height")}
+                      onAttributeChange={handleAttributeChange}
+                      attribute="height"
+                      type={"number"}
+                      value={attributes.height}
+                    />
+                  ) : key == "weight" ? (
+                    <FormQuestion
+                      key={"weight"}
+                      question={"Berapa berat badanmu? (kg)"}
+                      display={displayForAttributes("weight")}
+                      onAttributeChange={handleAttributeChange}
+                      attribute="weight"
+                      type={"number"}
+                      value={attributes.weight}
+                    />
+                  ) : key == "prefered_foot" ? (
+                    <FormRadio
+                      key={"prefered_foot"}
+                      question={"Manakah kaki terbaikmu?"}
+                      display={displayForAttributes("prefered_foot")}
+                      onAttributeChange={handleAttributeChange}
+                      attribute="prefered_foot"
+                      value={attributes.prefered_foot}
+                      options={[
+                        { value: "left", label: "Kaki Kiri (Left Foot)" },
+                        { value: "right", label: "Kaki Kanan (Right Foot)" },
+                      ]}
+                    />
+                  ) : (
+                    <FormSlider
+                      key={key}
+                      attribute={key}
+                      value={attributes[key]}
+                      question={questionForAttributes(key)}
+                      display={displayForAttributes(key)}
+                      onAttributeChange={handleAttributeChange}
+                    />
+                  )
+                )}
+              </div>
+            </div>
+          )}
 
           <div className="flex justify-end">
             {currentPage === totalPages ? (
@@ -214,15 +233,15 @@ export default function Form() {
             ) : null}
           </div>
 
-          <div className="flex justify-between mt-4">
+          <div className="flex md:flex-row flex-col align-middle justify-between mt-4">
             <button
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className="bg-blue-700 text-white active:bg-blue-600 font-bold uppercase px-4 py-4 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              disabled={currentPage == 0}
+              className="bg-blue-700 text-white active:bg-blue-600 font-bold uppercase px-4 py-4 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 w-full md:w-28 disabled:cursor-not-allowed disabled:bg-blue-300"
             >
               Previous
             </button>
-            <span className="mx-4 my-4">
+            <span className="mx-auto my-4">
               Page <b>{currentPage + 1}</b> of {totalPages + 1}
             </span>
             <button
@@ -230,7 +249,7 @@ export default function Form() {
                 setCurrentPage((prev) => Math.min(prev + 1, totalPages))
               }
               disabled={currentPage === totalPages}
-              className="bg-blue-700 text-white active:bg-blue-600 font-bold uppercase px-4 py-4 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 w-28"
+              className="bg-blue-700 text-white active:bg-blue-600 font-bold uppercase px-4 py-4 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 md:w-28 w-full disabled:cursor-not-allowed disabled:bg-blue-300"
             >
               Next
             </button>

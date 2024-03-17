@@ -207,9 +207,9 @@ export default function Form() {
 
           <div className="flex md:flex-row flex-col align-middle justify-between mt-4">
             <button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               disabled={currentPage == 0}
-              className="bg-blue-700 text-white active:bg-blue-600 font-bold uppercase px-4 py-4 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 w-full md:w-28"
+              className="bg-blue-700 text-white active:bg-blue-600 font-bold uppercase px-4 py-4 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 w-full md:w-28 disabled:cursor-not-allowed disabled:bg-blue-300"
             >
               Previous
             </button>
@@ -221,7 +221,7 @@ export default function Form() {
                 setCurrentPage((prev) => Math.min(prev + 1, totalPages))
               }
               disabled={currentPage === totalPages}
-              className="bg-blue-700 text-white active:bg-blue-600 font-bold uppercase px-4 py-4 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 md:w-28 w-full"
+              className="bg-blue-700 text-white active:bg-blue-600 font-bold uppercase px-4 py-4 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 md:w-28 w-full disabled:cursor-not-allowed disabled:bg-blue-300"
             >
               Next
             </button>

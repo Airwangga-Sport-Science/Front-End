@@ -79,21 +79,21 @@ export default function CardStatistic({ activeAttribute,positions }) {
             className={`flex flex-row justify-between my-1 bg-slate-200 px-4 py-4 rounded-lg gap-3`}
           >
             <div className='w-4 h-4 rounded-full bg-red-500 my-auto'></div>
-            <h5>{positions?.player_alike1}</h5>
+            <a href={`https://www.youtube.com/results?search_query=${positions?.player_alike1.split(' ').join('+')}+skills`}>{positions?.player_alike1}</a>
             
           </div>
           <div
             className={`flex flex-row justify-between my-1 bg-slate-200 px-4 py-4 rounded-lg gap-3`}
           >
             <div className='w-4 h-4 rounded-full bg-red-500 my-auto'></div>
-            <h5>{positions?.player_alike2}</h5>
+            <a href={`https://www.youtube.com/results?search_query=${positions?.player_alike2.split(' ').join('+')}+skills`}>{positions?.player_alike2}</a>
             
           </div>
           <div
             className={`flex flex-row justify-between my-1 bg-slate-200 px-4 py-4 rounded-lg gap-3`}
           >
             <div className='w-4 h-4 rounded-full bg-red-500 my-auto'></div>
-            <h5>{positions?.player_alike3}</h5>
+            <a href={`https://www.youtube.com/results?search_query=${positions?.player_alike3.split(' ').join('+')}+skills`}>{positions?.player_alike3}</a>
             
           </div>
         </div>
