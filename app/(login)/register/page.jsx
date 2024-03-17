@@ -3,11 +3,13 @@ import React from "react";
 import Link from "next/link";
 import api from "@/utils/api";
 import { redirect, useRouter } from 'next/navigation';
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 export default function Login() {
   const [username, setUsername] = React.useState("");
   const [name, setName] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [birthdate, setBirthdate] = React.useState("");
@@ -16,9 +18,10 @@ export default function Login() {
   const router = useRouter();
   const [error, setError] = React.useState({});
 
+
   React.useEffect(() => {
     checkForm();
-  },[ email, phone]);
+  },[ email, phone, password, confirmPassword]);
 
   function checkForm() {
     let errors ={}
@@ -36,6 +39,15 @@ export default function Login() {
     else{
       errors.phone = true;
     }
+    if (password != confirmPassword){
+      errors.password = true;
+      errors.confirmPassword = true;
+    }
+    else{
+      errors.password = false;
+      errors.confirmPassword = false;
+    }
+
     setError(errors);
 
   }
@@ -65,6 +77,14 @@ export default function Login() {
     }
   }
 
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+  function handleShowConfirmPassword() {
+    setShowConfirmPassword(!showConfirmPassword);
+  }
+  function handleShowPassword() {
+    setShowPassword(!showPassword);
+  }
   async function onRegisterSuccess(token) {
     api.putAccessToken(token);
     
@@ -142,13 +162,28 @@ return (
                     placeholder="Username"
                     onChange={(e) => setUsername(e.target.value)}
                   />
-
+                  <div className="relative">
                   <input
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     className={`border-0 px-3 py-3 placeholder-gray-600 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 mt-4 ${error.password ? 'border-red-500 border-1' : 'border-0'} `}
                     placeholder="Password"
                     onChange={(e) => setPassword(e.target.value)}
                   />
+                                      <button type="button" className="absolute right-0 bottom-3 pr-3" onClick={handleShowPassword}>
+                      {showPassword ? <FaEyeSlash /> : <FaEye />  }
+                    </button>
+                  </div>
+                  <div className="relative">
+                  <input
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    className={`border-0 px-3 py-3 placeholder-gray-600 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 mt-4 ${error.confirmPassword ? 'border-red-500 border-1' : 'border-0'} `}
+                    placeholder="Confirm Password"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+                                      <button type="button" className="absolute right-0 bottom-3 pr-3" onClick={handleShowConfirmPassword}>
+                      {showConfirmPassword ? <FaEyeSlash /> : <FaEye />  }
+                    </button>
+                  </div>
 
                   <input
                     type="file"

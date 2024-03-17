@@ -2,18 +2,76 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import api from "@/utils/api";
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 
 export default function UsersModal({ isOpen, closeModal, users,id,setUsers }) {
 	const cancelButtonRef = useRef(null);
 	console.log(users,id,users.find(user => user.id === id))
 
-	const [tempPlayer, setTempPlayer] = useState({});
+	const [tempPlayer, setTempPlayer] = useState(null);
+
+	const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  function handleShowConfirmPassword() {
+    setShowConfirmPassword(!showConfirmPassword);
+  }
+  function handleShowPassword() {
+    setShowPassword(!showPassword);
+  }
+
+  const [error, setError] = useState({});
 
 
+  useEffect(() => {
+    checkForm();
+  },[ tempPlayer]);
+
+  function checkForm() {
+    let errors ={}
+    //check object empty
+		if (tempPlayer != null) {
+			if (tempPlayer.email == "" || tempPlayer.email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+				errors.email = false;
+			}
+			else{
+				errors.email = true;
+			}
+	
+			if (tempPlayer.phone == "" || tempPlayer.phone.match(/\d/g).length>11){
+			
+				errors.phone = false;
+			}
+			else{
+				errors.phone = true;
+			}
+			if (tempPlayer.password != tempPlayer.confirm_password){
+				errors.password = true;
+				errors.confirm_password = true;
+			}
+			else{
+				errors.password = false;
+				errors.confirm_password = false;
+			}
+
+			if (tempPlayer.username == "" || tempPlayer.password == "" || tempPlayer.name == "" || tempPlayer.email == "" || tempPlayer.birth_date == "" || tempPlayer.phone == "" ||  tempPlayer.role == ""){
+				errors.tab = true;
+			}
+		}
+
+    setError(errors);
+
+  }
 	useEffect(() => {
 		setTempPlayer(users.find(user => user.id === id))
 	}, [users, id])
+
+	const [tabOpen, setTabOpen] = useState(1)
+
+	function handleChangeTab(tab) {
+		setTabOpen(tab)
+	}
+
 
 	console.log(tempPlayer)
 	async function handleSubmit(e) {
@@ -77,7 +135,7 @@ export default function UsersModal({ isOpen, closeModal, users,id,setUsers }) {
 		
 }
 function handleCloseModal() {
-	setTempPlayer({});
+	setTempPlayer(null);
 	users = [];
 	id = null;
 	closeModal();
@@ -117,6 +175,7 @@ function handleCloseModal() {
 							leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
 						>
 							<Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+								
 								<form className="relative bg-white rounded-lg shadow" enctype="multipart/form-data" onSubmit={(e) => handleSubmit(e)}>
 									<div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
 										<h3 className="text-xl font-semibold text-gray-900">
@@ -145,9 +204,21 @@ function handleCloseModal() {
 											<span className="sr-only">Close modal</span>
 										</button>
 									</div>
-
+									<div className=" flex justify-between text-center shadow-md">
+										<button type="button" className={"p-4 md:p-5 w-1/2 " + (tabOpen == "1" ? "bg-slate-100 border-b border-blue-500" : "")} onClick={() => setTabOpen("1")}>
+											Login Information
+										</button>
+										<button type="button" className={"p-4 md:p-5 w-1/2 " + (tabOpen == "2" ? "bg-slate-100 border-b border-blue-500" : "")} onClick={() => setTabOpen("2")}>
+											Account Information
+										</button>
+									</div>
+									<div className={error.tab ? "block" : "hidden"}>
+										<div className="bg-red-300 text-center text-red-700 p-4 md:p-5" >
+											Please Check Another Tab 
+										</div>
+									</div>
 									<div className="p-4 md:p-5 space-y-4">
-                    <div>
+                    <div className={(tabOpen == "2" ? "block" : "hidden")}>
                       <label
                         htmlFor="name"
                         className="block mb-2 text-sm font-medium text-gray-900"
@@ -164,7 +235,7 @@ function handleCloseModal() {
 												onChange={e => setTempPlayer({ ...tempPlayer, name: e.target.value })}
                       />
                     </div>
-                    <div>
+                    <div className={(tabOpen == "2" ? "block" : "hidden")}>
                       <label
                         htmlFor="email"
                         className="block mb-2 text-sm font-medium text-gray-900"
@@ -181,7 +252,7 @@ function handleCloseModal() {
                         required
                       />
                     </div>
-										<div>
+										<div className={(tabOpen == "2" ? "block" : "hidden")}>
 											<label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900">
 												Phone
 											</label>
@@ -196,7 +267,7 @@ function handleCloseModal() {
 											/>
 
 										</div>
-										<div>
+										<div className={(tabOpen == "2" ? "block" : "hidden")}>
 											<label htmlFor="birthdate" className="block mb-2 text-sm font-medium text-gray-900">
 												Birthdate
 											</label>
@@ -211,7 +282,7 @@ function handleCloseModal() {
 											/>
 
 										</div>
-										<div>
+										<div className={(tabOpen == "1" ? "block" : "hidden")}>
 											<label htmlFor="birthdate" className="block mb-2 text-sm font-medium text-gray-900">
 												Role
 											</label>
@@ -223,7 +294,7 @@ function handleCloseModal() {
 
 										</div>
 										
-										<div>
+										<div className={(tabOpen == "1" ? "block" : "hidden")}>
 											<label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900">
 												Username
 											</label>
@@ -238,21 +309,47 @@ function handleCloseModal() {
 											/>
 
 										</div>
-										<div>
+										<div className={"relative " + (tabOpen == "1" ? "block" : "hidden")}>
 											<label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">
 												Password
 											</label>
 											<input
-												type="password"
+												type={showPassword ? "text" : "password"}
 												id="password"
-												className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+												className={"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " + (error.confirm_password ? "border-red-500" : "border-gray-300")}
 												placeholder="Password"
 												onChange={e => setTempPlayer({ ...tempPlayer, password: e.target.value })}
+												
 												required
 											/>
-
+											<button type="button" className="absolute right-0 bottom-3 pr-3" onClick={handleShowPassword}>
+                      {showPassword ? <FaEyeSlash /> : <FaEye />  }
+                    </button>
 										</div>
-										<div>
+										<div className={"relative " + (tabOpen == "1" ? "block" : "hidden")}>
+                      <label
+                        htmlFor="confirm_password"
+                        className="block mb-2 text-sm font-medium text-gray-900"
+                      >
+                        Confirm Password
+                      </label>
+                      <input
+                        type={showConfirmPassword ? "text" : "password"}
+                        id="confirm_password"
+                        className={"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " + (error.confirm_password ? "border-red-500" : "border-gray-300")}
+                        placeholder="Confirm Password"
+                        onChange={(e) =>
+                          setTempPlayer({
+                            ...tempPlayer,
+                            confirm_password: e.target.value,
+                          })
+                        }
+                      />
+                      <button type="button" className="absolute right-0 bottom-3 pr-3" onClick={handleShowConfirmPassword}>
+                      {showConfirmPassword ? <FaEyeSlash /> : <FaEye />  }
+                    </button>
+                    </div>
+										<div className={(tabOpen == "2" ? "block" : "hidden")}>
 											<label
 												htmlFor="thumbnail"
 												className="block mb-2 text-sm font-medium text-gray-900"	

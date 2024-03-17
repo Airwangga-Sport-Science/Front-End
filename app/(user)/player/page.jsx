@@ -11,6 +11,7 @@ import api from '@/utils/api';
 import { accordion } from '@nextui-org/theme';
 import TableTrainingModal from '@/components/Popups/TableTrainingModal';
 import CardStatsSelector from '@/components/Cards/CardStatsSelector';
+import CardPositions from '@/components/Cards/CardPositions';
 
 export default function Index() {
 
@@ -95,9 +96,10 @@ export default function Index() {
       <CardStatsSelector attribute={attribute} activeAttribute={activeAttribute} setActiveAttribute={setActiveAttribute} />
       <div className="flex md:flex-row flex-col  w-full md:gap-6 px-6">
         <CardProfile player={player} positions={positions} activeAttribute={activeAttribute} openPlayerModal={openPlayerModal}  />
-        <CardTraining articles={article} openTableTrainingModal={openTableTrainingModal}  />
+        <CardPositions positions={positions} />
       </div>
       <CardStatistic activeAttribute={activeAttribute} positions={positions} />
+      <CardTraining articles={article} openTableTrainingModal={openTableTrainingModal}  />
     </div>
   );
 }

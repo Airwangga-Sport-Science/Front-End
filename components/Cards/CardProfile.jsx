@@ -70,19 +70,7 @@ const CardProfile = ({
                 {calculateAge(player.birth_date)}
               </h3>
             </div>
-            <div className="flex flex-col col-span-3">
-              <h4 className="text-sm text-center text-gray-500">
-                Recommendation Position
-              </h4>
-              {positions != undefined ? (
-                <h3 className="text-2xl text-center font-semibold">
-                  {positions?.name}, {positions["pos2.name"]},{" "}
-                  {positions["pos3.name"]}
-                </h3>
-              ) : (
-                <h3 className="text-2xl text-center font-semibold">-</h3>
-              )}
-            </div>
+            
           </div>
         </div>
       </div>

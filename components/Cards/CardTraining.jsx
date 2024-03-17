@@ -5,7 +5,7 @@ import React from "react";
 export default function CardTraining({ articles, openTableTrainingModal }) {
 	console.log(articles);
 	return (
-		<div className="relative flex flex-row break-words gap-6 md:w-6/12 w-full ">
+		<div className="relative flex flex-row break-words gap-6 mx-6">
 			<div className="flex flex-col justify-between w-full">
 				<div className="flex flex-col bg-white mb-6 shadow-xl rounded-xl px-6 py-6 h-80 ">
 					<div className="flex flex-row justify-between h-20">

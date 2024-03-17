@@ -1,11 +1,61 @@
-import { Fragment, useRef, useState } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import api from "@/utils/api";
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
   const cancelButtonRef = useRef(null);
   const [tempPlayer, setTempPlayer] = useState(player);
+
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+  function handleShowConfirmPassword() {
+    setShowConfirmPassword(!showConfirmPassword);
+  }
+  function handleShowPassword() {
+    setShowPassword(!showPassword);
+  }
+
+  const [error, setError] = React.useState({});
+
+
+  React.useEffect(() => {
+    checkForm();
+  },[ tempPlayer]);
+
+  function checkForm() {
+    let errors ={}
+    if (tempPlayer.email == "" || tempPlayer.email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+      errors.email = false;
+    }
+    else{
+      errors.email = true;
+    }
+
+    if (tempPlayer.phone == "" || tempPlayer.phone.match(/\d/g).length>11){
+    
+      errors.phone = false;
+    }
+    else{
+      errors.phone = true;
+    }
+    if (tempPlayer.password != tempPlayer.confirmPassword){
+      errors.password = true;
+      errors.confirmPassword = true;
+    }
+    else{
+      errors.password = false;
+      errors.confirmPassword = false;
+    }
+
+    if (tempPlayer.username == "" || tempPlayer.password == "" || tempPlayer.name == "" || tempPlayer.email == "" || tempPlayer.birth_date == "" || tempPlayer.phone == "" ){
+      errors.tab = true;
+    }
+
+    setError(errors);
+
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -40,6 +90,11 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
       closeModal();
     }
   }
+  const [tabOpen, setTabOpen] = useState(1)
+
+	function handleChangeTab(tab) {
+		setTabOpen(tab)
+	}
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
@@ -105,9 +160,21 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                       <span className="sr-only">Close modal</span>
                     </button>
                   </div>
-
+                  <div className=" flex justify-between text-center shadow-md">
+										<button type="button" className={"p-4 md:p-5 w-1/2 " + (tabOpen == "2" ? "bg-slate-100 border-b border-blue-500" : "")} onClick={() => setTabOpen("2")}>
+											Login Information
+										</button>
+										<button type="button" className={"p-4 md:p-5 w-1/2 " + (tabOpen == "1" ? "bg-slate-100 border-b border-blue-500" : "")} onClick={() => setTabOpen("1")}>
+											Account Information
+										</button>
+									</div>
+									<div className={error.tab ? "block" : "hidden"}>
+										<div className="bg-red-300 text-center text-red-700 p-4 md:p-5" >
+											Please Check Another Tab 
+										</div>
+									</div>
                   <div className="p-4 md:p-5 space-y-4">
-                    <div>
+                  <div className={(tabOpen == "1" ? "block" : "hidden")}>
                       <label
                         htmlFor="name"
                         className="block mb-2 text-sm font-medium text-gray-900"
@@ -117,7 +184,7 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                       <input
                         type="text"
                         id="name"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        className={"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"}
                         placeholder="Name"
                         value={tempPlayer?.name}
                         required
@@ -126,7 +193,7 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                         }
                       />
                     </div>
-                    <div>
+                    <div className={(tabOpen == "1" ? "block" : "hidden")}>
                       <label
                         htmlFor="email"
                         className="block mb-2 text-sm font-medium text-gray-900"
@@ -136,7 +203,7 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                       <input
                         type="email"
                         id="email"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        className={"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "+ (error.email ? "border-red-500" : "border-gray-300")}
                         placeholder="Name"
                         value={tempPlayer?.email}
                         onChange={(e) =>
@@ -148,7 +215,7 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                         required
                       />
                     </div>
-                    <div>
+                    <div className={(tabOpen == "1" ? "block" : "hidden")}>
                       <label
                         htmlFor="phone"
                         className="block mb-2 text-sm font-medium text-gray-900"
@@ -158,7 +225,7 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                       <input
                         type="text"
                         id="phone"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        className={"bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "+ (error.phone ? "border-red-500" : "border-gray-300")}
                         placeholder="Phone"
                         value={tempPlayer?.phone}
                         onChange={(e) =>
@@ -170,7 +237,7 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                         required
                       />
                     </div>
-                    <div>
+                    <div className={(tabOpen == "1" ? "block" : "hidden")}>
                       <label
                         htmlFor="birthdate"
                         className="block mb-2 text-sm font-medium text-gray-900"
@@ -180,7 +247,7 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                       <input
                         type="date"
                         id="birthdate"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        className={"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"}
                         placeholder="Birthdate"
                         value={
                           tempPlayer
@@ -197,7 +264,7 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                         }
                       />
                     </div>
-                    <div>
+                    <div className={(tabOpen == "2" ? "block" : "hidden")}>
                       <label
                         htmlFor="username"
                         className="block mb-2 text-sm font-medium text-gray-900"
@@ -207,7 +274,7 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                       <input
                         type="text"
                         id="username"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        className={"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"}
                         placeholder="Username"
                         value={tempPlayer?.username}
                         onChange={(e) =>
@@ -219,7 +286,7 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                         required
                       />
                     </div>
-                    <div>
+                    <div className={"relative " + (tabOpen == "2" ? "block" : "hidden")}>
                       <label
                         htmlFor="password"
                         className="block mb-2 text-sm font-medium text-gray-900"
@@ -227,9 +294,9 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                         Password
                       </label>
                       <input
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         id="password"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        className={"bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " + (error.password ? "border-red-500" : "border-gray-300")}
                         placeholder="Password"
                         onChange={(e) =>
                           setTempPlayer({
@@ -238,8 +305,34 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                           })
                         }
                       />
+                      <button type="button" className="absolute right-0 bottom-3 pr-3" onClick={handleShowPassword}>
+                      {showConfirmPassword ? <FaEyeSlash /> : <FaEye />  }
+                    </button>
                     </div>
-                    <div>
+                    <div className={"relative " + (tabOpen == "2" ? "block" : "hidden")}>
+                      <label
+                        htmlFor="confirm_password"
+                        className="block mb-2 text-sm font-medium text-gray-900"
+                      >
+                        Confirm Password
+                      </label>
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        id="confirm_password"
+                        className={"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " + (error.confirm_password ? "border-red-500" : "border-gray-300")}
+                        placeholder="Confirm Password"
+                        onChange={(e) =>
+                          setTempPlayer({
+                            ...tempPlayer,
+                            confirm_password: e.target.value,
+                          })
+                        }
+                      />
+                      <button type="button" className="absolute right-0 bottom-3 pr-3" onClick={handleShowConfirmPassword}>
+                      {showConfirmPassword ? <FaEyeSlash /> : <FaEye />  }
+                    </button>
+                    </div>
+                    <div className={(tabOpen == "1" ? "block" : "hidden")}>
                       <label
                         htmlFor="thumbnail"
                         className="block mb-2 text-sm font-medium text-gray-900"
@@ -250,7 +343,7 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                         type="file"
                         id="thumbnail"
                         name="thumbnail"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        className={"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"}
                         placeholder="Thumbnail"
                       />
                     </div>
