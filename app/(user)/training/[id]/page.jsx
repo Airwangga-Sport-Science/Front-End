@@ -26,7 +26,7 @@ export default function TrainingDetail() {
 
   async function getCompleteArticle(id) {
     const response = await api.getCompleteArticle(id);
-
+    console.log(response);
     setIsComplete(response.data);
   }
 

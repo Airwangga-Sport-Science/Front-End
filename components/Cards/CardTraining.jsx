@@ -1,9 +1,22 @@
+import api from "@/utils/api";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
-export default function CardTraining({ articles, openTableTrainingModal }) {
-	console.log(articles);
+export default function CardTraining({ activeAttribute, openTableTrainingModal }) {
+	const [articles, setArticles] = React.useState([]);
+	const [tempArticles, setTempArticles] = React.useState([]);
+	async function getArticles() {
+    const response = await api.getArticleByAttribute(activeAttribute.id);
+    console.log(response);
+    setArticles(response);
+    setTempArticles(response);
+  }
+
+
+	useEffect(() => {
+		getArticles();
+	}, [activeAttribute.id]);
 	return (
 		<div className="relative flex flex-row break-words gap-6 mx-6">
 			<div className="flex flex-col justify-between w-full">
@@ -17,75 +30,30 @@ export default function CardTraining({ articles, openTableTrainingModal }) {
 						</div>
 					</div>
 					<div className="flex flex-row gap-4 mt-6">
-						{articles?.latest_art1_id == null ? (
-							""
-						) : (
-							<Link
-								href={"/training/" + articles?.latest_art1_id}
-								className="flex-col text-center justify-center align-middle relative "
-							>
-								<Image
-									src={
-										articles?.latest_art1_thumbnail == null
-											? "/img/img-1-1000x600.jpg"
-											: articles?.latest_art1_thumbnail
-									}
-									width={200}
-									height={600}
-									className="h-48 w-80 rounded-xl filter brightness-75"
-									alt=""
-								/>
-								<h3 className="absolute text-left px-6 text-2xl font-semibold text-white bottom-4 ">
-									{articles?.latest_art1_title}
-								</h3>
-							</Link>
-						)}
-						{articles?.latest_art2_id == null ? (
-							""
-						) : (
-							<Link
-								href={"/training/" + articles?.latest_art2_id}
-								className="flex-col text-center justify-center align-middle relative"
-							>
-								<Image
-									src={
-										articles?.latest_art2_thumbnail == null
-											? "/img/img-1-1000x600.jpg"
-											: articles?.latest_art2_thumbnail
-									}
-									width={200}
-									height={600}
-									className="h-48 w-80 rounded-xl filter brightness-75"
-									alt=""
-								/>
-								<h3 className="absolute text-left px-6 text-2xl font-semibold text-white bottom-4">
-									{articles?.latest_art2_title}
-								</h3>
-							</Link>
-						)}
-						{articles?.latest_art3_id == null ? (
-							""
-						) : (
-							<Link
-								href={"/training/" + articles?.latest_art3_id}
-								className="flex-col text-center justify-center align-middle relative"
-							>
-								<Image
-									src={
-										articles?.latest_art3_thumbnail == null
-											? "/img/img-1-1000x600.jpg"
-											: articles?.latest_art3_thumbnail
-									}
-									width={200}
-									height={600}
-									className="h-48 w-80 rounded-xl filter brightness-75"
-									alt=""
-								/>
-								<h3 className="absolute text-left px-6 text-2xl font-semibold text-white bottom-4">
-									{articles?.latest_art3_title}
-								</h3>
-							</Link>
-						)}
+					{articles
+  ? articles.slice(0, 5).map((article) => (
+    <Link
+      href={"/training/" + article?.article_id}
+      className="flex-col text-center justify-center align-middle relative"
+    >
+      <Image
+        src={
+          article?.article_thumbnail == null
+            ? "/img/img-1-1000x600.jpg"
+            : article?.article_thumbnail
+        }
+        width={200}
+        height={600}
+        className="h-48 w-80 rounded-xl filter brightness-75"
+        alt=""
+      />
+      <h3 className="absolute text-left px-6 text-2xl font-semibold text-white bottom-4">
+        {article?.article_title}
+      </h3>
+    </Link>
+  ))
+  : ""}
+
 					</div>
 				</div>
 			</div>

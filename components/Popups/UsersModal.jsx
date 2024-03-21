@@ -1,15 +1,14 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import api from "@/utils/api";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 
-export default function UsersModal({ isOpen, closeModal, users,id,setUsers }) {
+export default function UsersModal({ isOpen, closeModal, users,user_id,setUsers }) {
 	const cancelButtonRef = useRef(null);
-	console.log(users,id,users.find(user => user.id === id))
+	
 
-	const [tempPlayer, setTempPlayer] = useState(null);
+	const [tempPlayer, setTempPlayer] = useState({});
 
 	const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -23,48 +22,69 @@ export default function UsersModal({ isOpen, closeModal, users,id,setUsers }) {
   const [error, setError] = useState({});
 
 
-  useEffect(() => {
-    checkForm();
-  },[ tempPlayer]);
 
   function checkForm() {
-    let errors ={}
-    //check object empty
-		if (tempPlayer != null) {
-			if (tempPlayer.email == "" || tempPlayer.email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+		let errors = {};
+		console.log(tempPlayer,users,user_id)
+		// Check if tempPlayer has been initialized
+		if (Object.keys(tempPlayer).length != 0){
+			if (tempPlayer.email === "" || !tempPlayer.email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+				errors.email = true;
+			} else {
 				errors.email = false;
 			}
-			else{
-				errors.email = true;
-			}
 	
-			if (tempPlayer.phone == "" || tempPlayer.phone.match(/\d/g).length>11){
-			
+			if (tempPlayer.phone === "" || (tempPlayer.phone.match(/\d/g) || []).length > 11) {
+				errors.phone = true;
+			} else {
 				errors.phone = false;
 			}
-			else{
-				errors.phone = true;
-			}
-			if (tempPlayer.password != tempPlayer.confirm_password){
+	
+			if (tempPlayer.password !== tempPlayer.confirm_password) {
 				errors.password = true;
 				errors.confirm_password = true;
-			}
-			else{
+			} else {
 				errors.password = false;
 				errors.confirm_password = false;
 			}
-
-			if (tempPlayer.username == "" || tempPlayer.password == "" || tempPlayer.name == "" || tempPlayer.email == "" || tempPlayer.birth_date == "" || tempPlayer.phone == "" ||  tempPlayer.role == ""){
+	
+			if (
+				tempPlayer.username === "" ||
+				tempPlayer.password === "" ||
+				tempPlayer.name === "" ||
+				tempPlayer.email === "" ||
+				tempPlayer.birthdate === "" ||
+				tempPlayer.phone === "" ||
+				tempPlayer.role === ""
+			) {
 				errors.tab = true;
+			} else {
+				errors.tab = false;
 			}
 		}
+	
+		setError(errors);
+	}
+	
+  useEffect(() => {
+    checkForm();
+  },[ tempPlayer ]);
 
-    setError(errors);
-
-  }
 	useEffect(() => {
-		setTempPlayer(users.find(user => user.id === id))
-	}, [users, id])
+		console.log(user_id);
+		if (users.find(user => user.id === user_id)) {
+		setTempPlayer(users.find(user => user.id === user_id))}
+		else{
+			setTempPlayer({
+				email: "",
+				phone: "",
+				password: "",
+				confirm_password: "",
+
+			})
+		}
+		
+	}, [user_id])
 
 	const [tabOpen, setTabOpen] = useState(1)
 
@@ -73,7 +93,7 @@ export default function UsersModal({ isOpen, closeModal, users,id,setUsers }) {
 	}
 
 
-	console.log(tempPlayer)
+	
 	async function handleSubmit(e) {
     e.preventDefault();
 
@@ -103,10 +123,11 @@ export default function UsersModal({ isOpen, closeModal, users,id,setUsers }) {
         phone: tempPlayer.phone,
         thumbnail: thumbnail,
         role: tempPlayer.role,
-				id:id
+				id:user_id
     };
 		let response = {};
-		if (id) {
+		console.log(user_id);
+		if (user_id) {
 			 response = await api.updateUserWithRole(updatedUserData);
 		}
     else{
@@ -119,7 +140,7 @@ export default function UsersModal({ isOpen, closeModal, users,id,setUsers }) {
 
         // Update the users state
         setUsers(users.map(user => {
-            if (user.id === id) {
+            if (user.id === user_id) {
                 // Update the user with matching id
                 return {
                     ...user,
@@ -135,9 +156,9 @@ export default function UsersModal({ isOpen, closeModal, users,id,setUsers }) {
 		
 }
 function handleCloseModal() {
-	setTempPlayer(null);
+	setTempPlayer({});
 	users = [];
-	id = null;
+	user_id = null;
 	closeModal();
 }
 		
@@ -205,10 +226,10 @@ function handleCloseModal() {
 										</button>
 									</div>
 									<div className=" flex justify-between text-center shadow-md">
-										<button type="button" className={"p-4 md:p-5 w-1/2 " + (tabOpen == "1" ? "bg-slate-100 border-b border-blue-500" : "")} onClick={() => setTabOpen("1")}>
+										<button type="button" className={"p-4 md:p-5 w-1/2 " + (tabOpen == "1" ? "bg-slate-100 border-b border-blue-500" : " ")} onClick={() => setTabOpen("1")}>
 											Login Information
 										</button>
-										<button type="button" className={"p-4 md:p-5 w-1/2 " + (tabOpen == "2" ? "bg-slate-100 border-b border-blue-500" : "")} onClick={() => setTabOpen("2")}>
+										<button type="button" className={"p-4 md:p-5 w-1/2 " + (tabOpen == "2" ? "bg-slate-100 border-b border-blue-500" : " ")} onClick={() => setTabOpen("2")}>
 											Account Information
 										</button>
 									</div>
@@ -288,7 +309,8 @@ function handleCloseModal() {
 											</label>
 											<select name="role" id="role" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
 											value={tempPlayer?.role} onChange={e => setTempPlayer({ ...tempPlayer, role: e.target.value })}>
-												<option value="2" selected>Admin</option>
+												<option value="">Select Role</option>
+												<option value="2">Admin</option>
 												<option value="1">User</option>
 											</select>
 

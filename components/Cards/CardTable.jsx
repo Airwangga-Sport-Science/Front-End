@@ -1,10 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import CardRow from "./CardRow";
+import api from "@/utils/api";
 // components
 
 
-export default function CardTable({ articles, openModalTraining,handleOpenModal }) {
+export default function CardTable({ articles, openModalTraining,handleOpenModal, handleDataChange }) {
+  async function handleDelete(id) {
+    await api.deleteArticle(id);
+    handleDataChange();
+  }
   return (
     <>
       <div
@@ -70,7 +75,7 @@ export default function CardTable({ articles, openModalTraining,handleOpenModal 
             </thead>
             <tbody>
               {articles.map((article) => (
-                <CardRow key={article.id} {...article} handleOpenModal={handleOpenModal}/>
+                <CardRow key={article.id} {...article} handleOpenModal={handleOpenModal} handleDelete={handleDelete}/>
               ))}
 
             </tbody>
