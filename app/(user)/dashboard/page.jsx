@@ -35,7 +35,7 @@ export default function Page() {
   }, [isRecommendationModalOpen]);
   return (
     <div className='flex flex-col '>
-      <TrainingModal isOpen={isRecommendationModalOpen} closeModal={() => setIsRecommendationModalOpen(false)} handleDataChange={handleDataChange} id={articleId}/>
+      <TrainingModal isOpen={isRecommendationModalOpen} closeModal={() => setIsRecommendationModalOpen(false)} handleDataChange={handleDataChange} id={articleId} setArticleId={setArticleId}/>
       <div className="h-2/3 px-4 py-8 2xl:w-[1440px] mx-auto">
         <CardTable articles={articles} openModalTraining={() => setIsRecommendationModalOpen(true)} handleOpenModal={handleOpenModal} handleDataChange={handleDataChange} />
       </div>

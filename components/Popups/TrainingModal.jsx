@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import api from "@/utils/api";
 
-export default function TrainingModal({ isOpen, closeModal,handleDataChange, id = null }) {
+export default function TrainingModal({ isOpen, closeModal,handleDataChange, id = null, setArticleId }) {
 	const cancelButtonRef = useRef(null);
   const [positions, setPositions] = React.useState(null);
   const [article, setArticle] = React.useState(null);
@@ -90,7 +90,7 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 
 	function handleCloseModal() {
 		setArticle(null);
-		id = null;
+		setArticleId(null);
 		closeModal();
 
 	}

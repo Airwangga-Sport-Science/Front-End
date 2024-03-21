@@ -7,7 +7,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa6";
 export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
   const cancelButtonRef = useRef(null);
   const [tempPlayer, setTempPlayer] = useState(player);
-
+  const [file, setFile] = useState(null);
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   function handleShowConfirmPassword() {
@@ -40,13 +40,19 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
     else{
       errors.phone = true;
     }
-    if (tempPlayer.password != tempPlayer.confirmPassword){
-      errors.password = true;
-      errors.confirmPassword = true;
-    }
-    else{
+    if (tempPlayer.password == player.password ){
       errors.password = false;
       errors.confirmPassword = false;
+    }
+    else{
+      if (tempPlayer.password == tempPlayer.confirm_password){
+        errors.password = false;
+        errors.confirmPassword = false;
+      }
+      else{
+        errors.password = true;
+        errors.confirmPassword = true;
+      }
     }
 
     if (tempPlayer.username == "" || tempPlayer.password == "" || tempPlayer.name == "" || tempPlayer.email == "" || tempPlayer.birth_date == "" || tempPlayer.phone == "" ){
@@ -59,30 +65,34 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
-    const response1 = await fetch("/api/upload", {
-      method: "POST",
-      body: formData,
-    });
-
-    if (!response1.ok) {
-      throw new Error("Network response was not ok");
+    let thumbnail = null
+    if(file){
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData);
+      const response1 = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+  
+      if (!response1.ok) {
+        throw new Error("Network response was not ok");
+      }
+  
+      const { filePath } = await response1.json();
+      let thumbnail = filePath;
+      console.log(thumbnail);
     }
-
-    const { filePath } = await response1.json();
-    let thumbnail = filePath;
-    console.log(thumbnail);
+    console.log(thumbnail? thumbnail : tempPlayer.thumbnail);
 
     const response = await api.updateUser({
       username: tempPlayer.username,
-      password: tempPlayer.password,
+      password: tempPlayer.password != player.password? tempPlayer.password : '',
       name: tempPlayer.name,
       email: tempPlayer.email,
       birth_date: tempPlayer.birth_date,
       phone: tempPlayer.phone,
-      thumbnail: thumbnail,
+      thumbnail: thumbnail? thumbnail : tempPlayer.thumbnail,
+      id: tempPlayer.id,
     });
     if (response) {
       console.log(response.data);
@@ -291,7 +301,7 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                         htmlFor="password"
                         className="block mb-2 text-sm font-medium text-gray-900"
                       >
-                        Password
+                        Update Password
                       </label>
                       <input
                         type={showPassword ? "text" : "password"}
@@ -314,12 +324,12 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                         htmlFor="confirm_password"
                         className="block mb-2 text-sm font-medium text-gray-900"
                       >
-                        Confirm Password
+                        Confirm New Password
                       </label>
                       <input
                         type={showPassword ? "text" : "password"}
                         id="confirm_password"
-                        className={"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " + (error.confirm_password ? "border-red-500" : "border-gray-300")}
+                        className={"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " + (error.confirmPassword ? "border-red-500" : "border-gray-300")}
                         placeholder="Confirm Password"
                         onChange={(e) =>
                           setTempPlayer({
@@ -345,6 +355,7 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                         name="thumbnail"
                         className={"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"}
                         placeholder="Thumbnail"
+                        onChange={(e) => setFile(e.target.files[0])}
                       />
                     </div>
                   </div>

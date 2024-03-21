@@ -73,7 +73,7 @@ const api = (() => {
 
     return responseJson;
   }
-  async function updateUser({ username, password, name, email, birth_date,phone, thumbnail }) {
+  async function updateUser({ username, password, name, email, birth_date,phone, thumbnail,id }) {
     const response = await fetchWithToken(`${BASE_URL}/user`, {
       method: 'PUT',
       headers: {
@@ -87,7 +87,8 @@ const api = (() => {
         name,
         email,
         birth_date,
-        thumbnail
+        thumbnail,
+        id
       }),
     });
 
