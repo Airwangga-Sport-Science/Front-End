@@ -22,11 +22,18 @@ export default function Navbar({ user, handleLogOut }) {
 						</Link>
 						{user ? (
 							user.role == 1 ? (
+								<>
 								<Link href="/player">
 									<p className={`text-sm leading-relaxed inline-block mr-4 py-2 whitespace-nowrap hover:border-b-2 hover:border-blue-500 ${isActive("/player")}`}>
 										Dashboard
 									</p>
 								</Link>
+								<Link href="/training">
+								<p className={`text-sm leading-relaxed inline-block mr-4 py-2 whitespace-nowrap hover:border-b-2 hover:border-blue-500 ${isActive("/training")}`}>
+									Training
+								</p>
+								</Link>
+								</>
 							) : (
 								<>
 									<Link href="/dashboard">
@@ -41,15 +48,11 @@ export default function Navbar({ user, handleLogOut }) {
 									</Link>
 								</>
 							)
+							
 						) : (
 							""
 						)}
 
-						<Link href="/training">
-							<p className={`text-sm leading-relaxed inline-block mr-4 py-2 whitespace-nowrap hover:border-b-2 hover:border-blue-500 ${isActive("/training")}`}>
-								Training
-							</p>
-						</Link>
 					</div>
 					<div>
 						{user ? (

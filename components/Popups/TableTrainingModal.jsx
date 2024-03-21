@@ -110,7 +110,11 @@ export default function TableTrainingModal({ isOpen, closeModal,activeAttribute 
 														<td className="p-3 text-gray-700 whitespace-nowrap gap-2 w-1/5">
 														<Image
 															alt="image"
-															src={"/img/img-1-1000x600.jpg"}
+															src={
+																article?.article_thumbnail == null
+																	? "/img/img-1-1000x600.jpg"
+																	: article?.article_thumbnail
+															}
 															className="rounded w-full h-full"
 															width={100} height={500} >
 														</Image>

@@ -39,18 +39,65 @@ export default function CardPositions({positions}) {
             alt=""
             className="rounded-xl shadow-xl h-72 bg-cover mr-2"
           />
-<div className={"absolute top-[32%] left-[10%] w-5 h-5 rounded-full " + (positionsList.includes('LB') ? 'bg-red-500' : 'bg-slate-300')} id='LB'></div>
-<div className={"absolute top-[47%] left-[10%] w-5 h-5 rounded-full " + (positionsList.includes('CB') ? 'bg-red-500' : 'bg-slate-300')} id='CB'></div>
-<div className={"absolute top-[62%] left-[10%] w-5 h-5 rounded-full " + (positionsList.includes('RB') ? 'bg-red-500' : 'bg-slate-300')} id='RB'></div>
-<div className={"absolute top-[12%] left-[13%] w-5 h-5 rounded-full " + (positionsList.includes('LWB') ? 'bg-red-500' : 'bg-slate-300')} id='LWB'></div>
-<div className={"absolute top-[82%] left-[13%] w-5 h-5 rounded-full " + (positionsList.includes('RWB') ? 'bg-red-500' : 'bg-slate-300')} id='RWB'></div>
-<div className={"absolute top-[47%] left-[25%] w-5 h-5 rounded-full " + (positionsList.includes('CDM') ? 'bg-red-500' : 'bg-slate-300')} id='CDM'></div>
-<div className={"absolute top-[32%] left-[35%] w-5 h-5 rounded-full " + (positionsList.includes('LM') ? 'bg-red-500' : 'bg-slate-300')} id='LM'></div>
-<div className={"absolute top-[62%] left-[35%] w-5 h-5 rounded-full " + (positionsList.includes('RM') ? 'bg-red-500' : 'bg-slate-300')} id='RM'></div>
-<div className={"absolute top-[12%] left-[50%] w-5 h-5 rounded-full " + (positionsList.includes('LW') ? 'bg-red-500' : 'bg-slate-300')} id='LW'></div>
-<div className={"absolute top-[82%] left-[50%] w-5 h-5 rounded-full " + (positionsList.includes('RW') ? 'bg-red-500' : 'bg-slate-300')} id='RW'></div>
-<div className={"absolute top-[40%] left-[52%] w-5 h-5 rounded-full " + (positionsList.includes('CF') ? 'bg-red-500' : 'bg-slate-300')} id='CF'></div>
-<div className={"absolute top-[52%] left-[55%] w-5 h-5 rounded-full " + (positionsList.includes('ST') ? 'bg-red-500' : 'bg-slate-300')} id='ST'></div>
+        <div className={"absolute top-[12%] left-[13%] flex flex-col align-middle justify-center "}>
+          <div className={"w-5 h-5 rounded-full mx-auto " + (positionsList.includes('LB') ? 'bg-red-500' : 'bg-slate-300')} id='LB'></div>
+          <span className='bg-slate-300 rounded-lg px-2 mt-1'>LB</span>
+        </div>
+        <div className={"absolute top-[47%] left-[13%] flex flex-col align-middle justify-center "}>
+  <div className={"w-5 h-5 rounded-full mx-auto " + (positionsList.includes('CB') ? 'bg-red-500' : 'bg-slate-300')} id='CB'></div>
+  <span className='bg-slate-300 rounded-lg px-2 mt-1'>CB</span>
+</div>
+
+        <div className={"absolute top-[75%] left-[13%] flex flex-col-reverse align-middle justify-center "}>
+  <div className={"w-5 h-5 rounded-full mx-auto " + (positionsList.includes('RB') ? 'bg-red-500' : 'bg-slate-300')} id='RB'></div>
+  <span className='bg-slate-300 rounded-lg px-2 mb-1'>RB</span>
+</div>
+
+<div className={"absolute top-[12%] left-[21%] flex flex-col align-middle justify-center "}>
+  <div className={"w-5 h-5 rounded-full mx-auto " + (positionsList.includes('LWB') ? 'bg-red-500' : 'bg-slate-300')} id='LWB'></div>
+  <span className='bg-slate-300 rounded-lg px-2 mt-1'>LWB</span>
+</div>
+
+<div className={"absolute top-[75%] left-[21%] flex flex-col-reverse align-middle justify-center "}>
+  <div className={"w-5 h-5 rounded-full mx-auto " + (positionsList.includes('RWB') ? 'bg-red-500' : 'bg-slate-300')} id='RWB'></div>
+  <span className='bg-slate-300 rounded-lg px-2 mb-1'>RWB</span>
+</div>
+
+<div className={"absolute top-[47%] left-[25%] flex flex-col align-middle justify-center "}>
+  <div className={"w-5 h-5 rounded-full mx-auto " + (positionsList.includes('CDM') ? 'bg-red-500' : 'bg-slate-300')} id='CDM'></div>
+  <span className='bg-slate-300 rounded-lg px-2 mt-1'>CDM</span>
+</div>
+
+<div className={"absolute top-[12%] left-[34%] flex flex-col align-middle justify-center "}>
+  <div className={"w-5 h-5 rounded-full mx-auto " + (positionsList.includes('LM') ? 'bg-red-500' : 'bg-slate-300')} id='LM'></div>
+  <span className='bg-slate-300 rounded-lg px-2 mt-1'>LM</span>
+</div>
+
+<div className={"absolute top-[75%] left-[34%] flex flex-col-reverse align-middle justify-center "}>
+  <div className={"w-5 h-5 rounded-full mx-auto " + (positionsList.includes('RM') ? 'bg-red-500' : 'bg-slate-300')} id='RM'></div>
+  <span className='bg-slate-300 rounded-lg px-2 mb-1'>RM</span>
+</div>
+
+<div className={"absolute top-[12%] left-[47%] flex flex-col align-middle justify-center "}>
+  <div className={"w-5 h-5 rounded-full mx-auto " + (positionsList.includes('LW') ? 'bg-red-500' : 'bg-slate-300')} id='LW'></div>
+  <span className='bg-slate-300 rounded-lg px-2 mt-1'>LW</span>
+</div>
+
+<div className={"absolute top-[75%] left-[47%] flex flex-col-reverse align-middle justify-center "}>
+  <div className={"w-5 h-5 rounded-full mx-auto " + (positionsList.includes('RW') ? 'bg-red-500' : 'bg-slate-300')} id='RW'></div>
+  <span className='bg-slate-300 rounded-lg px-2 mb-1'>RW</span>
+</div>
+
+<div className={"absolute top-[47%] left-[50%] flex flex-col align-middle justify-center "}>
+  <div className={"w-5 h-5 rounded-full mx-auto " + (positionsList.includes('CF') ? 'bg-red-500' : 'bg-slate-300')} id='CF'></div>
+  <span className='bg-slate-300 rounded-lg px-2 mt-1'>CF</span>
+</div>
+
+<div className={"absolute top-[47%] left-[57%] flex flex-col align-middle justify-center "}>
+  <div className={"w-5 h-5 rounded-full mx-auto " + (positionsList.includes('ST') ? 'bg-red-500' : 'bg-slate-300')} id='ST'></div>
+  <span className='bg-slate-300 rounded-lg px-2 mt-1'>ST</span>
+</div>
+
 
 				</div>
         <div className="flex flex-col mx-2 gap-1.5 flex-wrap h-72">

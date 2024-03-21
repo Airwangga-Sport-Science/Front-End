@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import api from "@/utils/api";
 
-export default function TrainingModal({ isOpen, closeModal,handleDataChange, id = null,create=true }) {
+export default function TrainingModal({ isOpen, closeModal,handleDataChange, id = null }) {
 	const cancelButtonRef = useRef(null);
   const [positions, setPositions] = React.useState(null);
   const [article, setArticle] = React.useState(null);
@@ -30,7 +30,6 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 	React.useEffect(() => {
 		getPositions();
 		if(id) {
-			create = false
 			getArticle();
 		}
 	},[id])
@@ -128,11 +127,11 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 							leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
 						>
 							<Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-								<form className="relative bg-white rounded-lg shadow" onSubmit={create? handleSubmit : handleUpdate}>
+								<form className="relative bg-white rounded-lg shadow" onSubmit={id? handleUpdate : handleSubmit}>
 									<input type="hidden" name="id" value={article?.id} />
 									<div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
 										<h3 className="text-xl font-semibold text-gray-900">
-											{ article ? "Update Training" : "Add Training" }
+											{ id ? "Update Training" : "Add Training" }
 										</h3>
 										<button
 											type="button"

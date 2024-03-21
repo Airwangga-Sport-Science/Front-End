@@ -2,11 +2,24 @@ import React from "react";
 import PropTypes from "prop-types";
 import CardRow from "./CardRow";
 import CardRowUser from "./CardRowUser";
+import api from "@/utils/api";
+
 // components
 
 
 
-export default function CardTableUser({ users, openModalTraining,handleOpenModal }) {
+export default function CardTableUser({ users, openModalTraining,handleOpenModal,handleDataChange }) {
+
+  async function handleDeleteUser(id) {
+    const response = await api.deleteUser(id);
+
+    if (response.status === 'success') {
+      handleDataChange();
+    }
+
+
+  }
+
   return (
     <>
       <div
@@ -25,7 +38,9 @@ export default function CardTableUser({ users, openModalTraining,handleOpenModal
                 User Tables
               </h3>
             </div>
-            <button className="bg-blue-700 text-white active:bg-blue-600 text-xs font-bold uppercase px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={handleOpenModal}> 
+            <button className="bg-blue-700 text-white active:bg-blue-600 text-xs font-bold uppercase px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={() => {
+                  handleOpenModal(null);
+            }}>
               Create User
             </button>
           </div>
@@ -86,7 +101,7 @@ export default function CardTableUser({ users, openModalTraining,handleOpenModal
             </thead>
             <tbody>
               {users.map((user) => (
-                <CardRowUser key={user.id} {...user} handleOpenModal={handleOpenModal}/>
+                <CardRowUser key={user.id} {...user} handleOpenModal={handleOpenModal} handleDeleteUser={handleDeleteUser}/>
               ))}
 
             </tbody>

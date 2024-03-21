@@ -36,8 +36,9 @@ export default function Index() {
 
       setPlayer(player);
       setAttribute(attribute);
-      setActiveAttribute(attribute[0]);
+      setActiveAttribute(attribute[attribute.length-1]);
       setIsLoading(false);
+      console.log(attribute[attribute.length-1],attribute.length-1);
 
     } catch (error) {
       console.error('Error fetching player data:', error);
@@ -99,7 +100,7 @@ export default function Index() {
         <CardPositions positions={positions} />
       </div>
       <CardStatistic activeAttribute={activeAttribute} positions={positions} />
-      <CardTraining articles={article} openTableTrainingModal={openTableTrainingModal}  />
+      <CardTraining activeAttribute={activeAttribute} article={article} openTableTrainingModal={openTableTrainingModal}  />
     </div>
   );
 }

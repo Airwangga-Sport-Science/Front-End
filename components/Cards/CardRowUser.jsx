@@ -1,7 +1,7 @@
 import React from 'react'
 import TableDropdownUsers from '../Dropdowns/TableDropdownUsers'
 
-export default function CardRowUser({name, role,username,phone,email, id, handleOpenModal}) {
+export default function CardRowUser({name, role,username,phone,email, id, handleOpenModal,handleDeleteUser}) {
   return (
     <tr>
                 <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
@@ -27,7 +27,7 @@ export default function CardRowUser({name, role,username,phone,email, id, handle
                 </td>
                 
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                <TableDropdownUsers handleOpenModal={handleOpenModal} id={id} />
+                <TableDropdownUsers handleOpenModal={handleOpenModal} id={id} handleDeleteUser={handleDeleteUser} />
                 </td>
 
               </tr>

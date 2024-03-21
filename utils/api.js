@@ -131,6 +131,32 @@ const api = (() => {
 
     return responseJson;
   }
+  async function deleteUser(id) {
+    const response = await fetchWithToken(`${BASE_URL}/user/${id}`, {
+      method: 'DELETE',
+    });
+    const responseJson = await response.json();
+
+    if (responseJson.status !== 'success') {
+      
+    }
+
+    return responseJson;
+  }
+
+  async function deleteArticle(id) {
+    const response = await fetchWithToken(`${BASE_URL}/articles/${id}`, {
+      method: 'DELETE',
+    });
+    const responseJson = await response.json();
+
+    if (responseJson.status !== 'success') {
+      
+    }
+
+    return responseJson;
+  }
+
 
   async function getUserLoggedIn() {
     const response = await fetchWithToken(`${BASE_URL}/user`, {
@@ -407,7 +433,9 @@ const api = (() => {
     getCompleteArticle,
     updateUser,
     getUsers,
-    updateUserWithRole
+    updateUserWithRole,
+    deleteArticle,
+    deleteUser
 
   };
 })();

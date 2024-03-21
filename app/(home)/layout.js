@@ -32,14 +32,6 @@ export default function RootLayout({ children }) {
     setAuthedUser(null);
   }
   
-  if(initialized != false){
-    if(authedUser){
-      
-    }
-    else{
-      redirect('/')
-    }
-  }
 
   return (
     <html lang="en">
@@ -51,7 +43,14 @@ export default function RootLayout({ children }) {
       </head>
 
         <body className="antialiased bg-white pt-10 font-poppins text-black overflow-x-hidden min-h-screen">
-        <IndexNavbar user={authedUser} handleLogOut={handleLogOut}/>
+        {
+          initialized ? (
+            <IndexNavbar user={authedUser} handleLogOut={handleLogOut}/>
+          ) : (
+            <IndexNavbar />
+          )
+        }
+        
           
         <Suspense fallback={<Loading />}>{children}</Suspense>
         </body>

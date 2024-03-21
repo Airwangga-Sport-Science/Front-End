@@ -16,6 +16,7 @@ export default function CardStatsSelector({ attribute,activeAttribute, setActive
 			<select
 				className="bg-gray-100 text-gray-400 h-12 px-6 rounded-xl font-semibold text flex align-middle"
 				onChange={(e) => handleSelect(e.target.value)}
+				value={activeAttribute.id}
 			>
 				{attribute.map((attr) => (
 					<option key={attr.id} value={attr.id}>
@@ -30,13 +31,13 @@ export default function CardStatsSelector({ attribute,activeAttribute, setActive
 				>
 					<span className="my-auto">New Recommendation</span>
 				</a>
-				<button
+				{/* <button
 					className="bg-gray-100 text-gray-400 h-12 px-6 rounded-xl font-semibold text flex align-middle"
 					value={activeAttribute.id}
 					onClick={() => redirectEdit(activeAttribute.id)}
 				>
 					<span className="my-auto">Edit Recommendation</span>
-				</button>
+				</button> */}
 			</div>
 		</div>
 	);
