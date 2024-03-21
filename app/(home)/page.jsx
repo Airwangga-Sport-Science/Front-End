@@ -12,14 +12,12 @@ export default function Home() {
       <div className="flex flex-wrap items-center mt-32">
         <div className="w-full md:w-5/12 px-4 mr-auto ml-auto">
           <h3 className="text-5xl mb-8 font-semibold leading-normal text-blue-500">
-            Airwangga Sport Center
+          Scoutition AI
           </h3>
           <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, doloribus error sequi iure fugit, qui laboriosam obcaecati vero numquam inventore autem dolorum. Dolore ea voluptatum modi, soluta nulla illum culpa.
-          </p>
+          AI-based software to assist football players, especially young football players in Indonesia, in improving their performance quality, developed by <em>Airwangga Sport Techno Science Group</em> in collaboration with <em>Coach Ricky Nelson</em> and <em>Coach Timo Scheunemann</em>.</p>
           <p className="text-lg font-light leading-relaxed mt-0 mb-12 text-blueGray-600">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, doloribus error sequi iure fugit, qui laboriosam obcaecati vero numquam inventore autem dolorum. Dolore ea voluptatum modi, soluta nulla illum culpa.
-          </p>
+          What are you waiting for? Start exploring and utilizing the features on Scoutition now!</p>
           <a href="/login" className="font-bold text-white bg-blue-500 active:bg-blue-600 uppercase px-6 py-3 rounded shadow hover:shadow-md outline-none focus:outline-none mt-6 mr-1 mb-1 ease-linear transition-all duration-150" >
             Get Started
           </a>
@@ -46,7 +44,7 @@ export default function Home() {
       <img
         alt="..."
         className="max-w-full rounded-lg shadow-lg"
-        src="https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+        src="/img/home-page-assets.jpg"
       />
     </div>
     <div className="w-full md:w-5/12 ml-auto mr-auto px-4">
@@ -130,7 +128,7 @@ export default function Home() {
                   <div className="pt-6 text-center">
                     <h5 className="text-xl font-bold">Rakyan Krisna</h5>
                     <p className="mt-1 text-sm text-blueGray-400 uppercase font-semibold">
-                      Project Manager
+                      Tech Lead (Scrum Master)
                     </p>
                     <div className="mt-6">
  
@@ -148,7 +146,7 @@ export default function Home() {
                   <div className="pt-6 text-center">
                     <h5 className="text-xl font-bold">Nabil Mustofa</h5>
                     <p className="mt-1 text-sm text-blueGray-400 uppercase font-semibold">
-                      Web Developer
+                      Software Engineer
                     </p>
                     <div className="mt-6">
                       
@@ -217,7 +215,7 @@ export default function Home() {
           <div className="flex flex-wrap items-center md:justify-between justify-center pb-6">
             <div className="w-full md:w-4/12 px-4 mx-auto text-center">
               <div className="text-sm text-blueGray-500 font-semibold py-1">
-                Copyright © {new Date().getFullYear()} Airwangga Sport Center.{" "}
+                Copyright © {new Date().getFullYear()} Airwangga Sport Techno Science Group{""}
                 <a
                   href="https://www.creative-tim.com?ref=nnjs-footer"
                   className="text-blueGray-500 hover:text-blueGray-800"

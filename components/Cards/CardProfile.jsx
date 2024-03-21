@@ -55,13 +55,13 @@ const CardProfile = ({
             <div className="flex flex-col">
               <h4 className="text-sm text-center text-gray-500">Height</h4>
               <h3 className="text-2xl text-center  font-semibold">
-                {activeAttribute.height}
+                {activeAttribute.height} cm
               </h3>
             </div>
             <div className="flex flex-col">
               <h4 className="text-sm text-center text-gray-500">Weight</h4>
               <h3 className="text-2xl text-center font-semibold">
-                {activeAttribute.weight}
+                {activeAttribute.weight} kg
               </h3>
             </div>
             <div className="flex flex-col">
