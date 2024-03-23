@@ -4,12 +4,12 @@ import api from "@/utils/api";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 
-export default function UsersModal({ isOpen, closeModal, users,user_id,setUsers }) {
+export default function UsersModal({ isOpen, closeModal, users,user_id,setUsers,setUserId }) {
 	const cancelButtonRef = useRef(null);
 	
-
+  const [file, setFile] = useState(null);
 	const [tempPlayer, setTempPlayer] = useState({});
-
+	const [player, setPlayer] = useState({});
 	const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   function handleShowConfirmPassword() {
@@ -40,12 +40,19 @@ export default function UsersModal({ isOpen, closeModal, users,user_id,setUsers 
 				errors.phone = false;
 			}
 	
-			if (tempPlayer.password !== tempPlayer.confirm_password) {
-				errors.password = true;
-				errors.confirm_password = true;
-			} else {
+			if (tempPlayer.password == player.password ){
 				errors.password = false;
 				errors.confirm_password = false;
+			}
+			else{
+				if (tempPlayer.password == tempPlayer.confirm_password){
+					errors.password = false;
+					errors.confirm_password = false;
+				}
+				else{
+					errors.password = true;
+					errors.confirm_password = true;
+				}
 			}
 	
 			if (
@@ -53,7 +60,6 @@ export default function UsersModal({ isOpen, closeModal, users,user_id,setUsers 
 				tempPlayer.password === "" ||
 				tempPlayer.name === "" ||
 				tempPlayer.email === "" ||
-				tempPlayer.birthdate === "" ||
 				tempPlayer.phone === "" ||
 				tempPlayer.role === ""
 			) {
@@ -73,7 +79,9 @@ export default function UsersModal({ isOpen, closeModal, users,user_id,setUsers 
 	useEffect(() => {
 		console.log(user_id);
 		if (users.find(user => user.id === user_id)) {
-		setTempPlayer(users.find(user => user.id === user_id))}
+		setTempPlayer(users.find(user => user.id === user_id))
+		setPlayer(users.find(user => user.id === user_id))}
+		
 		else{
 			setTempPlayer({
 				email: "",
@@ -96,22 +104,24 @@ export default function UsersModal({ isOpen, closeModal, users,user_id,setUsers 
 	
 	async function handleSubmit(e) {
     e.preventDefault();
-
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
-
-    const response1 = await fetch('/api/upload', {
-        method: 'POST',
+		let thumbnail = null
+    if(file){
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData);
+      const response1 = await fetch("/api/upload", {
+        method: "POST",
         body: formData,
-    });
-
-    if (!response1.ok) {
-        throw new Error('Network response was not ok');
+      });
+  
+      if (!response1.ok) {
+        throw new Error("Network response was not ok");
+      }
+  
+      const { filePath } = await response1.json();
+      let thumbnail = filePath;
+      console.log(thumbnail);
     }
-
-    const { filePath } = await response1.json();
-    let thumbnail = filePath;
-
+    console.log(thumbnail? thumbnail : tempPlayer.thumbnail);
 
     const updatedUserData = {
         username: tempPlayer.username,
@@ -121,17 +131,19 @@ export default function UsersModal({ isOpen, closeModal, users,user_id,setUsers 
         birth_date: tempPlayer.birth_date,
 				birthdate : tempPlayer.birth_date,
         phone: tempPlayer.phone,
-        thumbnail: thumbnail,
+        thumbnail: thumbnail? thumbnail : tempPlayer.thumbnail,
         role: tempPlayer.role,
 				id:user_id
     };
 		let response = {};
 		console.log(user_id);
 		if (user_id) {
+			updatedUserData.password = tempPlayer.password != player.password? tempPlayer.password : '',
 			 response = await api.updateUserWithRole(updatedUserData);
 		}
     else{
 			console.log(updatedUserData)
+			 
 			 response = await api.register(updatedUserData);
 		}
 
@@ -158,7 +170,8 @@ export default function UsersModal({ isOpen, closeModal, users,user_id,setUsers 
 function handleCloseModal() {
 	setTempPlayer({});
 	users = [];
-	user_id = null;
+	setUserId(null);
+	setFile(null);
 	closeModal();
 }
 		
@@ -288,7 +301,7 @@ function handleCloseModal() {
 											/>
 
 										</div>
-										<div className={(tabOpen == "2" ? "block" : "hidden")}>
+										<div className={(tabOpen == "2" && tempPlayer.role == 1 ? "block" : "hidden")}>
 											<label htmlFor="birthdate" className="block mb-2 text-sm font-medium text-gray-900">
 												Birthdate
 											</label>
@@ -298,7 +311,7 @@ function handleCloseModal() {
 												className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
 												placeholder="Birthdate"
 												value={ tempPlayer ? (tempPlayer.birth_date ? new Date(tempPlayer?.birth_date).toISOString().split('T')[0] : '') : '' }
-												required
+												
 												onChange={e => setTempPlayer({ ...tempPlayer, birth_date: e.target.value })}
 											/>
 
@@ -323,11 +336,12 @@ function handleCloseModal() {
 											<input
 												type="text"
 												id="username"
-												className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+												className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 read-only:bg-gray-200"
 												placeholder="Username"
 												value={tempPlayer?.username}
 												onChange={e => setTempPlayer({ ...tempPlayer, username: e.target.value })}
 												required
+												readOnly
 											/>
 
 										</div>
@@ -342,7 +356,7 @@ function handleCloseModal() {
 												placeholder="Password"
 												onChange={e => setTempPlayer({ ...tempPlayer, password: e.target.value })}
 												
-												required
+												
 											/>
 											<button type="button" className="absolute right-0 bottom-3 pr-3" onClick={handleShowPassword}>
                       {showPassword ? <FaEyeSlash /> : <FaEye />  }
@@ -371,7 +385,7 @@ function handleCloseModal() {
                       {showConfirmPassword ? <FaEyeSlash /> : <FaEye />  }
                     </button>
                     </div>
-										<div className={(tabOpen == "2" ? "block" : "hidden")}>
+										<div className={(tabOpen == "2" && tempPlayer.role == 1 ? "block" : "hidden")}>
 											<label
 												htmlFor="thumbnail"
 												className="block mb-2 text-sm font-medium text-gray-900"	
@@ -384,6 +398,7 @@ function handleCloseModal() {
 												name="thumbnail"
 												className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
 												placeholder="Thumbnail"
+												onChange={(e) => setFile(e.target.files[0])}
 												
 											/>
 										</div>

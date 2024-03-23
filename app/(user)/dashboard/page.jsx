@@ -25,6 +25,7 @@ export default function Page() {
   };
 
   async function handleDataChange() {
+    console.log("handleDataChange");
     const response = await api.getArticles();
     setArticles(response);
   }
@@ -33,6 +34,7 @@ export default function Page() {
   useEffect(() => {
     getArticles();
   }, [isRecommendationModalOpen]);
+
   return (
     <div className='flex flex-col '>
       <TrainingModal isOpen={isRecommendationModalOpen} closeModal={() => setIsRecommendationModalOpen(false)} handleDataChange={handleDataChange} id={articleId} setArticleId={setArticleId}/>

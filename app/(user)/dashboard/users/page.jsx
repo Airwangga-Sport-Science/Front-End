@@ -37,9 +37,9 @@ export default function Page() {
   }, [isRecommendationModalOpen]);
   return (
     <div className='flex flex-col '>
-      <UsersModal isOpen={isRecommendationModalOpen} closeModal={() => setIsRecommendationModalOpen(false)} handleDataChange={handleDataChange} users={users} user_id={userId} setUsers={setUsers}/>
+      <UsersModal isOpen={isRecommendationModalOpen} closeModal={() => setIsRecommendationModalOpen(false)} handleDataChange={handleDataChange} users={users} user_id={userId} setUsers={setUsers} setUserId={setUserId}/>
       <div className="h-2/3 px-4 py-8 2xl:w-[1440px] mx-auto">
-        <CardTableUser users={users} openModalTraining={() => setIsRecommendationModalOpen(true)} handleOpenModal={handleOpenModal} handleDataChange={handleDataChange} />
+        <CardTableUser users={users} openModalTraining={() => setIsRecommendationModalOpen(true)} handleOpenModal={handleOpenModal} handleDataChange={handleDataChange} setUserId={setUserId} />
       </div>
 
     </div>

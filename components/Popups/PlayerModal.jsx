@@ -284,7 +284,7 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                       <input
                         type="text"
                         id="username"
-                        className={"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"}
+                        className={"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 read-only:bg-gray-200"}
                         placeholder="Username"
                         value={tempPlayer?.username}
                         onChange={(e) =>
@@ -293,6 +293,7 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                             username: e.target.value,
                           })
                         }
+                        readOnly
                         required
                       />
                     </div>

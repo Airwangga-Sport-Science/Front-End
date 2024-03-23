@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import CardRow from "./CardRow";
 import api from "@/utils/api";
@@ -6,6 +6,15 @@ import api from "@/utils/api";
 
 
 export default function CardTable({ articles, openModalTraining,handleOpenModal, handleDataChange }) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5); 
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentArticles = articles.slice(indexOfFirstItem, indexOfLastItem);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   async function handleDelete(id) {
     await api.deleteArticle(id);
     handleDataChange();
@@ -74,12 +83,28 @@ export default function CardTable({ articles, openModalTraining,handleOpenModal,
               </tr>
             </thead>
             <tbody>
-              {articles.map((article) => (
-                <CardRow key={article.id} {...article} handleOpenModal={handleOpenModal} handleDelete={handleDelete}/>
+            {currentArticles.map((article) => (
+                <CardRow key={article.id} {...article} handleOpenModal={handleOpenModal} handleDelete={handleDelete} />
               ))}
 
             </tbody>
           </table>
+        </div>
+        <div className="flex justify-center my-4">
+          <ul className="flex pl-0 rounded list-none flex-wrap gap-2">
+            {Array.from({ length: Math.ceil(articles.length / itemsPerPage) }, (_, index) => (
+              <li key={index}>
+                <button
+                  onClick={() => paginate(index + 1)}
+                  className={`${
+                    currentPage === index + 1 ? "bg-blue-500 text-white" : "bg-white text-blue-500"
+                  } hover:bg-blue-400 hover:text-white w-10 h-10 my-auto rounded-full`}
+                >
+                  {index + 1}
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </>
