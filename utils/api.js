@@ -375,7 +375,7 @@ const api = (() => {
 
 
   async function getArticleByAttribute(id) {
-    const response = await fetch(`${BASE_URL}/articles/attributes/${id}`, {
+    const response = await fetchWithToken(`${BASE_URL}/articles/attributes/${id}`, {
       method: 'GET',
     });
     const responseJson = await response.json();

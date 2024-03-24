@@ -7,6 +7,7 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 	const cancelButtonRef = useRef(null);
   const [positions, setPositions] = React.useState(null);
   const [article, setArticle] = React.useState(null);
+	const [file, setFile] = React.useState(null);
 	async function getPositions() {
     const response = await api.getPositions();
     setPositions(response);
@@ -45,21 +46,27 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 
 	async function handleSubmit(e) {
 		e.preventDefault();
-
 		const formData = new FormData(e.target);
 		const data = Object.fromEntries(formData);
-		const response = await fetch('/api/upload', {
-			method: 'POST',
-			body: formData,
-		});
+		let thumbnail = null
+		if(file) {
+			
+			
+			const response = await fetch('/api/upload', {
+				method: 'POST',
+				body: formData,
+			});
+	
+			if (!response.ok) {
+				throw new Error('Network response was not ok');
+			}
+	
+			const { filePath } = await response.json();
 
-		if (!response.ok) {
-			throw new Error('Network response was not ok');
+			thumbnail = filePath;
 		}
 
-		const { filePath } = await response.json();
-
-		data.thumbnail = filePath;
+		data.thumbnail = thumbnail ? thumbnail : article.thumbnail
 		await api.createArticle(data).then(
 			handleDataChange(),
 			handleCloseModal()
@@ -68,20 +75,25 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 
 	async function handleUpdate(e) {
 		e.preventDefault();
+		let thumbnail = null
 		const formData = new FormData(e.target);
 		const data = Object.fromEntries(formData);
-		const response = await fetch('/api/upload', {
-			method: 'POST',
-			body: formData,
-		});
+		if(file) {
+			const response = await fetch('/api/upload', {
+				method: 'POST',
+				body: formData,
+			});
+	
+			if (!response.ok) {
+				throw new Error('Network response was not ok');
+			}
+	
+			const { filePath } = await response.json();
 
-		if (!response.ok) {
-			throw new Error('Network response was not ok');
+			thumbnail = filePath;
 		}
 
-		const { filePath } = await response.json();
-
-		data.thumbnail = filePath;
+		data.thumbnail = thumbnail ? thumbnail : article.thumbnail
 		await api.updateArticle(data).then(
 			handleDataChange(),
 			handleCloseModal()
@@ -91,6 +103,7 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 	function handleCloseModal() {
 		setArticle(null);
 		setArticleId(null);
+		setFile(null);
 		closeModal();
 
 	}
@@ -229,6 +242,48 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 											</select>
 											</div>
                     </div>
+										<div className="flex flex-row gap-3">
+											<div className="w-1/2">
+											<label
+                        htmlFor="age"
+                        classage="block mb-2 text-sm font-medium text-gray-900"
+                      >
+                        Min Age
+                      </label>
+											<input
+                        type="number"
+                        id="min_age"
+												name="min_age"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder="Min Age"
+												value={article ? article.min_age : ""}
+												onChange={(e) => handleChange(e)}
+                        required
+                      />
+											
+											
+											</div>
+											<div className="w-1/2">
+											<label
+                        htmlFor="age"
+                        classage="block mb-2 text-sm font-medium text-gray-900"
+                      >
+												Max Age
+                      </label>
+											<input
+                        type="number"
+                        id="max_age"
+												name="max_age"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder="Max Age"
+												value={article ? article.max_age : ""}
+												onChange={(e) => handleChange(e)}
+                        required
+                      />
+											
+											
+											</div>
+                    </div>
 										<div>
                       <label
                         htmlFor="name"
@@ -279,8 +334,8 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 												placeholder="Thumbnail"
 												name="thumbnail"
 												
-												onChange={(e) => handleChange(e)}
-												required
+												onChange={(e) => setFile(e.target.files[0])}
+												
 											/>
                     </div>
 									</div>
