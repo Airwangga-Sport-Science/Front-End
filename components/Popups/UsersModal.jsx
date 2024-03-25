@@ -341,7 +341,7 @@ function handleCloseModal() {
 												value={tempPlayer?.username}
 												onChange={e => setTempPlayer({ ...tempPlayer, username: e.target.value })}
 												required
-												readOnly
+												readOnly={user_id ? true : false}
 											/>
 
 										</div>
