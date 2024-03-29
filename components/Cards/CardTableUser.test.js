@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom'; // Importing @testing-library/jest-dom for extended DOM assertions
+import '@testing-library/jest-dom'; 
 import CardTableUser from './CardTableUser';
 
 describe('CardTableUser Component', () => {

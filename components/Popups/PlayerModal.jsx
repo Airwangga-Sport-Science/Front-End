@@ -161,9 +161,9 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                       >
                         <path
                           stroke="currentColor"
-                          stroke-linecap="round"
+                          strokeLinecap="round"
                           stroke-linejoin="round"
-                          stroke-width="2"
+                          strokeWidth="2"
                           d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                         />
                       </svg>
@@ -255,24 +255,31 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
                         Birthdate
                       </label>
                       <input
-                        type="date"
-                        id="birthdate"
-                        className={"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"}
-                        placeholder="Birthdate"
-                        value={
-                          tempPlayer
-                            ? new Date(tempPlayer?.birth_date)
-                                .toISOString()
-                                .split("T")[0]
-                            : ""
-                        }
-                        onChange={(e) =>
-                          setTempPlayer({
-                            ...tempPlayer,
-                            birth_date: e.target.value,
-                          })
-                        }
-                      />
+  type="date"
+  id="birthdate"
+  className={"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"}
+  placeholder="Birthdate"
+  value={
+    tempPlayer && tempPlayer.birth_date
+      ? new Date(tempPlayer.birth_date).toISOString().split("T")[0]
+      : ""
+  }
+  onChange={(e) => {
+    const value = e.target.value;
+    if (value === "") {
+      setTempPlayer({
+        ...tempPlayer,
+        birth_date: null, 
+      });
+    } else {
+      setTempPlayer({
+        ...tempPlayer,
+        birth_date: value,
+      });
+    }
+  }}
+/>
+
                     </div>
                     <div className={(tabOpen == "2" ? "block" : "hidden")}>
                       <label

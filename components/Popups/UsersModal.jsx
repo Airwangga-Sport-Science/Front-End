@@ -121,9 +121,9 @@ export default function UsersModal({ isOpen, closeModal, users,user_id,setUsers,
       let thumbnail = filePath;
       console.log(thumbnail);
     }
-    console.log(thumbnail? thumbnail : tempPlayer.thumbnail);
+    
 
-    const updatedUserData = {
+    const updatedUserData = await {
         username: tempPlayer.username,
         password: tempPlayer.password,
         name: tempPlayer.name,
@@ -138,13 +138,12 @@ export default function UsersModal({ isOpen, closeModal, users,user_id,setUsers,
 		let response = {};
 		console.log(user_id);
 		if (user_id) {
-			updatedUserData.password = tempPlayer.password != player.password? tempPlayer.password : '',
+				updatedUserData.password = tempPlayer.password != player.password? tempPlayer.password : '',
 			 response = await api.updateUserWithRole(updatedUserData);
 		}
     else{
-			console.log(updatedUserData)
-			 
-			 response = await api.register(updatedUserData);
+			updatedUserData.thumbnail = thumbnail
+			response = await api.register(updatedUserData);
 		}
 
     if (response) {
@@ -229,9 +228,9 @@ function handleCloseModal() {
 											>
 												<path
 													stroke="currentColor"
-													stroke-linecap="round"
+													strokeLinecap="round"
 													stroke-linejoin="round"
-													stroke-width="2"
+													strokeWidth="2"
 													d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
 												/>
 											</svg>
@@ -306,14 +305,21 @@ function handleCloseModal() {
 												Birthdate
 											</label>
 											<input
-												type="date"
-												id="birthdate"
-												className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-												placeholder="Birthdate"
-												value={ tempPlayer ? (tempPlayer.birth_date ? new Date(tempPlayer?.birth_date).toISOString().split('T')[0] : '') : '' }
-												
-												onChange={e => setTempPlayer({ ...tempPlayer, birth_date: e.target.value })}
-											/>
+  type="date"
+  id="birthdate"
+  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+  placeholder="Birthdate"
+  value={tempPlayer && tempPlayer.birth_date ? new Date(tempPlayer.birth_date).toISOString().split('T')[0] : ''}
+  onChange={e => {
+    const value = e.target.value;
+    if (value === '') {
+      setTempPlayer({ ...tempPlayer, birth_date: null }); // Set birth_date to null when input is cleared
+    } else {
+      setTempPlayer({ ...tempPlayer, birth_date: value });
+    }
+  }}
+/>
+
 
 										</div>
 										<div className={(tabOpen == "1" ? "block" : "hidden")}>
@@ -341,7 +347,7 @@ function handleCloseModal() {
 												value={tempPlayer?.username}
 												onChange={e => setTempPlayer({ ...tempPlayer, username: e.target.value })}
 												required
-												readOnly
+												readOnly={user_id ? true : false}
 											/>
 
 										</div>
@@ -410,7 +416,7 @@ function handleCloseModal() {
 											className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
 											
 										>
-											Save Changes
+											{ user_id ? "Update" : "Create"}
 										</button>
 										<button
 											type="button"
@@ -418,6 +424,15 @@ function handleCloseModal() {
 											onClick={handleCloseModal}
 										>
 											Decline
+										</button>
+										<button
+											type="button"
+											className="ms-auto  text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 bg-gray-700 text-gray-300 border-gray-500   focus:ring-gray-600"
+											onClick={(e) => {
+												tabOpen == "1" ? setTabOpen("2") : setTabOpen("1");
+											}}
+										>
+											{tabOpen == "1" ? "Next" : "Previous"}
 										</button>
 									</div>
 								</form>

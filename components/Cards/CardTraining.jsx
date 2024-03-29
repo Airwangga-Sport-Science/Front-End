@@ -35,6 +35,7 @@ export default function CardTraining({ activeAttribute, openTableTrainingModal }
     <Link
       href={"/training/" + article?.article_id}
       className="flex-col text-center justify-center align-middle relative"
+      key={article?.article_id}
     >
       <Image
         src={
