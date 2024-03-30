@@ -75,6 +75,9 @@ export default function Login() {
     if (response) {
       onRegisterSuccess(response.token);
     }
+    else{
+      setIsSend(false);
+    }
   }
 
   const [showPassword, setShowPassword] = React.useState(false);

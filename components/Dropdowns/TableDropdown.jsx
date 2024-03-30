@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const TableDropdown = ({handleOpenModal, id,handleDelete}) => {
+const TableDropdown = ({handleOpenModal, id,handleDelete,handleOpenModalDelete}) => {
   // dropdown props
   const [isOpen, setIsOpen] = useState(false);
 
@@ -62,7 +62,7 @@ const TableDropdown = ({handleOpenModal, id,handleDelete}) => {
                 
                 className="block px-4 py-2 hover:bg-gray-100 "
                 onClick={() => {
-                  handleDelete(id)
+                  handleOpenModalDelete(id)
                 }}
               >
                 Delete

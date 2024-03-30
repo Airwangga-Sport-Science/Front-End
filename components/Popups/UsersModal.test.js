@@ -30,7 +30,7 @@ describe('UsersModal Component', () => {
   });
 
   it('renders UsersModal component with form fields', async () => {
-    expect(screen.getByText('Update Player Information')).toBeInTheDocument();
+    expect(screen.getByText('Add User')).toBeInTheDocument();
     expect(screen.getByLabelText('Name')).toBeInTheDocument();
     expect(screen.getByLabelText('Email')).toBeInTheDocument();
     expect(screen.getByLabelText('Phone')).toBeInTheDocument();

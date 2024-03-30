@@ -5,7 +5,8 @@ import Navbar from './IndexNavbar';
 
 describe('Navbar Component', () => {
   const mockUser = {
-    role: 1 // Example user role
+    role: 1,
+    attributes: [{'weight': 50}],
   };
   const mockHandleLogOut = jest.fn(); // Mocking the handleLogOut function
 

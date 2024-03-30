@@ -218,7 +218,7 @@ function handleCloseModal() {
 								<form className="relative bg-white rounded-lg shadow" enctype="multipart/form-data" onSubmit={(e) => handleSubmit(e)}>
 									<div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
 										<h3 className="text-xl font-semibold text-gray-900">
-											Update Player Information
+											{user_id ? "Edit User" : "Add User"}
 										</h3>
 										<button
 											type="button"
@@ -332,12 +332,17 @@ function handleCloseModal() {
 											<label htmlFor="birthdate" className="block mb-2 text-sm font-medium text-gray-900">
 												Role
 											</label>
-											<select name="role" id="role" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-											value={tempPlayer?.role} onChange={e => setTempPlayer({ ...tempPlayer, role: e.target.value })}>
+											{ user_id ? (
+												<input name="role" id="role" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 read-only:bg-gray-200 " value={tempPlayer?.role == 1 ? "User" : "Admin"} readOnly  />
+											) : (
+												<select name="role" id="role" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+											value={tempPlayer?.role} onChange={e => setTempPlayer({ ...tempPlayer, role: e.target.value })} >
 												<option value="">Select Role</option>
 												<option value="2">Admin</option>
 												<option value="1">User</option>
 											</select>
+											)}
+											
 
 										</div>
 										
