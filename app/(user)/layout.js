@@ -19,6 +19,7 @@ export default function RootLayout({ children }) {
     if (accessToken) {
       const data  = await api.getUserLoggedIn();
       setAuthedUser(data);
+      console.log(data);
       setInitialized(true);
     }
   }

@@ -8,7 +8,7 @@ import api from "@/utils/api";
 
 
 
-export default function CardTableUser({ users, openModalTraining,handleOpenModal,handleDataChange,setUserId }) {
+export default function CardTableUser({ users, openModalTraining,handleOpenModal,handleDataChange,setUserId,handleOpenModalDelete }) {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10); // Change this number to adjust items per page
@@ -108,7 +108,7 @@ export default function CardTableUser({ users, openModalTraining,handleOpenModal
             </thead>
             <tbody>
               {currentUsers.map((user) => (
-                <CardRowUser key={user.id} {...user} handleOpenModal={handleOpenModal} handleDeleteUser={handleDeleteUser} />
+                <CardRowUser key={user.id} {...user} handleOpenModal={handleOpenModal} handleDeleteUser={handleDeleteUser} handleOpenModalDelete={handleOpenModalDelete} />
               ))}
             </tbody>
           </table>

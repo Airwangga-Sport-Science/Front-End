@@ -5,7 +5,7 @@ import api from "@/utils/api";
 // components
 
 
-export default function CardTable({ articles, openModalTraining,handleOpenModal, handleDataChange }) {
+export default function CardTable({ articles, openModalTraining,handleOpenModal, handleDataChange, handleOpenModalDelete }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5); 
 
@@ -84,7 +84,7 @@ export default function CardTable({ articles, openModalTraining,handleOpenModal,
             </thead>
             <tbody>
             {currentArticles.map((article) => (
-                <CardRow key={article.id} {...article} handleOpenModal={handleOpenModal} handleDelete={handleDelete} />
+                <CardRow key={article.id} {...article} handleOpenModal={handleOpenModal} handleDelete={handleDelete} handleOpenModalDelete={handleOpenModalDelete} />
               ))}
 
             </tbody>

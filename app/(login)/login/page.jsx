@@ -53,8 +53,15 @@ export default function Login() {
   },[]);
 
   if (authedUser) {
+    console.log(authedUser)
     if (authedUser.role == 1) {
-      redirect('/player')
+      if(authedUser.attributes.length == 0){
+        redirect('/form')
+      }
+      else{
+        redirect('/player')
+      }
+      
     }
     else if (authedUser.role == 2) {
       redirect('/dashboard')
@@ -124,6 +131,7 @@ export default function Login() {
                     </button>
                   </div>
                   <hr className="my-3 border-b-1 border-blueGray-300" />
+                  <p className="text-center text-sm text-gray-700 my-2">Don't have an account?</p>
                   <Link
                     href={"/register"}
                       className="bg-slate-50 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150 text-center"

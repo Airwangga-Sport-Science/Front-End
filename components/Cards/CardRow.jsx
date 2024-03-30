@@ -1,7 +1,7 @@
 import React from 'react'
 import TableDropdown from '../Dropdowns/TableDropdown'
 
-export default function CardRow({title, body,positions, thumbnail, id, handleOpenModal,handleDelete}) {
+export default function CardRow({title, body,positions, thumbnail, id, handleOpenModal,handleDelete, handleOpenModalDelete}) {
 
 
   return (
@@ -28,7 +28,7 @@ export default function CardRow({title, body,positions, thumbnail, id, handleOpe
                 </td>
                 
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                <TableDropdown handleOpenModal={handleOpenModal} id={id} handleDelete={handleDelete} />
+                <TableDropdown handleOpenModal={handleOpenModal} id={id} handleDelete={handleDelete} handleOpenModalDelete={handleOpenModalDelete} />
                 </td>
 
               </tr>

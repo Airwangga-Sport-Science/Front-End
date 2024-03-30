@@ -12,6 +12,7 @@ import { accordion } from '@nextui-org/theme';
 import TableTrainingModal from '@/components/Popups/TableTrainingModal';
 import CardStatsSelector from '@/components/Cards/CardStatsSelector';
 import CardPositions from '@/components/Cards/CardPositions';
+import { redirect, useRouter } from 'next/navigation';
 
 export default function Index() {
 
@@ -27,6 +28,8 @@ export default function Index() {
   const [isPlayerModalOpen, setIsPlayerModalOpen] = useState(false);
   const [isTableTrainingModalOpen, setIsTableTrainingModalOpen] = useState(false);
 
+  const router = useRouter();
+
   async function fetchPlayer(){
 
     try {
@@ -34,8 +37,10 @@ export default function Index() {
       const {player} = fetchedPlayer
       const {attribute} = fetchedPlayer
 
+      
+
       setPlayer(player);
-      setAttribute(attribute);
+      setAttribute(attribute); 
       setActiveAttribute(attribute[attribute.length-1]);
       setIsLoading(false);
       console.log(attribute[attribute.length-1],attribute.length-1);
@@ -51,6 +56,8 @@ export default function Index() {
     e.preventDefault();
     
   }
+
+  
   useEffect(() => {
     fetchPlayer();
   }, []);

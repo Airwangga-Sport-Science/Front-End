@@ -2,11 +2,14 @@
 import React, { useEffect, useState } from 'react'
 import CardTable from '@/components/Cards/CardTable'
 import TrainingModal from '@/components/Popups/TrainingModal'
+import DeleteArticleModal from '@/components/Popups/DeleteArticleModal'
 import api from '../../../utils/api';
 
 export default function Page() {
 
   const [isRecommendationModalOpen, setIsRecommendationModalOpen] = useState(false);
+  const [isCloseModalOpen, setIsCloseModalOpen] = useState(false);
+
   const [articles, setArticles] = useState([]);
   const [tempArticles, setTempArticles] = useState([]);
   const [articleId, setArticleId] = useState(null);
@@ -30,7 +33,10 @@ export default function Page() {
     setArticles(response);
   }
   
-
+  function handleOpenModalDelete(id=null) {
+    setArticleId(id);
+    setIsCloseModalOpen(true);
+  }
   useEffect(() => {
     getArticles();
   }, [isRecommendationModalOpen]);
@@ -38,8 +44,9 @@ export default function Page() {
   return (
     <div className='flex flex-col '>
       <TrainingModal isOpen={isRecommendationModalOpen} closeModal={() => setIsRecommendationModalOpen(false)} handleDataChange={handleDataChange} id={articleId} setArticleId={setArticleId}/>
+      <DeleteArticleModal isOpen={isCloseModalOpen} closeModal={() => setIsCloseModalOpen(false)} handleDataChange={handleDataChange}  id={articleId} />
       <div className="h-2/3 px-4 py-8 2xl:w-[1440px] mx-auto">
-        <CardTable articles={articles} openModalTraining={() => setIsRecommendationModalOpen(true)} handleOpenModal={handleOpenModal} handleDataChange={handleDataChange} />
+        <CardTable articles={articles} openModalTraining={() => setIsRecommendationModalOpen(true)} handleOpenModal={handleOpenModal} handleDataChange={handleDataChange} handleOpenModalDelete={handleOpenModalDelete} />
       </div>
     </div>
 
