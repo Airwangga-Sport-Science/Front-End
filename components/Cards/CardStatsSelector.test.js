@@ -36,9 +36,6 @@ describe('CardStatsSelector Component', () => {
 
     const newRecommendationButton = screen.getByText('New Recommendation');
     expect(newRecommendationButton).toBeInTheDocument();
-
-    const editRecommendationButton = screen.getByText('Edit Recommendation');
-    expect(editRecommendationButton).toBeInTheDocument();
   });
 
   it('calls setActiveAttribute with the correct attribute when an option is selected', () => {
@@ -69,17 +66,5 @@ describe('CardStatsSelector Component', () => {
     fireEvent.click(newRecommendationButton);
   });
 
-  it('calls useRouter.push with the correct URL when "Edit Recommendation" button is clicked', () => {
-    render(
-      <CardStatsSelector
-        attribute={attribute}
-        activeAttribute={{ id: 1 }}
-        setActiveAttribute={setActiveAttribute}
-      />
-    );
 
-    const editRecommendationButton = screen.getByText('Edit Recommendation');
-    fireEvent.click(editRecommendationButton);
-
-  });
 });

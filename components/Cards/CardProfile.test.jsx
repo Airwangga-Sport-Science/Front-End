@@ -11,8 +11,8 @@ describe('CardProfile Component', () => {
   };
 
   const activeAttribute = {
-    height: '180 cm',
-    weight: '75 kg'
+    height: '180',
+    weight: '75'
   };
 
   const positions = {
@@ -32,9 +32,9 @@ describe('CardProfile Component', () => {
     );
 
     expect(screen.getByText(player.name)).toBeInTheDocument();
-    expect(screen.getByText(activeAttribute.height)).toBeInTheDocument();
-    expect(screen.getByText(activeAttribute.weight)).toBeInTheDocument();
-    expect(screen.getByText('34')).toBeInTheDocument(); // Assuming current year is 2021
+    expect(screen.getByText(activeAttribute.height + ' cm')).toBeInTheDocument();
+    expect(screen.getByText(activeAttribute.weight + ' kg')).toBeInTheDocument();
+    expect(screen.getByText('34')).toBeInTheDocument(); 
   });
 
   it('calculates age correctly', () => {
@@ -47,7 +47,7 @@ describe('CardProfile Component', () => {
       />
     );
 
-    expect(screen.getByText('34')).toBeInTheDocument(); // Assuming current year is 2024
+    expect(screen.getByText('34')).toBeInTheDocument(); 
   });
 
   
