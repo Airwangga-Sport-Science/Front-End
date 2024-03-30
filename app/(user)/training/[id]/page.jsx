@@ -67,7 +67,7 @@ export default function TrainingDetail() {
 						)}
 					</div>
 					<h4 className=" text-slate-500">
-						Artikel ini ditujukan untuk pemain usia {article?.min_age} -{" "}
+						Latihan ini direkomendasikan untuk pemain usia {article?.min_age} -{" "}
 						{article?.max_age}
 					</h4>
 					<p className=" text-slate-500 mb-4">{article?.position_names}</p>

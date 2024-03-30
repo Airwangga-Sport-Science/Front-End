@@ -15,7 +15,7 @@ export default function Home() {
           Scoutition AI
           </h3>
           <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-          AI-based software to assist football players, especially young football players in Indonesia, in improving their performance quality, developed by <em>Airwangga Sport Techno Science Group</em> in collaboration with <em>Coach Ricky Nelson</em> and <em>Coach Timo Scheunemann</em>.</p>
+          AI-based software to assist football players, especially young football players in Indonesia, in improving their performance quality, developed by <em>Airwangga Technosport Science Group</em> in collaboration with <em>Coach Ricky Nelson</em> and <em>Coach Timo Scheunemann</em>.</p>
           <p className="text-lg font-light leading-relaxed mt-0 mb-12 text-blueGray-600">
           What are you waiting for? Start exploring and utilizing the features on Scoutition now!</p>
           <a href="/login" className="font-bold text-white bg-blue-500 active:bg-blue-600 uppercase px-6 py-3 rounded shadow hover:shadow-md outline-none focus:outline-none mt-6 mr-1 mb-1 ease-linear transition-all duration-150" >
@@ -53,11 +53,10 @@ export default function Home() {
         <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-blueGray-200">
         <FaBasketball className='text-3xl' />
         </div>
-        <h3 className="text-3xl font-semibold my-auto ml-4">About Us</h3>
+        <h3 className="text-3xl font-semibold my-auto ml-4">Our Features</h3>
         </div>
         <p className="mt-4 text-lg leading-relaxed text-blueGray-500">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, doloribus error sequi iure fugit, qui laboriosam obcaecati vero numquam inventore autem dolorum. Dolore ea voluptatum modi, soluta nulla illum culpa.
-        </p>
+        Scoutition AI offers three features to help football talents develop their best potential. The following are the features of Scoutition AI:        </p>
         <ul className="list-none mt-6">
           <li className="py-2">
             <div className="flex items-center">
@@ -215,7 +214,7 @@ export default function Home() {
           <div className="flex flex-wrap items-center md:justify-between justify-center pb-6">
             <div className="w-full md:w-4/12 px-4 mx-auto text-center">
               <div className="text-sm text-blueGray-500 font-semibold py-1">
-                Copyright © {new Date().getFullYear()} Airwangga Sport Techno Science Group{""}
+                Copyright © {new Date().getFullYear()} Airwangga Technosport Science Group{""}
                 <a
                   href="https://www.creative-tim.com?ref=nnjs-footer"
                   className="text-blueGray-500 hover:text-blueGray-800"
