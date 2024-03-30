@@ -167,7 +167,13 @@ export default function UsersModal({ isOpen, closeModal, users,user_id,setUsers,
 		
 }
 function handleCloseModal() {
-	setTempPlayer({});
+	setTempPlayer({
+		email: "",
+		phone: "",
+		password: "",
+		confirm_password: "",
+
+	})
 	users = [];
 	setUserId(null);
 	setFile(null);
