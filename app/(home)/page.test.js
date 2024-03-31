@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 describe('Home Component', () => {
   test('renders heading text', () => {
     render(<Home />);
-    const headingElement = screen.getByText(/Scoutition AI/i);
+    const headingElement = screen.getByText("Scoutition AI");
     expect(headingElement).toBeInTheDocument();
   });
 
@@ -22,7 +22,7 @@ describe('Home Component', () => {
 
   test('renders social media buttons', () => {
     render(<Home />);
-    const footer = screen.getByText(/Copyright © 2024 Airwangga Sport Techno Science Group/i);
+    const footer = screen.getByText(/Copyright © 2024 Airwangga Technosport Science Group/i);
     expect(footer).toBeInTheDocument();
   });
 });
