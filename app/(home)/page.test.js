@@ -16,7 +16,7 @@ describe('Home Component', () => {
 
   test('renders team members section', () => {
     render(<Home />);
-    const teamSectionElement = screen.getByText(/Here are our team/i);
+    const teamSectionElement = screen.getByText(/Meet our team/i);
     expect(teamSectionElement).toBeInTheDocument();
   });
 
