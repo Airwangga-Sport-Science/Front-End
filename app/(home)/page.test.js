@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 describe('Home Component', () => {
   test('renders heading text', () => {
     render(<Home />);
-    const headingElement = screen.getByText(/Scoutition AI/i);
+    const headingElement = screen.getByText("Scoutition AI");
     expect(headingElement).toBeInTheDocument();
   });
 
