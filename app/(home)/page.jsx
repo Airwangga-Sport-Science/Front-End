@@ -110,10 +110,7 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <div className="flex flex-wrap justify-center text-center mb-24">
               <div className="w-full lg:w-6/12 px-4">
-                <h2 className="text-4xl font-semibold">Here are our team</h2>
-                <p className="text-lg leading-relaxed m-4 text-blueGray-500">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, doloribus error sequi iure fugit, qui laboriosam obcaecati vero numquam inventore autem dolorum. Dolore ea voluptatum modi, soluta nulla illum culpa.
-                </p>
+                <h2 className="text-4xl font-semibold">Meet our team</h2>
               </div>
             </div>
             <div className="flex flex-wrap justify-between">
@@ -121,11 +118,11 @@ export default function Home() {
                 <div className="px-6">
                   <img
                     alt="..."
-                    src="/img/team-1-800x800.jpg"
+                    src="https://media.licdn.com/dms/image/D4E03AQF2xE4nV6Xrtg/profile-displayphoto-shrink_400_400/0/1698359128644?e=1717632000&v=beta&t=_4eJqXF1VmrA4dC4f0o-l6cjuJ6xvFyQHdkEm7HAt7c"
                     className="shadow-lg rounded-full mx-auto max-w-120-px"
                   />
                   <div className="pt-6 text-center">
-                    <h5 className="text-xl font-bold">Rakyan Krisna</h5>
+                    <h5 className="text-xl font-bold">Rakyan Krisna Dewangga</h5>
                     <p className="mt-1 text-sm text-blueGray-400 uppercase font-semibold">
                       Tech Lead (Scrum Master)
                     </p>
@@ -139,7 +136,7 @@ export default function Home() {
                 <div className="px-6">
                   <img
                     alt="..."
-                    src="/img/team-1-800x800.jpg"
+                    src="https://media.licdn.com/dms/image/D5635AQGvkshuBKpQ2Q/profile-framedphoto-shrink_400_400/0/1694689467455?e=1712466000&v=beta&t=kXdUJbfzCZ9MSXfFYcR1_ygJlLuR0jL7vsk85HSPHk8"
                     className="shadow-lg rounded-full mx-auto max-w-120-px"
                   />
                   <div className="pt-6 text-center">
@@ -157,11 +154,11 @@ export default function Home() {
                 <div className="px-6">
                   <img
                     alt="..."
-                    src="/img/team-1-800x800.jpg"
+                    src="https://media.licdn.com/dms/image/D5603AQHuaRP7irCDxQ/profile-displayphoto-shrink_400_400/0/1696925987246?e=1717632000&v=beta&t=KeARqfUm6e4-yBb--bTQ4PUcrw0yLKadrgmnNUwkjQY"
                     className="shadow-lg rounded-full mx-auto max-w-120-px"
                   />
                   <div className="pt-6 text-center">
-                    <h5 className="text-xl font-bold">Aga</h5>
+                    <h5 className="text-xl font-bold">Gentur Rizky Arganta</h5>
                     <p className="mt-1 text-sm text-blueGray-400 uppercase font-semibold">
                       Machine Learning Engineer
                     </p>
@@ -180,7 +177,7 @@ export default function Home() {
             <div className="w-full lg:w-6/12 px-4">
               <h4 className="text-3xl font-semibold">Let&apos;s keep in touch!</h4>
               <h5 className="text-lg mt-0 mb-2 text-blueGray-600">
-                Find us on any of these platforms, we respond 1-2 business days.
+                Find us on any of these platforms!
               </h5>
               <div className="mt-6 lg:mb-0 mb-6">
                 <button
