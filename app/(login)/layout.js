@@ -18,6 +18,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+      <link rel='icon' href='img/scoutition-logo-notext.jpeg' />
       <title>Scoutition AI</title>
       <link
         href="https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap"
