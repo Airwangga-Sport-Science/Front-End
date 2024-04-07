@@ -1,5 +1,6 @@
 import React from 'react'
 import TableDropdown from '../Dropdowns/TableDropdown'
+import api from '@/utils/api'
 
 export default function CardRow({title, body,positions, thumbnail, id, handleOpenModal,handleDelete, handleOpenModalDelete}) {
 
@@ -8,7 +9,7 @@ export default function CardRow({title, body,positions, thumbnail, id, handleOpe
     <tr>
                 <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
                   <img
-                    src={thumbnail?thumbnail:"img/bootstrap.jpg"}
+                    src={thumbnail?api.imageUrl(thumbnail):"img/bootstrap.jpg"}
                     className="h-12 w-12 bg-white rounded-full border"
                     alt="..."
                   ></img>{" "}

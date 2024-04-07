@@ -1,3 +1,4 @@
+import api from "@/utils/api";
 import React from "react";
 
 const CardProfile = ({
@@ -29,7 +30,7 @@ const CardProfile = ({
     <div className="flex md:flex-row flex-col gap-6 md:w-6/12">
       {/* User Image */}
       <img
-        src={player.thumbnail ? player.thumbnail : "/img/img-1-1000x600.jpg"}
+        src={player.thumbnail ? api.imageUrl(player.thumbnail) : "/img/img-1-1000x600.jpg"}
         alt=""
         className="md:w-64 md:h-80 rounded-xl shadow-xl"
       />

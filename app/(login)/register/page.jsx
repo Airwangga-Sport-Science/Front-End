@@ -59,16 +59,13 @@ export default function Login() {
     setIsSend(true);
 		const formData = new FormData(e.target);
 		const data = Object.fromEntries(formData);
-		const response1 = await fetch('/api/upload', {
-			method: 'POST',
-			body: formData,
-		});
+		const response1 = await api.uploads(formData);
 
 		if (!response1.ok) {
 			throw new Error('Network response was not ok');
 		}
 
-		const { filePath } = await response1.json();
+		const { filePath } = response1;
     let thumbnail = filePath;
     console.log(thumbnail);
     const response = await api.register({username, name, password, email, phone, birthdate, thumbnail});

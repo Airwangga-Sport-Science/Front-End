@@ -42,13 +42,13 @@ export default function TrainingDetail() {
 	return (
 		<div className="flex flex-col 2xl:w-[1440px] mt-20 mx-6 2xl:mx-auto">
 			<div className="flex md:flex-row flex-col">
-				<Image
-					src={article?.thumbnail ? article?.thumbnail : "/img/img-1-1000x600.jpg"}
+				<img
+					src={article?.thumbnail ? api.imageUrl(article?.thumbnail) : "/img/img-1-1000x600.jpg"}
 					alt=""
 					width={200}
 					height={200}
 					className=" md:w-1/2 w-full h-auto rounded-lg"
-				></Image>
+				></img>
 				<div className="flex flex-col bg-white shadow-xl rounded-xl px-6 py-6 w-full">
 					<div className="flex justify-between">
 						<h3 className="text-2xl font-semibold my-auto">{article?.title}</h3>

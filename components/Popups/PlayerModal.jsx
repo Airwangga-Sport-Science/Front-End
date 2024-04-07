@@ -69,42 +69,41 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
 	}
 
 	async function handleSubmit(e) {
-		e.preventDefault();
-		let thumbnail = null;
-		if (file) {
-			const formData = new FormData(e.target);
-			const data = Object.fromEntries(formData);
-			const response1 = await fetch("/api/upload", {
-				method: "POST",
-				body: formData,
-			});
+    e.preventDefault();
+    let thumbnail = null;
+    if (file) {
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData);
+        const response1 = await api.uploads(formData);
 
-			if (!response1.ok) {
-				throw new Error("Network response was not ok");
-			}
+        if (!response1.ok) {
+            throw new Error("Network response was not ok");
+        }
 
-			const { filePath } = await response1.json();
-			let thumbnail = filePath;
-			console.log(thumbnail);
-		}
-		console.log(thumbnail ? thumbnail : tempPlayer.thumbnail);
+        const { filePath } = response1;
+        thumbnail = filePath; // Update nilai thumbnail yang sama di dalam kondisional
+        console.log(thumbnail);
+    } else {
+        thumbnail = tempPlayer.thumbnail;
+    }
+    console.log(thumbnail, thumbnail ? thumbnail : tempPlayer.thumbnail);
+    const response = await api.updateUser({
+        username: tempPlayer.username,
+        password: tempPlayer.password != player.password ? tempPlayer.password : "",
+        name: tempPlayer.name,
+        email: tempPlayer.email,
+        birth_date: tempPlayer.birth_date,
+        phone: tempPlayer.phone,
+        thumbnail: thumbnail ? thumbnail : tempPlayer.thumbnail,
+        id: tempPlayer.id,
+    });
+    if (response) {
+        console.log(response.data);
+        setPlayer(response.data);
+        closeModal();
+    }
+}
 
-		const response = await api.updateUser({
-			username: tempPlayer.username,
-			password: tempPlayer.password != player.password ? tempPlayer.password : "",
-			name: tempPlayer.name,
-			email: tempPlayer.email,
-			birth_date: tempPlayer.birth_date,
-			phone: tempPlayer.phone,
-			thumbnail: thumbnail ? thumbnail : tempPlayer.thumbnail,
-			id: tempPlayer.id,
-		});
-		if (response) {
-			console.log(response.data);
-			setPlayer(response.data);
-			closeModal();
-		}
-	}
 	const [tabOpen, setTabOpen] = useState(1);
 
 	function handleChangeTab(tab) {

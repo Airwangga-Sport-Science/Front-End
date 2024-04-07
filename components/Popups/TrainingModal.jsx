@@ -52,16 +52,13 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 		if(file) {
 			
 			
-			const response = await fetch('/api/upload', {
-				method: 'POST',
-				body: formData,
-			});
+			const response =  await api.uploads(formData);
 	
 			if (!response.ok) {
 				throw new Error('Network response was not ok');
 			}
 	
-			const { filePath } = await response.json();
+			const { filePath } = response;
 
 			thumbnail = filePath;
 		}
@@ -79,16 +76,13 @@ export default function TrainingModal({ isOpen, closeModal,handleDataChange, id 
 		const formData = new FormData(e.target);
 		const data = Object.fromEntries(formData);
 		if(file) {
-			const response = await fetch('/api/upload', {
-				method: 'POST',
-				body: formData,
-			});
+			const response =  await api.uploads(formData);
 	
 			if (!response.ok) {
 				throw new Error('Network response was not ok');
 			}
 	
-			const { filePath } = await response.json();
+			const { filePath } = response;
 
 			thumbnail = filePath;
 		}

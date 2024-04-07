@@ -108,16 +108,16 @@ export default function TableTrainingModal({ isOpen, closeModal,activeAttribute 
 												{articles.map((article) => (
 													<tr key={article.id} className="bg-white border-b ">
 														<td className="p-3 text-gray-700 whitespace-nowrap gap-2 w-1/5">
-														<Image
+														<img
 															alt="image"
 															src={
 																article?.article_thumbnail == null
 																	? "/img/img-1-1000x600.jpg"
-																	: article?.article_thumbnail
+																	: api.imageUrl(article?.article_thumbnail)
 															}
 															className="rounded w-full h-full"
 															width={100} height={500} >
-														</Image>
+														</img>
 														</td>
 														<td className="p-3 text-sm text-gray-700 whitespace-nowrap w-1/2">
 														<div className="flex flex-col text-warp " style={{textWrap: 'wrap'}}>
