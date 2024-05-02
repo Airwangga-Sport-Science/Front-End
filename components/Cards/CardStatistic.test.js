@@ -32,8 +32,8 @@ describe('CardStatistic Component', () => {
 
     expect(screen.getByText('Player Statistic')).toBeInTheDocument();
     expect(screen.getByText('Similar Players')).toBeInTheDocument();
-    expect(screen.getByText('Player A')).toBeInTheDocument();
-    expect(screen.getByText('Player B')).toBeInTheDocument();
-    expect(screen.getByText('Player C')).toBeInTheDocument();
+    expect(screen.getByText(/Player A/i)).toBeInTheDocument();
+    expect(screen.getByText(/Player B/i)).toBeInTheDocument();
+    expect(screen.getByText(/Player C/i)).toBeInTheDocument();
   });
 });

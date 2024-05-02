@@ -14,14 +14,15 @@ jest.mock('@/utils/api', () => ({
       article_title: 'Training Article 2',
       article_thumbnail: '/img/img-2-1000x600.jpg'
     }
-  ]))
+  ])),
+  imageUrl: jest.fn(),
 }));
 
 describe('CardTraining Component', () => {
   test('renders training recommendations correctly', async () => {
     render(<CardTraining activeAttribute={{ id: 1 }} openTableTrainingModal={() => {}} />);
-    const training1Element = await screen.findByText('Training Article 1');
-    const training2Element = await screen.findByText('Training Article 2');
+    const training1Element = await screen.findByText(/Training Article 1/i);
+    const training2Element = await screen.findByText(/Training Article 2/i);
     expect(training1Element).toBeInTheDocument();
     expect(training2Element).toBeInTheDocument();
   });

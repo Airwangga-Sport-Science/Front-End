@@ -79,7 +79,7 @@ const CardProfile = ({
               </h4>
               {positions != undefined ? (
                                               <div className="flex flex-col">
-                                              <div className="flex gap-4">
+                                              <div className="flex justify-between gap-4">
                                               <h3 className=" text-center font-semibold">{positions?.name} </h3>
                                               <Slider 
                                                 color="foreground"
@@ -88,11 +88,11 @@ const CardProfile = ({
                                                 minValue={0}
                                                 maxValue={100}
                                                 isDisabled={true}
-                                                className="max-w-md"
+                                                className="w-3/4"
                                               />
                                               <p> {Math.round(positions.score_1)} %</p>
                                               </div>
-                                              <div className="flex gap-4">
+                                              <div className="flex justify-between gap-4">
                                               <h3 className=" text-center font-semibold">  {positions["pos2.name"]}</h3>
                                               <Slider 
                                                 color="foreground"
@@ -101,11 +101,11 @@ const CardProfile = ({
                                                 minValue={0}
                                                 maxValue={100}
                                                 isDisabled={true}
-                                                className="max-w-md"
+                                                className="w-3/4"
                                               />
                                               <p> {Math.round(positions.score_2)} %</p>
                                               </div>
-                                              <div className="flex gap-4">
+                                              <div className="flex justify-between gap-4">
                                               <h3 className=" text-center font-semibold">{positions["pos3.name"]}</h3>
                                               <Slider 
                                                 color="foreground"
@@ -114,7 +114,7 @@ const CardProfile = ({
                                                 minValue={0}
                                                 maxValue={100}
                                                 isDisabled={true}
-                                                className="max-w-md"
+                                                className="w-3/4"
                                               />
                                               <p>{Math.round(positions.score_3)} % </p>
                                               </div>
