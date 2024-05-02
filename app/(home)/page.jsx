@@ -136,7 +136,7 @@ export default function Home() {
                 <div className="px-6">
                   <img
                     alt="..."
-                    src="https://media.licdn.com/dms/image/D5635AQGvkshuBKpQ2Q/profile-framedphoto-shrink_400_400/0/1694689467455?e=1712466000&v=beta&t=kXdUJbfzCZ9MSXfFYcR1_ygJlLuR0jL7vsk85HSPHk8"
+                    src="https://avatars.githubusercontent.com/u/66898337?v=4"
                     className="shadow-lg rounded-full mx-auto max-w-120-px"
                   />
                   <div className="pt-6 text-center">
@@ -170,6 +170,51 @@ export default function Home() {
               </div>
 
             </div>
+            <div className="flex flex-wrap justify-center text-center mb-24 mt-20">
+              <div className="w-full lg:w-6/12 px-4">
+                <h2 className="text-4xl font-semibold">Collaberated With</h2>
+              </div>
+            </div>
+            <div className="flex flex-wrap justify-center">
+              
+              <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
+                <div className="px-6">
+                  <img
+                    alt="..."
+                    src="https://asset.indosport.com/article/image/q/80/336399/head_coach_sulut_united_ricky_nelson-169.jpg"
+                    className="shadow-lg rounded-full mx-auto w-72 h-72 object-cover"
+                  />
+                  <div className="pt-6 text-center">
+                    <h5 className="text-xl font-bold">Coach Ricky Nelson</h5>
+                    <p className="mt-1 text-sm text-blueGray-400 uppercase font-semibold">
+                      
+                    </p>
+                    <div className="mt-6">
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
+                <div className="px-6">
+                  <img
+                    alt="..."
+                    src="https://cdn1-production-images-kly.akamaized.net/cIkmK7vJSUqwSxiA-2Bq_ZEISxU=/500x281/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/4326761/original/061600600_1676552522-Timo_Scheunemann_1.jpg"
+                    className="shadow-lg rounded-full mx-auto w-72 h-72 object-cover"
+                  />
+                  <div className="pt-6 text-center">
+                    <h5 className="text-xl font-bold">Coach Timo Scheunemann</h5>
+                    <p className="mt-1 text-sm text-blueGray-400 uppercase font-semibold">
+                      
+                    </p>
+                    <div className="mt-6">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
         </section>
         <section className="pt-20 mx-auto px-4 bg-blue-500">
@@ -180,24 +225,6 @@ export default function Home() {
                 Find us on any of these platforms!
               </h5>
               <div className="mt-6 lg:mb-0 mb-6">
-                <button
-                  className="bg-white text-lightBlue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                  type="button"
-                >
-                  <FaTwitter className="text-lg mx-auto" />
-                </button>
-                <button
-                  className="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                  type="button"
-                >
-                  <FaFacebook className="text-lg mx-auto" />
-                </button>
-                <button
-                  className="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                  type="button"
-                >
-                  <FaDribbble className="text-lg mx-auto text-black" />
-                </button>
                 <button
                   className="bg-white text-blueGray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"

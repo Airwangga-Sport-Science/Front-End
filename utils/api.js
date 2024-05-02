@@ -413,6 +413,22 @@ const api = (() => {
     return responseJson;
   }
 
+  async function uploads (formData) {
+    const response = await fetch(`${BASE_URL}/uploads`, {
+			method: 'POST',
+			body: formData,
+		});
+    const responseJson = await response.json();
+    if (responseJson.status !== 201) {
+      throw new Error(responseJson.message);
+    }
+    return responseJson;
+  }
+
+  function imageUrl(image) {
+    return `${BASE_URL}${image}`;
+  }
+
   return {
     login,
     register,
@@ -436,7 +452,9 @@ const api = (() => {
     getUsers,
     updateUserWithRole,
     deleteArticle,
-    deleteUser
+    deleteUser,
+    uploads,
+    imageUrl
 
   };
 })();

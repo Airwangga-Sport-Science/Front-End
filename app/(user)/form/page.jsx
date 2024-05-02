@@ -90,7 +90,7 @@ export default function Form() {
     if (response.status === "success") {
       setOpenModal(true);
       setPositions(response.positions);
-      setAlikedPlayers(response.alike);
+      setAlikedPlayers(response.alike + ' (' + response.alike_positions + ')');
     } else {
       alert("Failed to update attribute");
     }

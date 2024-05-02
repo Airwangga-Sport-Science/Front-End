@@ -84,7 +84,7 @@ export default function RecommendationModal({ isOpen, setIsOpen, positions, alik
 
                   <div className="p-4 md:p-5 text-center">
                     <p className="text-lg leading-relaxed text-gray-500">
-                      Kamu sangat mirip, <span className="font-bold text-xl">{alike}</span>
+                      Pemain berikut adalah yang atribut kemampuannya mirip dengan Anda, <span className="font-bold text-xl"><br />{alike}</span>
                       <br /> <br />
                       Mungkin kamu dapat bermain pada posisi
                     </p>

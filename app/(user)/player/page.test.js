@@ -7,6 +7,7 @@ jest.mock('@/utils/api', () => ({
   getPlayer: jest.fn(),
   getArticleByAttribute : jest.fn(),
   getAttributeMaster: jest.fn(),
+  imageUrl: jest.fn(),
 }));
 jest.mock("next/navigation", () => ({
   useRouter() {

@@ -37,17 +37,17 @@ export default function CardTraining({ activeAttribute, openTableTrainingModal }
       className="flex-col text-center justify-center align-middle relative"
       key={article?.article_id}
     >
-      <Image
+      <img
         src={
           article?.article_thumbnail == null
             ? "/img/img-1-1000x600.jpg"
-            : article?.article_thumbnail
+            : api.imageUrl(article?.article_thumbnail)
         }
         width={200}
         height={600}
         className="h-48 w-80 rounded-xl filter brightness-75"
         alt=""
-      />
+      ></img>
       <h3 className="absolute text-left px-6 text-2xl font-semibold text-white bottom-4">
         {article?.article_title}
       </h3>

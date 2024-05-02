@@ -10,7 +10,7 @@ export default function FormLanding() {
           </p>
           <br></br>
           <i>
-            Please be informed that filling out the data in the following form is intended to illustrate the comparison of abilities' composition and does not represent values aligned with global standards. Kindly input values according to your own composition comparison and within the range you possess. For example, if you have a significantly better sprint ability compared to heading, you may input a value of 90 for sprint and 50 for heading. Thank you for your attention
+            Please be informed that filling out the data in the following form is intended to illustrate the comparison of abilities&apos; composition and does not represent values aligned with global standards. Kindly input values according to your own composition comparison and within the range you possess. For example, if you have a significantly better sprint ability compared to heading, you may input a value of 90 for sprint and 50 for heading. Thank you for your attention
           </i>
         </div>
     </div>

@@ -11,6 +11,7 @@ jest.mock('@/utils/api', () => ({
   getArticle: jest.fn(),
   completeArticle: jest.fn(),
   getCompleteArticle: jest.fn(),
+  imageUrl: jest.fn(),
 }));
 
 describe('TrainingDetail Component', () => {
@@ -24,9 +25,9 @@ describe('TrainingDetail Component', () => {
   it('renders the TrainingDetail component and loads article data', async () => {
 
     const mockedArticle = {
-      title: 'Sample Article',
+      title: 'Sample Article 2',
       thumbnail: '/sample-thumbnail.jpg',
-      position_names: 'Sample Position',
+      position_names: 'Sample Position 2',
       body: 'Sample Body',
       steps: 'Step 1, Step 2, Step 3',
     };
@@ -43,8 +44,8 @@ describe('TrainingDetail Component', () => {
     });
 
 
-    expect(screen.getByText('Sample Article')).toBeInTheDocument();
-    expect(screen.getByText('Sample Position')).toBeInTheDocument();
+    expect(screen.getByText('Sample Article 2')).toBeInTheDocument();
+    expect(screen.getByText('Sample Position 2')).toBeInTheDocument();
 
   });
 
