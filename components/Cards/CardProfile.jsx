@@ -1,6 +1,6 @@
 import api from "@/utils/api";
 import React from "react";
-
+import { Slider } from "@nextui-org/slider";
 const CardProfile = ({
   activeAttribute,
   player,
@@ -37,7 +37,7 @@ const CardProfile = ({
 
       {/* User Details */}
       <div className="flex w-full">
-        <div className="flex flex-col w-full bg-white mb-6 shadow-xl rounded-xl px-6 pt-6 pb-12 md:h-80 justify-between">
+        <div className="flex flex-col w-full bg-white mb-6 shadow-xl rounded-xl px-6 pt-6 pb-12  md:h-80 justify-between ">
           <div className="flex flex-row justify-between h-20">
             <div className="flex flex-col">
               <h3 className="font-semibold text-3xl">{player.name}</h3>
@@ -52,7 +52,7 @@ const CardProfile = ({
           </div>
 
           {/* User Stats */}
-          <div className="grid grid-cols-3 grid-rows-2 justify-between gap-y-6 mt-6">
+          <div className="grid grid-cols-3 justify-between mt-6">
             <div className="flex flex-col">
               <h4 className="text-sm text-center text-gray-500">Height</h4>
               <h3 className="text-2xl text-center  font-semibold">
@@ -73,18 +73,56 @@ const CardProfile = ({
             </div>
             
           </div>
-          <div className="flex flex-col col-span-3">
-              <h4 className="text-sm text-center text-gray-500">
+          <div className="flex flex-col col-span-3 mt-6">
+              <h4 className="text-sm text-gray-500 ">
                 Recommendation Position
               </h4>
               {positions != undefined ? (
-                <h3 className="text-2xl text-center font-semibold">
-                  {positions?.name}, {positions["pos2.name"]},{" "}
-                  {positions["pos3.name"]}
-                </h3>
+                                              <div className="flex flex-col">
+                                              <div className="flex gap-4">
+                                              <h3 className=" text-center font-semibold">{positions?.name} </h3>
+                                              <Slider 
+                                                color="foreground"
+                                                hideThumb={true}
+                                                value={positions.score_1}
+                                                minValue={0}
+                                                maxValue={100}
+                                                isDisabled={true}
+                                                className="max-w-md"
+                                              />
+                                              {Math.round(positions.score_1)} %
+                                              </div>
+                                              <div className="flex gap-4">
+                                              <h3 className=" text-center font-semibold">  {positions["pos2.name"]}</h3>
+                                              <Slider 
+                                                color="foreground"
+                                                hideThumb={true}
+                                                value={positions.score_2}
+                                                minValue={0}
+                                                maxValue={100}
+                                                isDisabled={true}
+                                                className="max-w-md"
+                                              />
+                                              {Math.round(positions.score_2)} %
+                                              </div>
+                                              <div className="flex gap-4">
+                                              <h3 className=" text-center font-semibold">{positions["pos3.name"]}</h3>
+                                              <Slider 
+                                                color="foreground"
+                                                hideThumb={true}
+                                                value={positions.score_3}
+                                                minValue={0}
+                                                maxValue={100}
+                                                isDisabled={true}
+                                                className="max-w-md"
+                                              />
+                                              {Math.round(positions.score_3)} %
+                                              </div>
+                                            </div>
               ) : (
                 <h3 className="text-2xl text-center font-semibold">-</h3>
               )}
+              
             </div>
         </div>
       </div>
