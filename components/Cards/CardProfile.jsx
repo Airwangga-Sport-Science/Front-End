@@ -90,7 +90,7 @@ const CardProfile = ({
                                                 isDisabled={true}
                                                 className="max-w-md"
                                               />
-                                              {Math.round(positions.score_1)} %
+                                              <p> {Math.round(positions.score_1)} %</p>
                                               </div>
                                               <div className="flex gap-4">
                                               <h3 className=" text-center font-semibold">  {positions["pos2.name"]}</h3>
@@ -103,7 +103,7 @@ const CardProfile = ({
                                                 isDisabled={true}
                                                 className="max-w-md"
                                               />
-                                              {Math.round(positions.score_2)} %
+                                              <p> {Math.round(positions.score_2)} %</p>
                                               </div>
                                               <div className="flex gap-4">
                                               <h3 className=" text-center font-semibold">{positions["pos3.name"]}</h3>
@@ -116,7 +116,7 @@ const CardProfile = ({
                                                 isDisabled={true}
                                                 className="max-w-md"
                                               />
-                                              {Math.round(positions.score_3)} %
+                                              <p>{Math.round(positions.score_3)} % </p>
                                               </div>
                                             </div>
               ) : (
