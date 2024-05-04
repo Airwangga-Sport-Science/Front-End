@@ -17,7 +17,7 @@ export default function Login() {
   const [isSend, setIsSend] = React.useState(false);
   const router = useRouter();
   const [error, setError] = React.useState({});
-
+  const [isRegisterError, setIsRegisterError] = React.useState(null);
 
   React.useEffect(() => {
     checkForm();
@@ -68,12 +68,17 @@ export default function Login() {
 		const { filePath } = response1;
     let thumbnail = filePath;
     console.log(thumbnail);
-    const response = await api.register({username, name, password, email, phone, birthdate, thumbnail});
-    if (response) {
-      onRegisterSuccess(response.token);
-    }
-    else{
+    try {
+      const response = await api.register({username, name, password, email, phone, birthdate, thumbnail});
+      if (response) {
+        onRegisterSuccess(response.token);
+      }
+      else{
+        setIsSend(false);
+      }
+    } catch (error) {
       setIsSend(false);
+      setIsRegisterError(error.message)
     }
   }
 
@@ -119,6 +124,9 @@ return (
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                 <div className="text-xl text-center mb-3 font-bold py-4">
                   Register 
+                </div>
+                <div className={`bg-red-100 my-6 border border-red-400 text-red-700 px-4 py-3 rounded relative ${isRegisterError ? "block" : "hidden"}`}>
+                  {isRegisterError}
                 </div>
                 <form encType="multipart/form-data" onSubmit={handleRegister}>
 
