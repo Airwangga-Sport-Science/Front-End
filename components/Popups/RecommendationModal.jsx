@@ -89,15 +89,19 @@ export default function RecommendationModal({ isOpen, setIsOpen, positions, alik
                       Mungkin kamu dapat bermain pada posisi
                     </p>
                     <p className="leading-relaxed text-gray-500 text-5xl font-bold">
-                      {
+                    {
                         positions ? (
-                          positions.map((position) => (
-                            <span key={position}>{position.toUpperCase()}, </span>
+                          positions.map((position, index) => (
+                            <span key={position}>
+                              {position.toUpperCase()}
+                              {index !== positions.length - 1 ? ', ' : ''}
+                            </span>
                           ))
                         ) : (
                           null
                         )
                       }
+
                     </p>
                   </div>
 

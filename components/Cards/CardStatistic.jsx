@@ -72,7 +72,8 @@ export default function CardStatistic({ activeAttribute,positions }) {
       </div>
             <hr />
       <div className="flex flex-col">
-      <h1 className='text-center font-semibold text-xl my-4'>Similar Players</h1>
+      <h1 className='text-center font-semibold text-xl mt-4'>Similar Players</h1>
+        <p  className='text-center mb-4'>Pemain berikut adalah yang atribut kemampuannya mirip dengan Anda</p>
       <div className="flex md:flex-row flex-col justify-center gap-4">
         
         <div
