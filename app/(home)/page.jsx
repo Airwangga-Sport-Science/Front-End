@@ -172,7 +172,7 @@ export default function Home() {
             </div>
             <div className="flex flex-wrap justify-center text-center mb-24 mt-20">
               <div className="w-full lg:w-6/12 px-4">
-                <h2 className="text-4xl font-semibold">Collaberated With</h2>
+                <h2 className="text-4xl font-semibold">Collaborated With</h2>
               </div>
             </div>
             <div className="flex flex-wrap justify-center">
