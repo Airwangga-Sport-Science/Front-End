@@ -92,7 +92,7 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
         password: tempPlayer.password != player.password ? tempPlayer.password : "",
         name: tempPlayer.name,
         email: tempPlayer.email,
-        birth_date: tempPlayer.birth_date,
+        birth_date: new Date(tempPlayer.birth_date).toISOString().split("T")[0],
         phone: tempPlayer.phone,
         thumbnail: thumbnail ? thumbnail : tempPlayer.thumbnail,
         id: tempPlayer.id,

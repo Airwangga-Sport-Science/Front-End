@@ -13,7 +13,7 @@ export default function Login() {
   const [email, setEmail] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [birthdate, setBirthdate] = React.useState("");
-  const [thumbnail, setThumbnail] = React.useState("");
+  const [thumbnail, setThumbnail] = React.useState(null); // Ubah default state menjadi null
   const [isSend, setIsSend] = React.useState(false);
   const router = useRouter();
   const [error, setError] = React.useState({});
@@ -59,17 +59,17 @@ export default function Login() {
     setIsSend(true);
 		const formData = new FormData(e.target);
 		const data = Object.fromEntries(formData);
-		const response1 = await api.uploads(formData);
-
-		if (!response1.ok) {
-			throw new Error('Network response was not ok');
+		let thumbnailPath = null;
+		if (thumbnail) {
+			const response1 = await api.uploads(formData);
+			if (!response1.ok) {
+				throw new Error('Network response was not ok');
+			}
+			thumbnailPath = response1.filePath;
 		}
-
-		const { filePath } = response1;
-    let thumbnail = filePath;
-    console.log(thumbnail);
+    console.log(thumbnailPath);
     try {
-      const response = await api.register({username, name, password, email, phone, birthdate, thumbnail});
+      const response = await api.register({username, name, password, email, phone, birthdate, thumbnail: thumbnailPath});
       if (response) {
         onRegisterSuccess(response.token);
       }
@@ -198,7 +198,7 @@ return (
                     className="border-0 px-3 py-3 placeholder-gray-600 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 mt-4"
                     placeholder="Photo"
                     name="thumbnail"
-                    onChange={(e) => setThumbnail(e.target.files[0])}
+                    onChange={(e) => setThumbnail(e.target.files[0] || null)} // Ubah handler untuk mengatur thumbnail menjadi null jika tidak ada file yang dipilih
                   />
 
                   <div className="text-center mt-6">
