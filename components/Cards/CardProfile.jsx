@@ -72,7 +72,7 @@ const CardProfile = ({
 						<div className="flex flex-col">
 							<h4 className="text-sm text-center text-gray-500">Age</h4>
 							<h3 className="text-2xl text-center font-semibold">
-								{calculateAge(player.birth_date)}
+								{calculateAge(player.birth_date? player.birth_date : player.birthdate)}
 							</h3>
 						</div>
 					</div>

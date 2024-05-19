@@ -12,18 +12,18 @@ export default function CardPositions({positions}) {
   }, [positions]);
 
   const master_positions = [
-    { id: 3, name: 'RB' },
-    { id: 4, name: 'LB' },
-    { id: 5, name: 'CB' },
-    { id: 1, name: 'RWB' },
-    { id: 2, name: 'LWB' },
-    { id: 6, name: 'CDM' },
-    { id: 7, name: 'LM' },
-    { id: 8, name: 'RM' },
-    { id: 9, name: 'LW' },
-    { id: 10, name: 'RW' },
-    { id: 11, name: 'CF' },
-    { id: 13, name: 'ST' }
+    { id: 3, name: 'RB', description: 'Right Back' },
+    { id: 4, name: 'LB', description: 'Left Back' },
+    { id: 5, name: 'CB', description: 'Center Back' },
+    { id: 1, name: 'RWB', description: 'Right Wing Back' },
+    { id: 2, name: 'LWB', description: 'Left Wing Back' },
+    { id: 6, name: 'CDM', description: 'Central Defensive Midfielder' },
+    { id: 7, name: 'LM', description: 'Left Midfielder' },
+    { id: 8, name: 'RM', description: 'Right Midfielder' },
+    { id: 9, name: 'LW', description: 'Left Winger' },
+    { id: 10, name: 'RW', description: 'Right Winger' },
+    { id: 11, name: 'CF', description: 'Center Forward' },
+    { id: 13, name: 'ST', description: 'Striker' }
   ];
 
 
@@ -102,7 +102,7 @@ export default function CardPositions({positions}) {
 				</div>
         <div className="flex flex-col mx-2 gap-1.5 flex-wrap h-72">
               {master_positions.map(position => (
-                <BadgePositions key={position.id} name={position.name} active={positionsList.includes(position.name)}  />
+                <BadgePositions key={position.id} name={position.name} active={positionsList.includes(position.name)} description={position.description} index={master_positions.indexOf(position)}/>
               ))}
             </div>
         </div>

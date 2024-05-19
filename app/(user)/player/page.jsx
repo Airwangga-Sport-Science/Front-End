@@ -65,6 +65,7 @@ export default function Index() {
   useEffect(() => {
     setArticle(activeAttribute?.latest_articles);
     setPositions(activeAttribute?.positions);
+    fetchPlayer();
   },[activeAttribute,player]);
 
   if (isLoading) {

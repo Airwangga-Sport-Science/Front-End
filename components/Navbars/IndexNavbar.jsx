@@ -38,6 +38,11 @@ export default function Navbar({ user, handleLogOut }) {
 								) : ( '')
 							) : (
 								<>
+									<Link href="/admin">
+										<p className={`text-sm leading-relaxed inline-block mr-4 py-2 whitespace-nowrap hover:border-b-2 hover:border-blue-500 ${isActive("/admin")}`}>
+											Dashboard
+										</p>
+									</Link>
 									<Link href="/dashboard">
 										<p className={`text-sm leading-relaxed inline-block mr-4 py-2 whitespace-nowrap hover:border-b-2 hover:border-blue-500 ${isActive("/dashboard")}`}>
 											Dashboard Training
@@ -56,10 +61,17 @@ export default function Navbar({ user, handleLogOut }) {
 						)}
 
 					</div>
-					<div>
+					
+					<div className="flex items-center">
+						{user && (
+							<p className="text-sm font-semibold mr-4">
+								Hello, {user.username}
+							</p>
+						)}
+
 						{user ? (
 							<button
-								className="bg-blue-400 text-white h-10 px-6 rounded-xl font-semibold text-sm flex align-middle w-fit mr-0 ml-auto shadow-md"
+								className="bg-blue-400 text-white h-10 px-6 rounded-xl font-semibold text-sm flex items-center justify-center w-fit mr-0 ml-auto shadow-md"
 								onClick={handleLogOut}
 							>
 								<p className="text-sm leading-relaxed inline-block py-2 whitespace-nowrap font-bold">
@@ -69,7 +81,7 @@ export default function Navbar({ user, handleLogOut }) {
 						) : (
 							<Link
 								href="/login"
-								className="bg-blue-400 text-white h-10 px-6 rounded-xl font-semibold text-sm flex align-middle w-fit mr-0 ml-auto shadow-md"
+								className="bg-blue-400 text-white h-10 px-6 rounded-xl font-semibold text-sm flex items-center justify-center w-fit mr-0 ml-auto shadow-md"
 							>
 								<p className="text-sm leading-relaxed inline-block py-2 whitespace-nowrap font-bold">
 									Login

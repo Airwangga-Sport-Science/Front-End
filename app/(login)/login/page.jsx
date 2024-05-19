@@ -14,6 +14,24 @@ export default function Login() {
   const router = useRouter();
   const [isLoginError, setIsLoginError] = React.useState(false);
   const [authedUser, setAuthedUser] = React.useState(null);
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      if (username && password) {
+        handleLogin();
+      } else {
+        setIsLoginError(true);
+      }
+    }
+  };
+
+  React.useEffect(() => {
+    const handle = (e) => handleKeyPress(e);
+    window.addEventListener('keydown', handle);
+    return () => {
+      window.removeEventListener('keydown', handle);
+    };
+  }, [username, password]);
   async function handleLogin(){
     try {
       const response = await api.login({username, password});
@@ -64,7 +82,7 @@ export default function Login() {
       
     }
     else if (authedUser.role == 2) {
-      redirect('/dashboard')
+      redirect('/admin')
     }
   }
   return (
