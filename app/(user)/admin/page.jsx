@@ -43,7 +43,7 @@ export default function Page() {
   };
 
   return (
-    <div className='flex flex-col px-12 mt-16'>
+    <div className='flex flex-col mx-auto mt-16 2xl:w-[1440px] 2xl:px-0 px-28'>
       <UsersModal isOpen={isRecommendationModalOpen} closeModal={() => setIsRecommendationModalOpen(false)} handleDataChange={handleDataChange} users={users} user_id={userId} setUsers={setUsers} setUserId={setUserId}/>
       <div className="flex justify-between">
         <h1 className='text-4xl font-bold mb-4'>Selamat Datang, {authedUser?.name}</h1>

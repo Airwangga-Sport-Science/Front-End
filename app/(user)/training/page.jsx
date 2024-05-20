@@ -46,7 +46,7 @@ export default function Training() {
   }, []);
 
   return (
-    <div className="flex flex-col 2xl:w-[1440px] mx-auto mt-20">
+    <div className="flex flex-col 2xl:w-[1440px] 2xl:px-0 px-16 mx-auto mt-20">
       <div className="flex md:flex-row flex-col justify-between w-full md:gap-6 px-6">
         <h2 className="font-semibold text-3xl my-auto">Training Catalogue </h2>
         <div className="flex md:flex-row flex-col gap-3">

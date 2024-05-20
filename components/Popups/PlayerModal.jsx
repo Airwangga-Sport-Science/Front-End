@@ -98,8 +98,10 @@ export default function PlayerModal({ isOpen, closeModal, player, setPlayer }) {
         id: tempPlayer.id,
     });
     if (response) {
+				const fetchedPlayer = await api.getPlayer();
+				const {player} = fetchedPlayer
         console.log(response.data);
-        setPlayer(response.data);
+        setPlayer(player);
         closeModal();
     }
 }
