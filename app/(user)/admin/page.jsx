@@ -55,7 +55,7 @@ export default function Page() {
         </button>
       </div>
       <div className='flex justify-between mt-8 gap-8'>
-        <Link href="/dashboard/user" className='bg-blue-500 text-white w-1/2 h-64 px-6 rounded-xl font-semibold flex flex-col justify-between p-4 hover:bg-blue-600'>
+        <Link href="/dashboard/users" className='bg-blue-500 text-white w-1/2 h-64 px-6 rounded-xl font-semibold flex flex-col justify-between p-4 hover:bg-blue-600'>
           <h3 className=' text-4xl '>Dashboard User</h3>
           <FaUsers size={100} color="white" className='mr-0 ml-auto' />
         </Link>
