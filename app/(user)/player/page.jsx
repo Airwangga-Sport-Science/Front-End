@@ -65,7 +65,7 @@ export default function Index() {
   useEffect(() => {
     setArticle(activeAttribute?.latest_articles);
     setPositions(activeAttribute?.positions);
-    fetchPlayer();
+    
   },[activeAttribute,player]);
 
   if (isLoading) {
@@ -97,7 +97,7 @@ export default function Index() {
   }
 
   return (
-    <div className="flex flex-col 2xl:w-[1440px] mx-auto mt-12">
+    <div className="flex flex-col 2xl:w-[1440px] 2xl:px-0 px-16 mx-auto mt-12">
       <RecommendationModal isOpen={isRecommendationModalOpen} closeModal={closeRecommendationModal} />
       <PlayerModal isOpen={isPlayerModalOpen} closeModal={closePlayerModal} player={player} positions={positions} handleUpdate= {handleUpdate} setPlayer={setPlayer} />
       <TableTrainingModal isOpen={isTableTrainingModalOpen} closeModal={closeTableTrainingModal} activeAttribute={activeAttribute} positions={positions}/>
