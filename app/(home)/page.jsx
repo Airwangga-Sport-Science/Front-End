@@ -119,7 +119,7 @@ export default function Home() {
                   <img
                     alt="..."
                     src="/img/rakyan.jpg"
-                    className="shadow-lg rounded-full mx-auto max-w-120-px"
+                    className="shadow-lg rounded-full w-72 h-72 mx-auto max-w-120-px object-cover"
                   />
                   <div className="pt-6 text-center">
                     <h5 className="text-xl font-bold">Rakyan Krisna Dewangga</h5>
@@ -150,7 +150,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 w-72 h-72 mb-12 px-4">
+              <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
                 <div className="px-6">
                   <img
                     alt="..."
