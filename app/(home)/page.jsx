@@ -137,7 +137,7 @@ export default function Home() {
                   <img
                     alt="..."
                     src="/img/nabil.jpg"
-                    className="shadow-lg rounded-full mx-auto max-w-120-px"
+                    className="shadow-lg rounded-full mx-auto w-72 h-72 max-w-120-px"
                   />
                   <div className="pt-6 text-center">
                     <h5 className="text-xl font-bold">Nabil Mustofa</h5>
@@ -150,12 +150,12 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
+              <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 w-72 h-72 mb-12 px-4">
                 <div className="px-6">
                   <img
                     alt="..."
                     src="/img/aga.jpg"
-                    className="shadow-lg rounded-full mx-auto max-w-120-px"
+                    className="shadow-lg rounded-full mx-auto w-72 h-72 max-w-120-px"
                   />
                   <div className="pt-6 text-center">
                     <h5 className="text-xl font-bold">Gentur Rizky Arganta</h5>
