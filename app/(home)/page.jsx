@@ -118,8 +118,8 @@ export default function Home() {
                 <div className="px-6">
                   <img
                     alt="..."
-                    src="https://media.licdn.com/dms/image/D4E03AQF2xE4nV6Xrtg/profile-displayphoto-shrink_400_400/0/1698359128644?e=1717632000&v=beta&t=_4eJqXF1VmrA4dC4f0o-l6cjuJ6xvFyQHdkEm7HAt7c"
-                    className="shadow-lg rounded-full mx-auto max-w-120-px"
+                    src="/img/rakyan.jpg"
+                    className="shadow-lg rounded-full w-72 h-72 mx-auto max-w-120-px object-cover"
                   />
                   <div className="pt-6 text-center">
                     <h5 className="text-xl font-bold">Rakyan Krisna Dewangga</h5>
@@ -136,8 +136,8 @@ export default function Home() {
                 <div className="px-6">
                   <img
                     alt="..."
-                    src="https://avatars.githubusercontent.com/u/66898337?v=4"
-                    className="shadow-lg rounded-full mx-auto max-w-120-px"
+                    src="/img/nabil.jpg"
+                    className="shadow-lg rounded-full mx-auto w-72 h-72 max-w-120-px"
                   />
                   <div className="pt-6 text-center">
                     <h5 className="text-xl font-bold">Nabil Mustofa</h5>
@@ -154,8 +154,8 @@ export default function Home() {
                 <div className="px-6">
                   <img
                     alt="..."
-                    src="https://media.licdn.com/dms/image/D5603AQHuaRP7irCDxQ/profile-displayphoto-shrink_400_400/0/1696925987246?e=1717632000&v=beta&t=KeARqfUm6e4-yBb--bTQ4PUcrw0yLKadrgmnNUwkjQY"
-                    className="shadow-lg rounded-full mx-auto max-w-120-px"
+                    src="/img/aga.jpg"
+                    className="shadow-lg rounded-full mx-auto w-72 h-72 max-w-120-px"
                   />
                   <div className="pt-6 text-center">
                     <h5 className="text-xl font-bold">Gentur Rizky Arganta</h5>
@@ -181,7 +181,7 @@ export default function Home() {
                 <div className="px-6">
                   <img
                     alt="..."
-                    src="https://asset.indosport.com/article/image/q/80/336399/head_coach_sulut_united_ricky_nelson-169.jpg"
+                    src="img/rikcy.jpg"
                     className="shadow-lg rounded-full mx-auto w-72 h-72 object-cover"
                   />
                   <div className="pt-6 text-center">
@@ -199,7 +199,7 @@ export default function Home() {
                 <div className="px-6">
                   <img
                     alt="..."
-                    src="https://cdn1-production-images-kly.akamaized.net/cIkmK7vJSUqwSxiA-2Bq_ZEISxU=/500x281/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/4326761/original/061600600_1676552522-Timo_Scheunemann_1.jpg"
+                    src="img/timo.jpg"
                     className="shadow-lg rounded-full mx-auto w-72 h-72 object-cover"
                   />
                   <div className="pt-6 text-center">
