@@ -105,23 +105,23 @@ export default function RecommendationModal({ isOpen, setIsOpen, positions, alik
                     </p>
                   </div>
 
-                  <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
+                  <div className="flex justify-center items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
                     <button
                       onClick={handleSave}
                       type="button"
-                      className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 disabled:bg-blue-400 disabled:text-gray-300 disabled:cursor-not-allowed"
+                      className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 disabled:bg-blue-400 disabled:text-gray-300 disabled:cursor-not-allowed mx-auto"
                       disabled = {isSend ? true : false}
                    >
                       Simpan
                     </button>
-                    <button
+                    {/* <button
                       onClick={() => setIsOpen(false)}
                       type="button"
                       className="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 bg-gray-700 text-gray-300 border-gray-500 hover:text-white hover:bg-gray-600 focus:ring-gray-600"
                       
                     >
                       Decline
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </Dialog.Panel>
